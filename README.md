@@ -1,2 +1,3 @@
 # LukeRossCleaner
-This tool is made to get rid of the LukeRoss VR mod in Hogwarts Legacy.
+Place the script file in the root of the Hogwarts Legacy directory.
+No admin right needed

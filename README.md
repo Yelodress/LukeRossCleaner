@@ -6,6 +6,9 @@
 Cyberpunk 2077:
 `\Cyberpunk 2077\Cyberpunk 2077\bin\x64`
 
+Elden Ring:
+`\ELDEN RING`
+
 Horizon Zero Dawn:
 `\Horizon Zero Dawn`
 

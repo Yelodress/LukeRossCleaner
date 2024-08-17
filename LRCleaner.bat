@@ -3,6 +3,7 @@
 IF EXIST HogwartsLegacy.exe IF NOT EXIST EOSSDK-Win64-Shipping.dll GOTO cleanupHogwarts
 IF EXIST HogwartsLegacy.exe IF EXIST EOSSDK-Win64-Shipping.dll GOTO cleanupHogwarts2
 IF EXIST Cyberpunk2077.exe GOTO cleanupCP2077
+IF EXIST HorizonZeroDawn.exe GOTO cleanupHZD
 ECHO This game is not supported for now.
 GOTO :end
 
@@ -48,10 +49,19 @@ DEL "%dst%UserSettings.json"
 REN "%dst%UserSettings_ori.json" UserSettings.json
 GOTO end
 
+:cleanupHZD
+echo Deleting mod files...
+RMDIR /s /q "RealRepo"
+DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log"
+
+echo Restoring graphic settings...
+SET sub=\Horizon Zero Dawn\Saved Game\profile\
+
+SET "dst=%USERPROFILE%\Documents%sub%"
+DEL "%dst%graphicsconfig.ini"
+REN "%dst%graphicsconfig_ori.ini" graphicsconfig.ini
+GOTO end
+
 :end
 echo All done ! Please report any issues on my GitHub: Yelodress
-pause
-
-:abort
-ECHO Aborting LRCleaner.
 pause

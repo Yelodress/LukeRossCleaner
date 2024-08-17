@@ -1,3 +1,12 @@
 # LukeRossCleaner
-Place the script file in the root of the Hogwarts Legacy directory.
-No admin right needed
+### No admin right needed
+
+### Place the script in these paths:
+
+Hogwarts Legacy:
+`\Hogwarts Legacy`
+OR
+`\Hogwarts Legacy\Phoenix\Binaries\Win64`
+
+Cyberpunk 2077:
+`\Cyberpunk 2077\Cyberpunk 2077\bin\x64`

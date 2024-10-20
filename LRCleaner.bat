@@ -5,9 +5,10 @@ IF EXIST HogwartsLegacy.exe IF EXIST EOSSDK-Win64-Shipping.dll GOTO cleanupHogwa
 IF EXIST Cyberpunk2077.exe GOTO cleanupCP2077
 IF EXIST HorizonZeroDawn.exe GOTO cleanupHZD
 IF EXIST eldenring.exe IF EXIST start_protected_game_ori.exe GOTO cleanupEldenRing
+IF EXIST FarCry4.exe GOTO cleanupFC4
 IF EXIST Outlaws.exe GOTO cleanupStarWarsOutlaws
 ECHO This game is not supported for now.
-GOTO :end
+GOTO abort
 
 :cleanupHogwarts
 echo Deleting mod files...
@@ -76,6 +77,22 @@ DEL "%dst%GraphicsConfig.xml"
 REN "%dst%GraphicsConfig_ori.xml" GraphicsConfig.xml
 GOTO end
 
+:cleanupFC4
+echo Deleting mod files...
+RMDIR /s /q "RealRepo"
+DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll"
+
+echo Restoring graphic settings...
+SET sub= Documents\My Games\Far Cry 4\
+SET dst="%USERPROFILE%%sub%"
+FOR /F "delims=" %%D IN ('DIR /AD /B "%dst%"') DO (
+    IF EXIST "%dst%%%D\GamerProfile_ori.xml" (
+        DEL "%dst%%%D\GamerProfile.xml" 
+        REN "%dst%%%D\GamerProfile_ori.xml" GamerProfile.xml
+    )
+)
+GOTO end
+
 :cleanupStarWarsOutlaws
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
@@ -88,6 +105,12 @@ DEL "%dst%graphic settings.cfg"
 REN "%dst%graphic settings_ori.cfg" "graphic settings.cfg"
 GOTO end
 
+:abort
+echo Execution aborted. Please report any issues on my GitHub: Yelodress
+pause
+
 :end
 echo All done ! Please report any issues on my GitHub: Yelodress
+echo This script will remove itself after pressing any key
 pause
+DEL "LRCleaner.bat"

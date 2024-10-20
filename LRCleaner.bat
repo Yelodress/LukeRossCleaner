@@ -5,6 +5,7 @@ IF EXIST HogwartsLegacy.exe IF EXIST EOSSDK-Win64-Shipping.dll GOTO cleanupHogwa
 IF EXIST Cyberpunk2077.exe GOTO cleanupCP2077
 IF EXIST HorizonZeroDawn.exe GOTO cleanupHZD
 IF EXIST eldenring.exe IF EXIST start_protected_game_ori.exe GOTO cleanupEldenRing
+IF EXIST Outlaws.exe GOTO cleanupStarWarsOutlaws
 ECHO This game is not supported for now.
 GOTO :end
 
@@ -73,6 +74,18 @@ SET sub=\EldenRing\
 SET "dst=%APPDATA%%sub%"
 DEL "%dst%GraphicsConfig.xml"
 REN "%dst%GraphicsConfig_ori.xml" GraphicsConfig.xml
+GOTO end
+
+:cleanupStarWarsOutlaws
+echo Deleting mod files...
+RMDIR /s /q "RealRepo"
+DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll"
+
+echo Restoring graphic settings...
+SET sub=\My Games\Outlaws\
+SET "dst=%USERPROFILE%\Documents%sub%"
+DEL "%dst%graphic settings.cfg"
+REN "%dst%graphic settings_ori.cfg" "graphic settings.ini"
 GOTO end
 
 :end

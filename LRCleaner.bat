@@ -85,7 +85,7 @@ echo Restoring graphic settings...
 SET sub=\My Games\Outlaws\
 SET "dst=%USERPROFILE%\Documents%sub%"
 DEL "%dst%graphic settings.cfg"
-REN "%dst%graphic settings_ori.cfg" "graphic settings.ini"
+REN "%dst%graphic settings_ori.cfg" "graphic settings.cfg"
 GOTO end
 
 :end

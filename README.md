@@ -9,6 +9,9 @@ Cyberpunk 2077:
 Elden Ring:
 `\ELDEN RING`
 
+FarCry 4:
+`\FarCry4`
+
 Horizon Zero Dawn:
 `\Horizon Zero Dawn`
 

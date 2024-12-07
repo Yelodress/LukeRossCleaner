@@ -10,7 +10,7 @@ Elden Ring:
 `\ELDEN RING`
 
 FarCry 4:
-`\FarCry4`
+`\Far Cry 4`
 
 Horizon Zero Dawn:
 `\Horizon Zero Dawn`

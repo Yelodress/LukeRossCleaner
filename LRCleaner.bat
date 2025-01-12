@@ -6,6 +6,7 @@ IF EXIST Cyberpunk2077.exe GOTO cleanupCP2077
 IF EXIST HorizonZeroDawn.exe GOTO cleanupHZD
 IF EXIST eldenring.exe IF EXIST start_protected_game_ori.exe GOTO cleanupEldenRing
 IF EXIST FarCry4.exe GOTO cleanupFC4
+IF EXIST FarCry6.exe GOTO cleanupFC6
 IF EXIST Outlaws.exe GOTO cleanupStarWarsOutlaws
 ECHO This game is not supported for now.
 GOTO abort
@@ -92,6 +93,23 @@ FOR /F "delims=" %%D IN ('DIR /AD /B "%dst%"') DO (
     )
 )
 GOTO end
+
+:cleanupFC6
+echo Deleting mod files...
+RMDIR /s /q "RealRepo"
+DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll"
+
+echo Restoring graphic settings...
+SET sub=\Documents\My Games\Far Cry 6\
+SET dst="%USERPROFILE%%sub%"
+
+IF EXIST "%dst%\gamerprofile_ori.xml" (
+    DEL "%dst%\gamerprofile.xml" 
+    REN "%dst%\gamerprofile_ori.xml" gamerprofile.xml
+)
+
+GOTO end
+
 
 :cleanupStarWarsOutlaws
 echo Deleting mod files...

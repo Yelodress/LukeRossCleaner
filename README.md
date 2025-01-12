@@ -12,6 +12,9 @@ Elden Ring:
 FarCry 4:
 `\Far Cry 4`
 
+FarCry 6:
+`\Far Cry 6`
+
 Horizon Zero Dawn:
 `\Horizon Zero Dawn`
 

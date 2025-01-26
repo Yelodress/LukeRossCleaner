@@ -15,6 +15,9 @@ FarCry 4:
 FarCry 6:
 `\Far Cry 6`
 
+Horizon Forbidden West:
+`\Horizon Forbidden West`
+
 Horizon Zero Dawn:
 `\Horizon Zero Dawn`
 

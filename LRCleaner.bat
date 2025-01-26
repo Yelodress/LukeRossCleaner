@@ -4,6 +4,7 @@ IF EXIST HogwartsLegacy.exe IF NOT EXIST EOSSDK-Win64-Shipping.dll GOTO cleanupH
 IF EXIST HogwartsLegacy.exe IF EXIST EOSSDK-Win64-Shipping.dll GOTO cleanupHogwarts2
 IF EXIST Cyberpunk2077.exe GOTO cleanupCP2077
 IF EXIST HorizonZeroDawn.exe GOTO cleanupHZD
+IF EXIST HorizonForbiddenWest.exe GOTO cleanupHFW
 IF EXIST eldenring.exe IF EXIST start_protected_game_ori.exe GOTO cleanupEldenRing
 IF EXIST FarCry4.exe GOTO cleanupFC4
 IF EXIST FarCry6.exe GOTO cleanupFC6
@@ -63,6 +64,15 @@ SET sub=\Horizon Zero Dawn\Saved Game\profile\
 SET "dst=%USERPROFILE%\Documents%sub%"
 DEL "%dst%graphicsconfig.ini"
 REN "%dst%graphicsconfig_ori.ini" graphicsconfig.ini
+GOTO end
+
+:cleanupHFW
+echo Deleting mod files...
+RMDIR /s /q "RealRepo"
+DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll"
+
+echo Restoring the graphics settings will delete the game graphics registry key. You will need to set your preferences again at the next launch.
+REG delete "HKCU\Software\Guerrilla Games\Horizon Forbidden West Complete Edition\Graphics"
 GOTO end
 
 :cleanupEldenRing

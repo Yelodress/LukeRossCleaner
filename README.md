@@ -35,4 +35,7 @@ OR
 Star Wars Outlaws:
 `\Star Wars Outlaws`
 
+Watch Dogs:
+`\Watch_Dogs\bin`
+
 ### ⚠️ This script is still under development. It's not my priority, so if you need a specific game, let me know by creating an [issue](https://github.com/Yelodress/LukeRossCleaner/issues) and I'll update it as soon as possible :)

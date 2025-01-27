@@ -18,6 +18,9 @@ FarCry 6:
 Ghostrunner:
 `\Ghostrunner\Ghostrunner\Binaries\Win64`
 
+GhostwireTokyo:
+`\GhostwireTokyo` *Unlike the original mod, LRCleaner supports the EGS version (in case you've modified the installation script).*
+
 Horizon Forbidden West:
 `\Horizon Forbidden West`
 

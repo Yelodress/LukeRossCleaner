@@ -15,6 +15,9 @@ FarCry 4:
 FarCry 6:
 `\Far Cry 6`
 
+Ghostrunner:
+`\Ghostrunner\Ghostrunner\Binaries\Win64`
+
 Horizon Forbidden West:
 `\Horizon Forbidden West`
 
@@ -25,9 +28,6 @@ Hogwarts Legacy:
 `\Hogwarts Legacy`
 OR
 `\Hogwarts Legacy\Phoenix\Binaries\Win64`
-
-Star Wars Outlaws:
-`\Star Wars Outlaws`
 
 
 ### ⚠️ This script is still under development. It's not my priority, so if you need a specific game, let me know by creating an [issue](https://github.com/Yelodress/LukeRossCleaner/issues) and I'll update it as soon as possible :)

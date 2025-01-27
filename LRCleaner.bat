@@ -14,6 +14,7 @@ IF EXIST HogwartsLegacy.exe IF NOT EXIST EOSSDK-Win64-Shipping.dll GOTO cleanupH
 IF EXIST HogwartsLegacy.exe IF EXIST EOSSDK-Win64-Shipping.dll GOTO cleanupHogwarts2
 IF EXIST Outlaws.exe GOTO cleanupStarWarsOutlaws
 IF EXIST Outlaws_Plus.exe GOTO cleanupStarWarsOutlaws
+IF EXIST watch_dogs.exe GOTO cleanupWD1
 ECHO This game is not supported for now.
 GOTO abort
 
@@ -166,10 +167,24 @@ RMDIR /s /q "RealRepo"
 DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll"
 
 echo Restoring graphic settings...
-SET sub=\My Games\Outlaws\
-SET "dst=%USERPROFILE%\Documents%sub%"
+SET sub=\Documents\My Games\Outlaws\
+SET "dst=%USERPROFILE%%sub%"
 DEL "%dst%graphic settings.cfg"
 REN "%dst%graphic settings_ori.cfg" "graphic settings.cfg"
+GOTO end
+
+:cleanupWD1
+echo Deleting mod files...
+RMDIR /s /q "RealRepo"
+DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log"
+
+echo Restoring graphic settings...
+SET sub=\Documents\My Games\Watch_Dogs\
+SET "dst=%USERPROFILE%%sub%"
+FOR /F "delims=" %%D IN ('DIR /AD /B "%dst%"') DO (
+    DEL "%dst%%%D\GamerProfile.xml"
+    REN "%dst%%%D\GamerProfile_ori.xml" GamerProfile.xml
+)
 GOTO end
 
 :abort

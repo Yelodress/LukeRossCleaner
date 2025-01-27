@@ -5,6 +5,9 @@ IF EXIST eldenring.exe IF EXIST start_protected_game_ori.exe GOTO cleanupEldenRi
 IF EXIST FarCry4.exe GOTO cleanupFC4
 IF EXIST FarCry6.exe GOTO cleanupFC6
 IF EXIST Ghostrunner-Win64-Shipping.exe GOTO cleanupGR
+IF EXIST GWT.exe IF EXIST OpenImageDenoise.dll GOTO cleanupGWT
+IF EXIST GWT.exe IF EXIST XCurl.dll GOTO cleanupGWT
+IF EXIST GWT.exe IF EXIST .egstore GOTO cleanupGWTegs
 IF EXIST HorizonForbiddenWest.exe GOTO cleanupHFW
 IF EXIST HorizonZeroDawn.exe GOTO cleanupHZD
 IF EXIST HogwartsLegacy.exe IF NOT EXIST EOSSDK-Win64-Shipping.dll GOTO cleanupHogwarts
@@ -79,6 +82,30 @@ DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini"
 echo Restoring graphic settings...
 SET sub=\Ghostrunner\Saved\Config\WindowsNoEditor\
 SET "dst=%LOCALAPPDATA%%sub%"
+DEL "%dst%GameUserSettings.ini"
+REN "%dst%GameUserSettings_ori.ini" GameUserSettings.ini
+GOTO end
+
+:cleanupGWT
+echo Deleting mod files...
+RMDIR /s /q "RealRepo" "reshade-shaders"
+DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "ReShadePreset.ini"
+
+echo Restoring graphic settings...
+SET "sub=\Saved Games\TangoGameworks\Saved\Config\WindowsNoEditor\"
+SET "dst=%USERPROFILE%%sub%"
+DEL "%dst%GameUserSettings.ini"
+REN "%dst%GameUserSettings_ori.ini" GameUserSettings.ini
+GOTO end
+
+:cleanupGWTegs
+echo Deleting mod files...
+RMDIR /s /q "RealRepo" "reshade-shaders"
+DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "ReShadePreset.ini"
+
+echo Restoring graphic settings...
+SET "sub=\Saved Games\TangoGameworks\GhostWire Tokyo (EGS)\Saved\Config\WindowsNoEditor\"
+SET "dst=%USERPROFILE%%sub%"
 DEL "%dst%GameUserSettings.ini"
 REN "%dst%GameUserSettings_ori.ini" GameUserSettings.ini
 GOTO end

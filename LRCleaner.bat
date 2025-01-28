@@ -165,7 +165,7 @@ GOTO end
 :cleanupIJTGC
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll"
+DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.json" "RealVR64.dll"
 GOTO end
 
 :cleanupStarWarsOutlaws

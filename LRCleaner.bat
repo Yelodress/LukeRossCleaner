@@ -12,6 +12,7 @@ IF EXIST HorizonForbiddenWest.exe GOTO cleanupHFW
 IF EXIST HorizonZeroDawn.exe GOTO cleanupHZD
 IF EXIST HogwartsLegacy.exe IF NOT EXIST EOSSDK-Win64-Shipping.dll GOTO cleanupHogwarts
 IF EXIST HogwartsLegacy.exe IF EXIST EOSSDK-Win64-Shipping.dll GOTO cleanupHogwarts2
+IF EXIST TheGreatCircle.exe GOTO cleanupIJTGC
 IF EXIST Outlaws.exe GOTO cleanupStarWarsOutlaws
 IF EXIST Outlaws_Plus.exe GOTO cleanupStarWarsOutlaws
 IF EXIST watch_dogs.exe GOTO cleanupWD1
@@ -159,6 +160,12 @@ SET sub=\Hogwarts Legacy\Saved\Config\WindowsNoEditor\
 SET "dst=%LOCALAPPDATA%%sub%"
 DEL "%dst%GameUserSettings.ini"
 REN "%dst%GameUserSettings_ori.ini" GameUserSettings.ini
+GOTO end
+
+:cleanupIJTGC
+echo Deleting mod files...
+RMDIR /s /q "RealRepo"
+DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll"
 GOTO end
 
 :cleanupStarWarsOutlaws

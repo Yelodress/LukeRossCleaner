@@ -32,6 +32,9 @@ Hogwarts Legacy:
 OR
 `\Hogwarts Legacy\Phoenix\Binaries\Win64`
 
+Indiana Jones and the Great Circle:
+`\TheGreatCircle` *Feel free to correct me if i'm wrong*
+
 Star Wars Outlaws:
 `\Star Wars Outlaws`
 

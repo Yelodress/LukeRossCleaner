@@ -3,6 +3,9 @@
 
 ## 📋 List of supported games (and path)
 
+☢️Atomic Heart:
+`\Atomic Heart\AtomicHeart\Binaries\Win64`
+
 🤖Cyberpunk 2077:
 `\Cyberpunk 2077\Cyberpunk 2077\bin\x64`
 

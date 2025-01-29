@@ -39,7 +39,7 @@ OR
 `\Hogwarts Legacy\Phoenix\Binaries\Win64`
 
 Indiana Jones and the Great Circle:
-`\TheGreatCircle` **Unchecked*
+`\Indiana Jones and the Great Circle\Content`
 
 Marvel's Spider-Man Remastered:
 `\Marvel's Spider-Man Remastered` **Unchecked*

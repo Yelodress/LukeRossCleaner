@@ -1,9 +1,18 @@
 @echo off
 
+FOR /F "tokens=* USEBACKQ" %%F IN (`%pshell% "[Environment]::GetFolderPath('Personal')"`) DO SET doc=%%F\
+FOR /F "tokens=* USEBACKQ" %%F IN (`%pshell% "(new-object -COM Shell.Application).Namespace(0x05).Self.Path"`) DO SET doc1=%%F\
+SET "doc2=%USERPROFILE%\Documents\"
+IF "%doc1%"=="\" SET "doc1=%doc2%"
+IF "%doc%"=="\" SET "doc=%doc1%"
+
+REM IF EXIST AtomicHeart-Win*-Shipping.exe GOTO cleanupAH == next update :)
 IF EXIST Cyberpunk2077.exe GOTO cleanupCP2077
 IF EXIST DarkSoulsRemastered.exe GOTO cleanupDSR
 IF EXIST eldenring.exe IF EXIST start_protected_game_ori.exe GOTO cleanupEldenRing
+IF EXIST FCPrimal.exe GOTO cleanupFCP
 IF EXIST FarCry4.exe GOTO cleanupFC4
+IF EXIST FarCry5.exe GOTO cleanupFC5
 IF EXIST FarCry6.exe GOTO cleanupFC6
 IF EXIST Ghostrunner-Win64-Shipping.exe GOTO cleanupGR
 IF EXIST GWT.exe IF EXIST OpenImageDenoise.dll GOTO cleanupGWT
@@ -21,8 +30,29 @@ IF EXIST Spider-Man.exe GOTO cleanupSPIDERMAN
 IF EXIST MilesMorales.exe GOTO cleanupSPIDERMAN
 IF EXIST Stray-Win64-Shipping.exe GOTO cleanupSTRAY
 IF EXIST watch_dogs.exe GOTO cleanupWD1
+IF EXIST WatchDogs2.exe GOTO cleanupWD2
 ECHO This game is not supported for now.
 GOTO abort
+
+:cleanupAH
+echo Deleting mod files...
+RMDIR /s /q "RealRepo"
+DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log"
+
+echo Restoring graphic settings...
+SET sub=\AtomicHeart\Saved\Config\WindowsNoEditor\
+SET subGDK=\AtomicHeart\Saved\Config\WinGDK\
+SET "dst=%LOCALAPPDATA%%sub%"
+SET "dstGDK=%LOCALAPPDATA%%subGDK%"
+IF EXIST "%dst%" (
+    DEL "%dst%GameUserSettings.ini"
+    REN "%dst%GameUserSettings_ori.ini" GameUserSettings.ini
+)
+IF EXIST "%dstGDK%" (
+    DEL "%dstGDK%GameUserSettings.ini"
+    REN "%dstGDK%GameUserSettings_ori.ini" GameUserSettings.ini
+)
+GOTO end
 
 :cleanupCP2077
 echo Deleting mod files...
@@ -61,14 +91,30 @@ DEL "%dst%GraphicsConfig.xml"
 REN "%dst%GraphicsConfig_ori.xml" GraphicsConfig.xml
 GOTO end
 
+:cleanupFCP
+echo Deleting mod files...
+RMDIR /s /q "RealRepo"
+DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll"
+
+echo Restoring graphic settings...
+SET "sub=My Games\Far Cry Primal\"
+IF NOT EXIST "%doc%%sub%" IF EXIST "%doc1%%sub%" SET "doc=%doc1%"
+IF NOT EXIST "%doc%%sub%" IF EXIST "%doc2%%sub%" SET "doc=%doc2%"
+SET "dst=%doc%%sub%"
+DEL "%dst%\gamerprofile.xml" 
+REN "%dst%\gamerprofile_ori.xml" gamerprofile.xml
+GOTO end
+
 :cleanupFC4
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
 DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll"
 
 echo Restoring graphic settings...
-SET sub= Documents\My Games\Far Cry 4\
-SET dst="%USERPROFILE%%sub%"
+SET "sub=My Games\Far Cry 4\"
+IF NOT EXIST "%doc%%sub%" IF EXIST "%doc1%%sub%" SET "doc=%doc1%"
+IF NOT EXIST "%doc%%sub%" IF EXIST "%doc2%%sub%" SET "doc=%doc2%"
+SET "dst=%doc%%sub%"
 FOR /F "delims=" %%D IN ('DIR /AD /B "%dst%"') DO (
     IF EXIST "%dst%%%D\GamerProfile_ori.xml" (
         DEL "%dst%%%D\GamerProfile.xml" 
@@ -77,19 +123,32 @@ FOR /F "delims=" %%D IN ('DIR /AD /B "%dst%"') DO (
 )
 GOTO end
 
+:cleanupFC5
+echo Deleting mod files...
+RMDIR /s /q "RealRepo"
+DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll"
+
+echo Restoring graphic settings...
+SET "sub=My Games\Far Cry 5\"
+IF NOT EXIST "%doc%%sub%" IF EXIST "%doc1%%sub%" SET "doc=%doc1%"
+IF NOT EXIST "%doc%%sub%" IF EXIST "%doc2%%sub%" SET "doc=%doc2%"
+SET "dst=%doc%%sub%"
+DEL "%dst%\gamerprofile.xml" 
+REN "%dst%\gamerprofile_ori.xml" gamerprofile.xml
+GOTO end
+
 :cleanupFC6
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
 DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll"
 
 echo Restoring graphic settings...
-SET sub=\Documents\My Games\Far Cry 6\
-SET dst="%USERPROFILE%%sub%"
-
-IF EXIST "%dst%\gamerprofile_ori.xml" (
-    DEL "%dst%\gamerprofile.xml" 
-    REN "%dst%\gamerprofile_ori.xml" gamerprofile.xml
-)
+SET "sub=My Games\Far Cry 6\"
+IF NOT EXIST "%doc%%sub%" IF EXIST "%doc1%%sub%" SET "doc=%doc1%"
+IF NOT EXIST "%doc%%sub%" IF EXIST "%doc2%%sub%" SET "doc=%doc2%"
+SET "dst=%doc%%sub%"
+DEL "%dst%\gamerprofile.xml" 
+REN "%dst%\gamerprofile_ori.xml" gamerprofile.xml
 GOTO end
 
 :cleanupGR
@@ -203,8 +262,8 @@ echo Deleting mod files...
 RMDIR /s /q "RealRepo"
 DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.json" "RealVR64.dll"
 
-REM echo Restoring graphic settings...
-REM REG delete "HKLM\SOFTWARE\Khronos\Vulkan\ImplicitLayers"
+echo Restoring graphic settings...
+powershell -Command "& { $path = 'HKLM:\SOFTWARE\Khronos\Vulkan\ImplicitLayers'; $regName = (Get-ItemProperty -Path $path | Get-Member -MemberType NoteProperty | Where-Object { $_.Name -like '*RealVR64.json' }).Name; if ($regName) { Start-Process cmd -ArgumentList ('/c REG DELETE \"HKLM\SOFTWARE\Khronos\Vulkan\ImplicitLayers\" /V \"' + $regName + '\" /F') -Verb RunAs } }"
 GOTO end
 
 :cleanupStarWarsOutlaws
@@ -249,6 +308,20 @@ FOR /F "delims=" %%D IN ('DIR /AD /B "%dst%"') DO (
     DEL "%dst%%%D\GamerProfile.xml"
     REN "%dst%%%D\GamerProfile_ori.xml" GamerProfile.xml
 )
+GOTO end
+
+:cleanupWD2
+echo Deleting mod files...
+RMDIR /s /q "RealRepo"
+DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log"
+
+echo Restoring graphic settings...
+SET "sub=My Games\Watch_Dogs 2\"
+IF NOT EXIST "%doc%%sub%" IF EXIST "%doc1%%sub%" SET "doc=%doc1%"
+IF NOT EXIST "%doc%%sub%" IF EXIST "%doc2%%sub%" SET "doc=%doc2%"
+SET "dst=%doc%%sub%"
+DEL "%dst%\WD2_GamerProfile.xml"
+REN "%dst%\WD2_GamerProfile_ori.xml" WD2_GamerProfile.xml
 GOTO end
 
 :abort

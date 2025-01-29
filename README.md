@@ -58,7 +58,7 @@ OR
 `\Spider-man Remastered`
 
 - Marvel's Spider-Man: Miles Morales:
-`\Marvel's Spider-Man: Miles Morales ` **Unchecked*
+`\Marvel’s Spider-Man - Miles Morales`
 
 🌑Star Wars Outlaws:
 `\Star Wars Outlaws`

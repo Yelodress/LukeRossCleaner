@@ -6,6 +6,9 @@
 Cyberpunk 2077:
 `\Cyberpunk 2077\Cyberpunk 2077\bin\x64`
 
+Dark Souls: Remastered:
+`\DARK SOULS REMASTERED`
+
 Elden Ring:
 `\ELDEN RING`
 

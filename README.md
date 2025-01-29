@@ -62,4 +62,7 @@ Stray:
 Watch Dogs:
 `\Watch_Dogs\bin`
 
+Watch Dogs 2:
+`\Watch_Dogs 2\bin` **Unchecked*
+
 ### ⚠️ This script is still under development. It's not my priority, so if you need a specific game, let me know by creating an [issue](https://github.com/Yelodress/LukeRossCleaner/issues) and I'll update it as soon as possible :)

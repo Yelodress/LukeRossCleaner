@@ -12,8 +12,14 @@ Dark Souls: Remastered:
 Elden Ring:
 `\ELDEN RING`
 
+FarCry Primal:
+`\Far Cry - Primal\bin`
+
 FarCry 4:
 `\Far Cry 4`
+
+FarCry 5:
+`\Far Cry 5`
 
 FarCry 6:
 `\Far Cry 6`

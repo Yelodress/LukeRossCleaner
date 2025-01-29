@@ -55,7 +55,7 @@ OR
 
 ### 🕸️Spider-Man
 - Marvel's Spider-Man Remastered:
-`\Marvel's Spider-Man Remastered` **Unchecked*
+`\Spider-man Remastered`
 
 - Marvel's Spider-Man: Miles Morales:
 `\Marvel's Spider-Man: Miles Morales ` **Unchecked*

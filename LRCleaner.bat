@@ -9,6 +9,7 @@ IF EXIST Ghostrunner-Win64-Shipping.exe GOTO cleanupGR
 IF EXIST GWT.exe IF EXIST OpenImageDenoise.dll GOTO cleanupGWT
 IF EXIST GWT.exe IF EXIST XCurl.dll GOTO cleanupGWT
 IF EXIST GWT.exe IF EXIST .egstore GOTO cleanupGWTegs
+IF EXIST Maine-Win*-Shipping.exe GOTO cleanupGROUNDED
 IF EXIST HorizonForbiddenWest.exe GOTO cleanupHFW
 IF EXIST HorizonZeroDawn.exe GOTO cleanupHZD
 IF EXIST HogwartsLegacy.exe IF NOT EXIST EOSSDK-Win64-Shipping.dll GOTO cleanupHogwarts
@@ -16,6 +17,9 @@ IF EXIST HogwartsLegacy.exe IF EXIST EOSSDK-Win64-Shipping.dll GOTO cleanupHogwa
 IF EXIST TheGreatCircle.exe GOTO cleanupIJTGC
 IF EXIST Outlaws.exe GOTO cleanupStarWarsOutlaws
 IF EXIST Outlaws_Plus.exe GOTO cleanupStarWarsOutlaws
+IF EXIST Spider-Man.exe GOTO cleanupSPIDERMAN
+IF EXIST MilesMorales.exe GOTO cleanupSPIDERMAN
+IF EXIST Stray-Win64-Shipping.exe GOTO cleanupSTRAY
 IF EXIST watch_dogs.exe GOTO cleanupWD1
 ECHO This game is not supported for now.
 GOTO abort
@@ -86,7 +90,6 @@ IF EXIST "%dst%\gamerprofile_ori.xml" (
     DEL "%dst%\gamerprofile.xml" 
     REN "%dst%\gamerprofile_ori.xml" gamerprofile.xml
 )
-
 GOTO end
 
 :cleanupGR
@@ -123,6 +126,26 @@ SET "sub=\Saved Games\TangoGameworks\GhostWire Tokyo (EGS)\Saved\Config\WindowsN
 SET "dst=%USERPROFILE%%sub%"
 DEL "%dst%GameUserSettings.ini"
 REN "%dst%GameUserSettings_ori.ini" GameUserSettings.ini
+GOTO end
+
+:cleanupGROUNDED
+echo Deleting mod files...
+RMDIR /s /q "RealRepo"
+DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log"
+
+echo Restoring graphic settings...
+SET sub=\Maine\Saved\Config\WindowsNoEditor\
+SET subGDK=\Maine\Saved\Config\WinGDK\
+SET "dst=%LOCALAPPDATA%%sub%"
+SET "dstGDK=%LOCALAPPDATA%%subGDK%"
+IF EXIST "%dst%" (
+    DEL "%dst%GameUserSettings.ini"
+    REN "%dst%GameUserSettings_ori.ini" GameUserSettings.ini
+)
+IF EXIST "%dstGDK%" (
+    DEL "%dstGDK%GameUserSettings.ini"
+    REN "%dstGDK%GameUserSettings_ori.ini" GameUserSettings.ini
+)
 GOTO end
 
 :cleanupHFW
@@ -194,6 +217,24 @@ SET sub=\Documents\My Games\Outlaws\
 SET "dst=%USERPROFILE%%sub%"
 DEL "%dst%graphic settings.cfg"
 REN "%dst%graphic settings_ori.cfg" "graphic settings.cfg"
+GOTO end
+
+:cleanupSPIDERMAN
+echo Deleting mod files...
+RMDIR /s /q "RealRepo"
+DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll"
+GOTO end
+
+:cleanupSTRAY
+echo Deleting mod files...
+RMDIR /s /q "RealRepo"
+DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "start_protected_game.exe" "RealVR64.dll"
+
+echo Restoring graphic settings...
+SET sub=\Hk_project\Saved\Config\WindowsNoEditor\
+SET "dst=%LOCALAPPDATA%%sub%"
+DEL "%dst%GameUserSettings.ini"
+REN "%dst%GameUserSettings_ori.ini" GameUserSettings.ini
 GOTO end
 
 :cleanupWD1

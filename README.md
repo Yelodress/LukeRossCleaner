@@ -22,7 +22,7 @@ Ghostrunner:
 `\Ghostrunner\Ghostrunner\Binaries\Win64`
 
 GhostwireTokyo:
-`\GhostwireTokyo` *Unlike the original mod, LRCleaner supports the EGS version (in case you've modified the installation script).*
+`\GhostwireTokyo` 
 
 Horizon Forbidden West:
 `\Horizon Forbidden West`
@@ -40,6 +40,9 @@ Indiana Jones and the Great Circle:
 
 Star Wars Outlaws:
 `\Star Wars Outlaws`
+
+Stray:
+`\Stray\Hk_project\Binaries\Win64`
 
 Watch Dogs:
 `\Watch_Dogs\bin`

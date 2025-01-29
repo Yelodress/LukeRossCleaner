@@ -24,6 +24,9 @@ Ghostrunner:
 GhostwireTokyo:
 `\GhostwireTokyo` 
 
+Grounded:
+`\Grounded\Maine\Binaries\Win64` 
+
 Horizon Forbidden West:
 `\Horizon Forbidden West`
 

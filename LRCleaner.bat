@@ -1,6 +1,7 @@
 @echo off
 
 IF EXIST Cyberpunk2077.exe GOTO cleanupCP2077
+IF EXIST DarkSoulsRemastered.exe GOTO cleanupDSR
 IF EXIST eldenring.exe IF EXIST start_protected_game_ori.exe GOTO cleanupEldenRing
 IF EXIST FarCry4.exe GOTO cleanupFC4
 IF EXIST FarCry6.exe GOTO cleanupFC6
@@ -29,6 +30,18 @@ SET sub=\CD Projekt Red\Cyberpunk 2077\
 SET "dst=%LOCALAPPDATA%%sub%"
 DEL "%dst%UserSettings.json"
 REN "%dst%UserSettings_ori.json" UserSettings.json
+GOTO end
+
+:cleanupDSR
+echo Deleting mod files...
+RMDIR /s /q "RealRepo"
+DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "start_protected_game.exe" "RealVR64.dll"
+
+echo Restoring graphic settings...
+SET sub=\FromSoftware\NBGI\DarkSouls\
+SET "dst=%LOCALAPPDATA%%sub%"
+DEL "%dst%DarkSouls.ini"
+REN "%dst%DarkSouls_ori.ini" DarkSouls.ini
 GOTO end
 
 :cleanupEldenRing
@@ -166,6 +179,9 @@ GOTO end
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
 DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.json" "RealVR64.dll"
+
+REM echo Restoring graphic settings...
+REM REG delete "HKLM\SOFTWARE\Khronos\Vulkan\ImplicitLayers"
 GOTO end
 
 :cleanupStarWarsOutlaws

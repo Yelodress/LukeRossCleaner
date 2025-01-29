@@ -6,7 +6,7 @@ SET "doc2=%USERPROFILE%\Documents\"
 IF "%doc1%"=="\" SET "doc1=%doc2%"
 IF "%doc%"=="\" SET "doc=%doc1%"
 
-REM IF EXIST AtomicHeart-Win*-Shipping.exe GOTO cleanupAH == next update :)
+IF EXIST AtomicHeart-Win*-Shipping.exe GOTO cleanupAH
 IF EXIST Cyberpunk2077.exe GOTO cleanupCP2077
 IF EXIST DarkSoulsRemastered.exe GOTO cleanupDSR
 IF EXIST eldenring.exe IF EXIST start_protected_game_ori.exe GOTO cleanupEldenRing

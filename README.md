@@ -49,6 +49,12 @@
 </details>
 
 <details>
+  <summary><h2>🎮PlayStation Studios</h2></summary>
+  
+  - Uncharted Legacy of Thieves Collection `\UNCHARTED - Legacy of Thieves Collection`
+</details>
+
+<details>
   <summary><h2>🧑‍🚀Squanch Games</h2></summary>
   
   - High On Life `\High on Life\Oregon\Binaries\Win64`
@@ -59,7 +65,7 @@
   
  Avatar: Frontiers of Pandora: `work in progress...`
    ### FarCry:
-  - FarCry New Dawn: `work in progress...`
+  - FarCry New Dawn: `\Far Cry New Dawn\bin`
   - FarCry Primal: `\Far Cry - Primal\bin`
   - FarCry 4: `\Far Cry 4`
   - FarCry 5: `\Far Cry 5`
@@ -83,7 +89,11 @@ Star Wars Outlaws: `\Star Wars Outlaws`
   - Hogwarts Legacy: `\Hogwarts Legacy\Phoenix\Binaries\Win64`
 </details>
 
-🤺Ghostrunner: `\Ghostrunner\Ghostrunner\Binaries\Win64`
+<details>
+  <summary><h2>🦿505 Games</h2></summary>
+  
+  - Ghostrunner: `\Ghostrunner\Ghostrunner\Binaries\Win64`
+</details>
 
 
 

@@ -70,7 +70,7 @@
 <details>
   <summary><h2>🌀Ubisoft</h2></summary>
   
- Avatar: Frontiers of Pandora: `Work in progress...`
+ Avatar: Frontiers of Pandora: `\AvatarFrontiersofPandora`
    ### FarCry:
   - FarCry New Dawn: `\Far Cry New Dawn\bin`
   - FarCry Primal: `\Far Cry - Primal\bin`

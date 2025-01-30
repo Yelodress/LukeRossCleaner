@@ -37,6 +37,13 @@
   - Horizon Zero Dawn: `\Horizon Zero Dawn`
 </details>
 
+<details>
+  <summary><h2>🕸️Insomniac Games</h2></summary>
+  
+  - Marvel's Spider-Man Remastered: `\Spider-man Remastered`
+  - Marvel's Spider-Man: Miles Morales: `\Marvel’s Spider-Man - Miles Morales`
+</details>
+
 🤺Ghostrunner:
 `\Ghostrunner\Ghostrunner\Binaries\Win64`
 
@@ -56,13 +63,6 @@ OR
 
 🏆Indiana Jones and the Great Circle:
 `\Indiana Jones and the Great Circle\Content`
-
-### 🕸️Spider-Man
-- Marvel's Spider-Man Remastered:
-`\Spider-man Remastered`
-
-- Marvel's Spider-Man: Miles Morales:
-`\Marvel’s Spider-Man - Miles Morales`
 
 🌑Star Wars Outlaws:
 `\Star Wars Outlaws`

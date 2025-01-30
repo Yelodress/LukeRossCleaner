@@ -104,4 +104,4 @@ Star Wars Outlaws: `\Star Wars Outlaws`
 
 Special thanks to [Loocist23](https://github.com/Loocist23) for his time during our tests !
 
-### ⚠️ This script is still under development. It's not my priority, so if you need a specific game, let me know by creating an [issue](https://github.com/Yelodress/LukeRossCleaner/issues) and I'll update it as soon as possible :)
+### ⚠️ This script is still under development and currently supports up to version 16.2.1 of the mod. It's not my priority, so if you need a specific game or a newer mod version, let me know by creating an [issue](https://github.com/Yelodress/LukeRossCleaner/issues) with the game you want to add, and I'll update it as soon as possible :)

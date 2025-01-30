@@ -17,6 +17,7 @@ IF EXIST FCPrimal.exe GOTO cleanupFCP
 IF EXIST FarCry4.exe GOTO cleanupFC4
 IF EXIST FarCry5.exe GOTO cleanupFC5
 IF EXIST FarCry6.exe GOTO cleanupFC6
+IF EXIST ff7remake_.exe GOTO cleanupFF7R
 IF EXIST GhostOfTsushima.exe GOTO cleanupGOT
 IF EXIST Ghostrunner-Win64-Shipping.exe GOTO cleanupGR
 IF EXIST GWT.exe IF EXIST OpenImageDenoise.dll GOTO cleanupGWT
@@ -185,6 +186,30 @@ IF NOT EXIST "%doc%%sub%" IF EXIST "%doc2%%sub%" SET "doc=%doc2%"
 SET "dst=%doc%%sub%"
 DEL "%dst%\gamerprofile.xml" 
 REN "%dst%\gamerprofile_ori.xml" gamerprofile.xml
+GOTO end
+
+:cleanupFF7R
+echo Deleting mod files...
+RMDIR /s /q "RealRepo"
+DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll"
+
+echo Restoring graphic settings...
+SET "sub=My Games\FINAL FANTASY VII REMAKE\"
+IF NOT EXIST "%doc%%sub%" IF EXIST "%doc1%%sub%" SET "doc=%doc1%"
+IF NOT EXIST "%doc%%sub%" IF EXIST "%doc2%%sub%" SET "doc=%doc2%"
+SET "dst=%doc%%sub%"
+
+FOR /F "delims=" %%D IN ('DIR /AD /B "%dst%EOS"') DO (
+    DEL "%dst%EOS\%%D\ff7remakedevice.sav"
+)
+FOR /F "delims=" %%D IN ('DIR /AD /B "%dst%Steam"') DO (
+    DEL "%dst%Steam\%%D\ff7remakedevice.sav"
+)
+
+SET "sub2=%dst%Saved\Config\WindowsNoEditor\"
+DEL "%sub2%Engine.ini" 
+REN "%sub2%Engine_ori.ini" Engine.ini
+
 GOTO end
 
 :cleanupGOT

@@ -102,6 +102,6 @@ Star Wars Outlaws: `\Star Wars Outlaws`
   - Ghostrunner: `\Ghostrunner\Ghostrunner\Binaries\Win64`
 </details>
 
-
+Special thanks to [Loocist23](https://github.com/Loocist23) for his time during our tests !
 
 ### ⚠️ This script is still under development. It's not my priority, so if you need a specific game, let me know by creating an [issue](https://github.com/Yelodress/LukeRossCleaner/issues) and I'll update it as soon as possible :)

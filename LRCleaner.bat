@@ -1,38 +1,60 @@
 @echo off
 
-FOR /F "tokens=* USEBACKQ" %%F IN (`%pshell% "[Environment]::GetFolderPath('Personal')"`) DO SET doc=%%F\
-FOR /F "tokens=* USEBACKQ" %%F IN (`%pshell% "(new-object -COM Shell.Application).Namespace(0x05).Self.Path"`) DO SET doc1=%%F\
+FOR /F "tokens=* USEBACKQ" %%F IN (`powershell "[Environment]::GetFolderPath('Personal')"`) DO SET doc=%%F\
+FOR /F "tokens=* USEBACKQ" %%F IN (`powershell "(new-object -COM Shell.Application).Namespace(0x05).Self.Path"`) DO SET doc1=%%F\
 SET "doc2=%USERPROFILE%\Documents\"
 IF "%doc1%"=="\" SET "doc1=%doc2%"
 IF "%doc%"=="\" SET "doc=%doc1%"
 
 IF EXIST AtomicHeart-Win*-Shipping.exe GOTO cleanupAH
+IF EXIST afop.exe GOTO cleanupAFOP
+IF EXIST afop_plus.exe GOTO cleanupAFOP
 IF EXIST Cyberpunk2077.exe GOTO cleanupCP2077
 IF EXIST DarkSoulsRemastered.exe GOTO cleanupDSR
 IF EXIST eldenring.exe IF EXIST start_protected_game_ori.exe GOTO cleanupEldenRing
+IF EXIST FarCryNewDawn.exe GOTO cleanupFCND
 IF EXIST FCPrimal.exe GOTO cleanupFCP
 IF EXIST FarCry4.exe GOTO cleanupFC4
 IF EXIST FarCry5.exe GOTO cleanupFC5
 IF EXIST FarCry6.exe GOTO cleanupFC6
+IF EXIST GhostOfTsushima.exe GOTO cleanupGOT
 IF EXIST Ghostrunner-Win64-Shipping.exe GOTO cleanupGR
 IF EXIST GWT.exe IF EXIST OpenImageDenoise.dll GOTO cleanupGWT
 IF EXIST GWT.exe IF EXIST XCurl.dll GOTO cleanupGWT
 IF EXIST GWT.exe IF EXIST .egstore GOTO cleanupGWTegs
 IF EXIST Maine-Win*-Shipping.exe GOTO cleanupGROUNDED
+IF EXIST Oregon-Win*-Shipping.exe GOTO cleanupHOL
 IF EXIST HorizonForbiddenWest.exe GOTO cleanupHFW
 IF EXIST HorizonZeroDawn.exe GOTO cleanupHZD
-IF EXIST HogwartsLegacy.exe IF NOT EXIST EOSSDK-Win64-Shipping.dll GOTO cleanupHogwarts
-IF EXIST HogwartsLegacy.exe IF EXIST EOSSDK-Win64-Shipping.dll GOTO cleanupHogwarts2
+IF EXIST HogwartsLegacy.exe IF EXIST EOSSDK-Win64-Shipping.dll GOTO cleanupHogwarts
 IF EXIST TheGreatCircle.exe GOTO cleanupIJTGC
 IF EXIST Outlaws.exe GOTO cleanupStarWarsOutlaws
 IF EXIST Outlaws_Plus.exe GOTO cleanupStarWarsOutlaws
 IF EXIST Spider-Man.exe GOTO cleanupSPIDERMAN
 IF EXIST MilesMorales.exe GOTO cleanupSPIDERMAN
 IF EXIST Stray-Win64-Shipping.exe GOTO cleanupSTRAY
+IF EXIST u4.exe IF EXIST tll.exe GOTO cleanupULOTC
 IF EXIST watch_dogs.exe GOTO cleanupWD1
 IF EXIST WatchDogs2.exe GOTO cleanupWD2
 ECHO This game is not supported for now.
 GOTO abort
+
+:cleanupAFOP
+echo Deleting mod files...
+RMDIR /s /q "RealRepo"
+DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll"
+
+echo Restoring graphic settings...
+SET "sub=My Games\AFOP\"
+IF NOT EXIST "%doc%%sub%" IF EXIST "%doc1%%sub%" SET "doc=%doc1%"
+IF NOT EXIST "%doc%%sub%" IF EXIST "%doc2%%sub%" SET "doc=%doc2%"
+SET "dst=%doc%%sub%"
+
+DEL "%dst%graphic settings.cfg" "%dst%persistent_settings.cfg" "%dst%state.cfg"
+REN "%dst%graphic settings_ori.cfg" graphic settings.cfg
+REN "%dst%persistent_settings_ori.cfg" persistent_settings.cfg
+REN "%dst%state_ori.cfg" state.cfg
+GOTO end
 
 :cleanupAH
 echo Deleting mod files...
@@ -89,6 +111,20 @@ SET sub=\EldenRing\
 SET "dst=%APPDATA%%sub%"
 DEL "%dst%GraphicsConfig.xml"
 REN "%dst%GraphicsConfig_ori.xml" GraphicsConfig.xml
+GOTO end
+
+:cleanupFCND
+echo Deleting mod files...
+RMDIR /s /q "RealRepo"
+DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll"
+
+echo Restoring graphic settings...
+SET "sub=My Games\Far Cry New Dawn\"
+IF NOT EXIST "%doc%%sub%" IF EXIST "%doc1%%sub%" SET "doc=%doc1%"
+IF NOT EXIST "%doc%%sub%" IF EXIST "%doc2%%sub%" SET "doc=%doc2%"
+SET "dst=%doc%%sub%"
+DEL "%dst%\gamerprofile.xml" 
+REN "%dst%\gamerprofile_ori.xml" gamerprofile.xml
 GOTO end
 
 :cleanupFCP
@@ -151,6 +187,15 @@ DEL "%dst%\gamerprofile.xml"
 REN "%dst%\gamerprofile_ori.xml" gamerprofile.xml
 GOTO end
 
+:cleanupGOT
+echo Deleting mod files...
+RMDIR /s /q "RealRepo"
+DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log"
+
+echo Restoring the graphics settings will delete the game graphics registry key. You will need to set your preferences again at the next launch.
+REG delete "HKCU\Software\Sucker Punch Productions\Ghost of Tsushima DIRECTOR'S CUT\Graphics"
+GOTO end
+
 :cleanupGR
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
@@ -207,6 +252,26 @@ IF EXIST "%dstGDK%" (
 )
 GOTO end
 
+:cleanupHOL
+echo Deleting mod files...
+RMDIR /s /q "RealRepo"
+DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log"
+
+echo Restoring graphic settings...
+SET sub=\Oregon\Saved\Config\WindowsNoEditor\
+SET subGDK=\Oregon\Saved\Config\WinGDK\
+SET "dst=%LOCALAPPDATA%%sub%"
+SET "dstGDK=%LOCALAPPDATA%%subGDK%"
+IF EXIST "%dst%" (
+    DEL "%dst%GameUserSettings.ini"
+    REN "%dst%GameUserSettings_ori.ini" GameUserSettings.ini
+)
+IF EXIST "%dstGDK%" (
+    DEL "%dstGDK%GameUserSettings.ini"
+    REN "%dstGDK%GameUserSettings_ori.ini" GameUserSettings.ini
+)
+GOTO end
+
 :cleanupHFW
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
@@ -229,23 +294,6 @@ REN "%dst%graphicsconfig_ori.ini" graphicsconfig.ini
 GOTO end
 
 :cleanupHogwarts
-echo Deleting mod files...
-RMDIR /s /q "Phoenix\Binaries\Win64\RealRepo"
-DEL "Phoenix\Binaries\Win64\cudart64_110.dll"
-DEL "Phoenix\Binaries\Win64\dxgi.dll"
-DEL "Phoenix\Binaries\Win64\openvr_api.dll"
-DEL "Phoenix\Binaries\Win64\RealConfig.bat"
-DEL "Phoenix\Binaries\Win64\RealVR.ini"
-DEL "Phoenix\Binaries\Win64\RealVR64.log"
-
-echo Restoring graphic settings...
-SET sub=\Hogwarts Legacy\Saved\Config\WindowsNoEditor\
-SET "dst=%LOCALAPPDATA%%sub%"
-DEL "%dst%GameUserSettings.ini"
-REN "%dst%GameUserSettings_ori.ini" GameUserSettings.ini
-GOTO end
-
-:cleanupHogwarts2
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
 DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log"
@@ -294,6 +342,17 @@ SET sub=\Hk_project\Saved\Config\WindowsNoEditor\
 SET "dst=%LOCALAPPDATA%%sub%"
 DEL "%dst%GameUserSettings.ini"
 REN "%dst%GameUserSettings_ori.ini" GameUserSettings.ini
+GOTO end
+
+:cleanupULOTC
+echo Deleting mod files...
+RMDIR /s /q "RealRepo"
+DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "start_protected_game.exe" "RealVR64.dll"
+
+echo Restoring graphic settings...
+SET sub=Uncharted4_data\
+DEL "%sub%screeninfo.cfg"
+REN "%sub%screeninfo_ori.cfg" screeninfo.cfg
 GOTO end
 
 :cleanupWD1

@@ -9,25 +9,33 @@
 🤖Cyberpunk 2077:
 `\Cyberpunk 2077\Cyberpunk 2077\bin\x64`
 
-### ⚔️Fromsoftware
-- Dark Souls: Remastered:
-`\DARK SOULS REMASTERED`
+<details>
+  <summary><h2>⚔️Fromsoftware</h2></summary>
+  
+  - Dark Souls: Remastered: `\DARK SOULS REMASTERED`
+  - Elden Ring: `\ELDEN RING`
+</details>
+<details>
+  <summary><h2>🎭Ubisoft</h2></summary>
+  
+ Avatar: Frontiers of Pandora: `work in progress...`
+   ### FarCry:
+  - FarCry New Dawn: `work in progress...`
+  - FarCry Primal: `\Far Cry - Primal\bin`
+  - FarCry 4: `\Far Cry 4`
+  - FarCry 5: `\Far Cry 5`
+  - FarCry 6: `\Far Cry 6`
+ ### Watch Dogs:
+  - Watch Dogs: `\Watch_Dogs\bin`
+  - Watch Dogs 2: `\Watch_Dogs 2\bin`
+</details>
 
-- Elden Ring:
-`\ELDEN RING`
-
-### 🔫FarCry:
-- FarCry Primal:
-`\Far Cry - Primal\bin`
-
-- FarCry 4:
-`\Far Cry 4`
-
-- FarCry 5:
-`\Far Cry 5`
-
-- FarCry 6:
-`\Far Cry 6`
+<details>
+  <summary><h2>🦕Guerrilla Games</h2></summary>
+  
+  - Horizon Forbidden West: `\Horizon Forbidden West`
+  - Horizon Zero Dawn: `\Horizon Zero Dawn`
+</details>
 
 🤺Ghostrunner:
 `\Ghostrunner\Ghostrunner\Binaries\Win64`
@@ -38,12 +46,8 @@
 🐛Grounded:
 `\Grounded\Maine\Binaries\Win64` 
 
-### 🦕Horizon
-- Horizon Forbidden West:
-`\Horizon Forbidden West`
 
-- Horizon Zero Dawn:
-`\Horizon Zero Dawn`
+
 
 🪄Hogwarts Legacy:
 `\Hogwarts Legacy`
@@ -66,11 +70,5 @@ OR
 🐈Stray:
 `\Stray\Hk_project\Binaries\Win64`
 
-### 💻Watch Dogs
-- Watch Dogs:
-`\Watch_Dogs\bin`
-
-- Watch Dogs 2:
-`\Watch_Dogs 2\bin`
 
 ### ⚠️ This script is still under development. It's not my priority, so if you need a specific game, let me know by creating an [issue](https://github.com/Yelodress/LukeRossCleaner/issues) and I'll update it as soon as possible :)

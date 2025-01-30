@@ -64,7 +64,7 @@
 <details>
   <summary><h2>🗡️Square Enix</h2></summary>
   
-  - Final Fantasy VII Remake Intergrade: `Work in progress...`
+  - Final Fantasy VII Remake Intergrade: `\Final Fantasy VII - Remake Intergrade\End\Binaries\Win64`
 </details>
 
 <details>

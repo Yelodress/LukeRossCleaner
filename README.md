@@ -2,34 +2,30 @@
 ### A bash tool that is designed to get rid of a super cool mod that you can't uninstall :)
 
 ## 📋 List of supported games (and path)
-
-☢️Atomic Heart:
-`\Atomic Heart\AtomicHeart\Binaries\Win64`
-
-🤖Cyberpunk 2077:
-`\Cyberpunk 2077\Cyberpunk 2077\bin\x64`
+<details>
+  <summary><h2>🐈Annapurna Interactive</h2></summary>
+  
+  - Stray: `\Stray\Hk_project\Binaries\Win64`
+</details>
 
 <details>
-  <summary><h2>⚔️Fromsoftware</h2></summary>
+  <summary><h2>⚙️Bethesda Softworks</h2></summary>
+    
+  - GhostwireTokyo: `\GhostwireTokyo` 
+  - Indiana Jones and the Great Circle: `\Indiana Jones and the Great Circle\Content`
+</details>
+
+<details>
+  <summary><h2>🐦CD Projekt</h2></summary>
+  
+  - Cyberpunk 2077: `\Cyberpunk 2077\Cyberpunk 2077\bin\x64`
+</details>
+
+<details>
+  <summary><h2>⚔Fromsoftware</h2></summary>
   
   - Dark Souls: Remastered: `\DARK SOULS REMASTERED`
   - Elden Ring: `\ELDEN RING`
-</details>
-<details>
-  <summary><h2>🎭Ubisoft</h2></summary>
-  
- Avatar: Frontiers of Pandora: `work in progress...`
-   ### FarCry:
-  - FarCry New Dawn: `work in progress...`
-  - FarCry Primal: `\Far Cry - Primal\bin`
-  - FarCry 4: `\Far Cry 4`
-  - FarCry 5: `\Far Cry 5`
-  - FarCry 6: `\Far Cry 6`
- ### Watch Dogs:
-  - Watch Dogs: `\Watch_Dogs\bin`
-  - Watch Dogs 2: `\Watch_Dogs 2\bin`
-
-Star Wars Outlaws: `\Star Wars Outlaws`
 </details>
 
 <details>
@@ -46,29 +42,49 @@ Star Wars Outlaws: `\Star Wars Outlaws`
   - Marvel's Spider-Man: Miles Morales: `\Marvel’s Spider-Man - Miles Morales`
 </details>
 
-🤺Ghostrunner:
-`\Ghostrunner\Ghostrunner\Binaries\Win64`
+<details>
+  <summary><h2>🪝Mundfish</h2></summary>
+  
+  - Atomic Heart: `\Atomic Heart\AtomicHeart\Binaries\Win64`
+</details>
 
-👻GhostwireTokyo:
-`\GhostwireTokyo` 
+<details>
+  <summary><h2>🧑‍🚀Squanch Games</h2></summary>
+  
+  - High On Life `\High on Life\Oregon\Binaries\Win64`
+</details>
 
-🐛Grounded:
-`\Grounded\Maine\Binaries\Win64` 
+<details>
+  <summary><h2>🌀Ubisoft</h2></summary>
+  
+ Avatar: Frontiers of Pandora: `work in progress...`
+   ### FarCry:
+  - FarCry New Dawn: `work in progress...`
+  - FarCry Primal: `\Far Cry - Primal\bin`
+  - FarCry 4: `\Far Cry 4`
+  - FarCry 5: `\Far Cry 5`
+  - FarCry 6: `\Far Cry 6`
+ ### Watch Dogs:
+  - Watch Dogs: `\Watch_Dogs\bin`
+  - Watch Dogs 2: `\Watch_Dogs 2\bin`
 
+Star Wars Outlaws: `\Star Wars Outlaws`
+</details>
 
+<details>
+  <summary><h2>🎮Xbox Game Studios</h2></summary>
+  
+  - Grounded: `\Grounded\Maine\Binaries\Win64` 
+</details>
 
+<details>
+  <summary><h2>🛡️Warner Bros. Games</h2></summary>
+  
+  - Hogwarts Legacy: `\Hogwarts Legacy\Phoenix\Binaries\Win64`
+</details>
 
-🪄Hogwarts Legacy:
-`\Hogwarts Legacy`
-OR
-`\Hogwarts Legacy\Phoenix\Binaries\Win64`
+🤺Ghostrunner: `\Ghostrunner\Ghostrunner\Binaries\Win64`
 
-🏆Indiana Jones and the Great Circle:
-`\Indiana Jones and the Great Circle\Content`
-
-
-🐈Stray:
-`\Stray\Hk_project\Binaries\Win64`
 
 
 ### ⚠️ This script is still under development. It's not my priority, so if you need a specific game, let me know by creating an [issue](https://github.com/Yelodress/LukeRossCleaner/issues) and I'll update it as soon as possible :)

@@ -28,6 +28,8 @@
  ### Watch Dogs:
   - Watch Dogs: `\Watch_Dogs\bin`
   - Watch Dogs 2: `\Watch_Dogs 2\bin`
+
+Star Wars Outlaws: `\Star Wars Outlaws`
 </details>
 
 <details>
@@ -64,8 +66,6 @@ OR
 🏆Indiana Jones and the Great Circle:
 `\Indiana Jones and the Great Circle\Content`
 
-🌑Star Wars Outlaws:
-`\Star Wars Outlaws`
 
 🐈Stray:
 `\Stray\Hk_project\Binaries\Win64`

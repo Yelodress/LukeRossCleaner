@@ -50,20 +50,27 @@
 
 <details>
   <summary><h2>🎮PlayStation Studios</h2></summary>
-  
-  - Uncharted Legacy of Thieves Collection `\UNCHARTED - Legacy of Thieves Collection`
+
+  - Ghost of Tsushima: `\Ghost of Tsushima DIRECTOR'S CUT`
+  - Uncharted Legacy of Thieves Collection: `\UNCHARTED - Legacy of Thieves Collection`
 </details>
 
 <details>
   <summary><h2>🧑‍🚀Squanch Games</h2></summary>
   
-  - High On Life `\High on Life\Oregon\Binaries\Win64`
+  - High On Life: `\High on Life\Oregon\Binaries\Win64`
+</details>
+
+<details>
+  <summary><h2>🗡️Square Enix</h2></summary>
+  
+  - Final Fantasy VII Remake: `Work in progress...`
 </details>
 
 <details>
   <summary><h2>🌀Ubisoft</h2></summary>
   
- Avatar: Frontiers of Pandora: `work in progress...`
+ Avatar: Frontiers of Pandora: `Work in progress...`
    ### FarCry:
   - FarCry New Dawn: `\Far Cry New Dawn\bin`
   - FarCry Primal: `\Far Cry - Primal\bin`
@@ -78,15 +85,15 @@ Star Wars Outlaws: `\Star Wars Outlaws`
 </details>
 
 <details>
-  <summary><h2>🎮Xbox Game Studios</h2></summary>
-  
-  - Grounded: `\Grounded\Maine\Binaries\Win64` 
-</details>
-
-<details>
   <summary><h2>🛡️Warner Bros. Games</h2></summary>
   
   - Hogwarts Legacy: `\Hogwarts Legacy\Phoenix\Binaries\Win64`
+</details>
+
+<details>
+  <summary><h2>🎮Xbox Game Studios</h2></summary>
+  
+  - Grounded: `\Grounded\Maine\Binaries\Win64` 
 </details>
 
 <details>

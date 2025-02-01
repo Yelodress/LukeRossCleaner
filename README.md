@@ -58,6 +58,7 @@
 <details>
   <summary><h2>®️Rockstar Games</h2></summary>
 
+  - Grand Theft Auto V: `\GTAV` or `\Grand Theft Auto V`
   - Mafia: Definitive Edition: `\Mafia Definitive Edition`
   - Mafia II: Definitive Edition: `\Mafia II - Definitive Edition\pc`
   - Mafia III: Definitive Edition: `\Mafia 3 - Definitive Edition`

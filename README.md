@@ -56,6 +56,15 @@
 </details>
 
 <details>
+  <summary><h2>®️Rockstar Games</h2></summary>
+
+  - Mafia: Definitive Edition: `Work in progress...`
+  - Mafia II: Definitive Edition: `Work in progress...`
+  - Mafia III: Definitive Edition: `Work in progress...`
+  - Red Dead Redemption 2: `Work in progress...`
+</details>
+
+<details>
   <summary><h2>🧑‍🚀Squanch Games</h2></summary>
   
   - High On Life: `\High on Life\Oregon\Binaries\Win64`

@@ -23,6 +23,7 @@ IF EXIST Ghostrunner-Win64-Shipping.exe GOTO cleanupGR
 IF EXIST GWT.exe IF EXIST OpenImageDenoise.dll GOTO cleanupGWT
 IF EXIST GWT.exe IF EXIST XCurl.dll GOTO cleanupGWT
 IF EXIST GWT.exe IF EXIST .egstore GOTO cleanupGWTegs
+IF EXIST GTA5.exe GOTO cleanupGTA5
 IF EXIST Maine-Win*-Shipping.exe GOTO cleanupGROUNDED
 IF EXIST Oregon-Win*-Shipping.exe GOTO cleanupHOL
 IF EXIST HorizonForbiddenWest.exe GOTO cleanupHFW
@@ -259,6 +260,20 @@ SET "sub=\Saved Games\TangoGameworks\GhostWire Tokyo (EGS)\Saved\Config\WindowsN
 SET "dst=%USERPROFILE%%sub%"
 DEL "%dst%GameUserSettings.ini"
 REN "%dst%GameUserSettings_ori.ini" GameUserSettings.ini
+GOTO end
+
+:cleanupGTA5
+echo Deleting mod files...
+RMDIR /s /q "asi" "Settings" "ShaderFixes"
+DEL "RealVR.ini" "d3d11.dll" "ScriptHookV.dll" "RealConfig.bat" "commandline.txt" "openvr_api.dll" "nvapi64.dll" "d3dx.ini" "dinput8.dll"
+
+echo Restoring graphic settings...
+SET "sub=\Rockstar Games\GTA V\"
+IF NOT EXIST "%doc%%sub%" IF EXIST "%doc1%%sub%" SET "doc=%doc1%"
+IF NOT EXIST "%doc%%sub%" IF EXIST "%doc2%%sub%" SET "doc=%doc2%"
+SET "dst=%doc%%sub%"
+DEL "%dst%settings.xml"
+REN "%dst%settings_ori.xml" settings.xml
 GOTO end
 
 :cleanupGROUNDED

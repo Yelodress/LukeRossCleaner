@@ -1,5 +1,5 @@
 # 🧼LukeRossCleaner
-### A bash tool that is designed to get rid of a super cool mod that you can't uninstall :)
+### A bash tool that is designed to get rid of a super cool mod that you can't \*properly* uninstall :)
 
 ## 📋 List of supported games (and path), sorted by studios
 <details>
@@ -58,10 +58,10 @@
 <details>
   <summary><h2>®️Rockstar Games</h2></summary>
 
-  - Mafia: Definitive Edition: `Work in progress...`
-  - Mafia II: Definitive Edition: `Work in progress...`
+  - Mafia: Definitive Edition: `\Mafia Definitive Edition`
+  - Mafia II: Definitive Edition: `\Mafia II - Definitive Edition\pc`
   - Mafia III: Definitive Edition: `Work in progress...`
-  - Red Dead Redemption 2: `Work in progress...`
+  - Red Dead Redemption 2: `\Red Dead Redemption 2`
 </details>
 
 <details>

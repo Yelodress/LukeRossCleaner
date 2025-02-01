@@ -60,7 +60,7 @@
 
   - Mafia: Definitive Edition: `\Mafia Definitive Edition`
   - Mafia II: Definitive Edition: `\Mafia II - Definitive Edition\pc`
-  - Mafia III: Definitive Edition: `Work in progress...`
+  - Mafia III: Definitive Edition: `\Mafia 3 - Definitive Edition`
   - Red Dead Redemption 2: `\Red Dead Redemption 2`
 </details>
 

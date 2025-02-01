@@ -377,8 +377,8 @@ GOTO end
 
 :cleanupMDE3
 echo Deleting mod files...
-RMDIR /s /q "RealRepo"
-DEL "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll"
+RMDIR /s /q "RealRepo" "reshade-shaders"
+DEL "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll" "ReShadePreset.ini"
 
 echo Restoring graphic settings...
 SET "sub=\2K Games\Mafia III\"

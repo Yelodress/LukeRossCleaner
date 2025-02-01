@@ -29,8 +29,12 @@ IF EXIST HorizonForbiddenWest.exe GOTO cleanupHFW
 IF EXIST HorizonZeroDawn.exe GOTO cleanupHZD
 IF EXIST HogwartsLegacy.exe IF EXIST EOSSDK-Win64-Shipping.dll GOTO cleanupHogwarts
 IF EXIST TheGreatCircle.exe GOTO cleanupIJTGC
+IF EXIST mafiadefinitiveedition.exe GOTO cleanupMDE1
+IF EXIST "Mafia II Definitive Edition.exe" GOTO cleanupMDE2
+IF EXIST mafia3definitiveedition.exe GOTO cleanupMDE3
 IF EXIST Outlaws.exe GOTO cleanupStarWarsOutlaws
 IF EXIST Outlaws_Plus.exe GOTO cleanupStarWarsOutlaws
+IF EXIST RDR2.exe GOTO cleanupRDR2
 IF EXIST Spider-Man.exe GOTO cleanupSPIDERMAN
 IF EXIST MilesMorales.exe GOTO cleanupSPIDERMAN
 IF EXIST Stray-Win64-Shipping.exe GOTO cleanupSTRAY
@@ -339,16 +343,78 @@ echo Restoring graphic settings...
 powershell -Command "& { $path = 'HKLM:\SOFTWARE\Khronos\Vulkan\ImplicitLayers'; $regName = (Get-ItemProperty -Path $path | Get-Member -MemberType NoteProperty | Where-Object { $_.Name -like '*RealVR64.json' }).Name; if ($regName) { Start-Process cmd -ArgumentList ('/c REG DELETE \"HKLM\SOFTWARE\Khronos\Vulkan\ImplicitLayers\" /V \"' + $regName + '\" /F') -Verb RunAs } }"
 GOTO end
 
+:cleanupMDE1
+echo Deleting mod files...
+RMDIR /s /q "RealRepo"
+DEL "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll"
+
+echo Restoring graphic settings...
+SET "sub=My Games\Mafia Definitive Edition\"
+IF NOT EXIST "%doc%%sub%" IF EXIST "%doc1%%sub%" SET "doc=%doc1%"
+IF NOT EXIST "%doc%%sub%" IF EXIST "%doc2%%sub%" SET "doc=%doc2%"
+SET "dst=%doc%%sub%"
+FOR /F "delims=" %%D IN ('DIR /AD /B "%dst%Data"') DO (
+    DEL "%dst%Data\%%D\profiles\temporaryprofile\profile_videosettings.pf"
+)
+DEL "%dst%Saves\videoconfig.cfg"
+DEL "%dst%Saves\launcconfig.cfg"
+GOTO end
+
+:cleanupMDE2
+echo Deleting mod files...
+RMDIR /s /q "RealRepo"
+DEL "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll"
+
+echo Restoring graphic settings...
+SET "sub=My Games\Mafia II Definitive Edition\"
+IF NOT EXIST "%doc%%sub%" IF EXIST "%doc1%%sub%" SET "doc=%doc1%"
+IF NOT EXIST "%doc%%sub%" IF EXIST "%doc2%%sub%" SET "doc=%doc2%"
+SET "dst=%doc%%sub%"
+FOR /F "delims=" %%D IN ('DIR /AD /B "%dst%Data\profiles"') DO (
+    DEL "%dst%Data\profiles\%%D\settings.xml"
+)
+GOTO end
+
+:cleanupMDE3
+echo Deleting mod files...
+RMDIR /s /q "RealRepo"
+DEL "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll"
+
+echo Restoring graphic settings...
+SET "sub=\2K Games\Mafia III\"
+SET "dst=%LOCALAPPDATA%%sub%"
+FOR /F "delims=" %%D IN ('DIR /AD /B "%dst%Data"') DO (
+    DEL "%dst%Data\%%D\profiles\temporaryprofile\profile_videosettings.pf"
+)
+DEL "%dst%Saves\videoconfig.cfg"
+DEL "%dst%Saves\launcconfig.cfg"
+GOTO end
+
 :cleanupStarWarsOutlaws
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll"
+DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll" 
 
 echo Restoring graphic settings...
 SET sub=\Documents\My Games\Outlaws\
 SET "dst=%USERPROFILE%%sub%"
 DEL "%dst%graphic settings.cfg"
 REN "%dst%graphic settings_ori.cfg" "graphic settings.cfg"
+GOTO end
+
+:cleanupRDR2
+echo Deleting mod files...
+RMDIR /s /q "RealRepo" "Settings"
+DEL "RealVR_RDR2.asi" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "ScriptHookRDR2.dll" "RealVR64.dll" "dinput8.dll" "commandline.txt" "RealVR64.json"
+
+echo Restoring graphic settings...
+powershell -Command "& { $path = 'HKLM:\SOFTWARE\Khronos\Vulkan\ImplicitLayers'; $regName = (Get-ItemProperty -Path $path | Get-Member -MemberType NoteProperty | Where-Object { $_.Name -like '*RealVR64.json' }).Name; if ($regName) { Start-Process cmd -ArgumentList ('/c REG DELETE \"HKLM\SOFTWARE\Khronos\Vulkan\ImplicitLayers\" /V \"' + $regName + '\" /F') -Verb RunAs } }"
+SET "sub=Rockstar Games\Red Dead Redemption 2\Settings\"
+IF NOT EXIST "%doc%%sub%" IF EXIST "%doc1%%sub%" SET "doc=%doc1%"
+IF NOT EXIST "%doc%%sub%" IF EXIST "%doc2%%sub%" SET "doc=%doc2%"
+SET "dst=%doc%%sub%"
+DEL "%dst%system.xml"
+REN "%dst%system_ori.xml" system.xml
 GOTO end
 
 :cleanupSPIDERMAN

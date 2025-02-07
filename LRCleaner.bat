@@ -265,7 +265,7 @@ GOTO end
 :cleanupGTA5
 echo Deleting mod files...
 RMDIR /s /q "asi" "Settings" "ShaderFixes"
-DEL "RealVR.ini" "d3d11.dll" "ScriptHookV.dll" "RealConfig.bat" "commandline.txt" "openvr_api.dll" "nvapi64.dll" "d3dx.ini" "dinput8.dll"
+DEL "RealVR.ini" "d3d11.dll" "ScriptHookV.dll" "RealConfig.bat" "commandline.txt" "openvr_api.dll" "nvapi64.dll" "d3dx.ini" "dinput8.dll" "ScriptHookV.log" "asiloader.log" "args.txt" "NativeTrainer.asi"
 
 echo Restoring graphic settings...
 SET "sub=\Rockstar Games\GTA V\"

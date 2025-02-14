@@ -80,18 +80,15 @@
 <details>
   <summary><h2>🌀Ubisoft</h2></summary>
   
- Avatar: Frontiers of Pandora: `\AvatarFrontiersofPandora`
-   ### FarCry:
+  - Avatar: Frontiers of Pandora: `\AvatarFrontiersofPandora`
   - FarCry New Dawn: `\Far Cry New Dawn\bin`
   - FarCry Primal: `\Far Cry - Primal\bin`
   - FarCry 4: `\Far Cry 4`
   - FarCry 5: `\Far Cry 5`
   - FarCry 6: `\Far Cry 6`
- ### Watch Dogs:
   - Watch Dogs: `\Watch_Dogs\bin`
   - Watch Dogs 2: `\Watch_Dogs 2\bin`
-
-Star Wars Outlaws: `\Star Wars Outlaws`
+  - Star Wars Outlaws: `\Star Wars Outlaws`
 </details>
 
 <details>

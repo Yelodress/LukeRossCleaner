@@ -25,7 +25,7 @@
   <summary><h2>⚔Fromsoftware</h2></summary>
   
   - Dark Souls: Remastered: `\DARK SOULS REMASTERED`
-  - Dark Souls II: `Work in progress...`
+  - Dark Souls II: Scholar of the First Sin: `Work in progress...`
   - Elden Ring: `\ELDEN RING`
 </details>
 
@@ -76,6 +76,7 @@
   <summary><h2>🗡️Square Enix</h2></summary>
   
   - Final Fantasy VII Remake Intergrade: `\Final Fantasy VII - Remake Intergrade\End\Binaries\Win64`
+  - Final Fantasy VII Rebirth : `Work in progress...`
 </details>
 
 <details>

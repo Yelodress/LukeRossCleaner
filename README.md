@@ -25,6 +25,7 @@
   <summary><h2>⚔Fromsoftware</h2></summary>
   
   - Dark Souls: Remastered: `\DARK SOULS REMASTERED`
+  - Dark Souls II: `Work in progress...`
   - Elden Ring: `\ELDEN RING`
 </details>
 

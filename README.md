@@ -25,7 +25,7 @@
   <summary><h2>⚔Fromsoftware</h2></summary>
   
   - Dark Souls: Remastered: `\DARK SOULS REMASTERED`
-  - Dark Souls II: Scholar of the First Sin: `Work in progress...`
+  - Dark Souls II: Scholar of the First Sin: `\Dark Souls II\Game`
   - Elden Ring: `\ELDEN RING`
 </details>
 

@@ -11,12 +11,14 @@ IF EXIST afop.exe GOTO cleanupAFOP
 IF EXIST afop_plus.exe GOTO cleanupAFOP
 IF EXIST Cyberpunk2077.exe GOTO cleanupCP2077
 IF EXIST DarkSoulsRemastered.exe GOTO cleanupDSR
+IF EXIST DarkSoulsII.exe GOTO cleanupDS2
 IF EXIST eldenring.exe IF EXIST start_protected_game_ori.exe GOTO cleanupEldenRing
 IF EXIST FarCryNewDawn.exe GOTO cleanupFCND
 IF EXIST FCPrimal.exe GOTO cleanupFCP
 IF EXIST FarCry4.exe GOTO cleanupFC4
 IF EXIST FarCry5.exe GOTO cleanupFC5
 IF EXIST FarCry6.exe GOTO cleanupFC6
+IF EXIST ff7rebirth_.exe GOTO cleanupFF7RB
 IF EXIST ff7remake_.exe GOTO cleanupFF7R
 IF EXIST GhostOfTsushima.exe GOTO cleanupGOT
 IF EXIST Ghostrunner-Win64-Shipping.exe GOTO cleanupGR
@@ -104,6 +106,18 @@ SET sub=\FromSoftware\NBGI\DarkSouls\
 SET "dst=%LOCALAPPDATA%%sub%"
 DEL "%dst%DarkSouls.ini"
 REN "%dst%DarkSouls_ori.ini" DarkSouls.ini
+GOTO end
+
+:cleanupDS2
+echo Deleting mod files...
+RMDIR /s /q "RealRepo"
+DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "start_protected_game.exe" "RealVR64.dll" "BackupSaves.bat"
+
+echo Restoring graphic settings...
+SET sub=\DarkSoulsII\
+SET "dst=%LOCALAPPDATA%%sub%"
+DEL "%dst%GraphicsConfig_SOFS.xml"
+REN "%dst%GraphicsConfig_SOFS_ori.xml" GraphicsConfig_SOFS.xml
 GOTO end
 
 :cleanupEldenRing
@@ -214,7 +228,25 @@ FOR /F "delims=" %%D IN ('DIR /AD /B "%dst%Steam"') DO (
 SET "sub2=%dst%Saved\Config\WindowsNoEditor\"
 DEL "%sub2%Engine.ini" 
 REN "%sub2%Engine_ori.ini" Engine.ini
+GOTO end
 
+:cleanupFF7RB
+echo Deleting mod files...
+RMDIR /s /q "RealRepo"
+DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll"
+
+echo Restoring graphic settings...
+SET "sub=My Games\FINAL FANTASY VII REBIRTH\"
+IF NOT EXIST "%doc%%sub%" IF EXIST "%doc1%%sub%" SET "doc=%doc1%"
+IF NOT EXIST "%doc%%sub%" IF EXIST "%doc2%%sub%" SET "doc=%doc2%"
+SET "dst=%doc%%sub%"
+
+FOR /F "delims=" %%D IN ('DIR /AD /B "%dst%EOS"') DO (
+    DEL "%dst%EOS\%%D\ff7rebirthdevice.sav"
+)
+FOR /F "delims=" %%D IN ('DIR /AD /B "%dst%Steam"') DO (
+    DEL "%dst%Steam\%%D\ff7rebirthdevice.sav"
+)
 GOTO end
 
 :cleanupGOT

@@ -76,7 +76,7 @@
   <summary><h2>🗡️Square Enix</h2></summary>
   
   - Final Fantasy VII Remake Intergrade: `\Final Fantasy VII - Remake Intergrade\End\Binaries\Win64`
-  - Final Fantasy VII Rebirth : `Work in progress...`
+  - Final Fantasy VII Rebirth : `\FINAL FANTASY VII REBIRTH\End\Binaries\Win64`
 </details>
 
 <details>

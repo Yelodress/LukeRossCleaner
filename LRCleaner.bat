@@ -86,7 +86,7 @@ GOTO end
 
 :cleanupCP2077
 echo Deleting mod files...
-RMDIR /s /q "Phoenix\Binaries\Win64\RealRepo"
+RMDIR /s /q "RealRepo"
 DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log"
 
 echo Restoring graphic settings...

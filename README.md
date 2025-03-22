@@ -94,9 +94,15 @@
 </details>
 
 <details>
-  <summary><h2>🛡️Warner Bros. Games</h2></summary>
+  <summary><h2>🤺Warhorse Studios</h2></summary>
   
   - Hogwarts Legacy: `\Hogwarts Legacy\Phoenix\Binaries\Win64`
+</details>
+
+<details>
+  <summary><h2>🛡️Warner Bros. Games</h2></summary>
+  
+  - Kingdom Come: Deliverance II: `Work in progress...`
 </details>
 
 <details>

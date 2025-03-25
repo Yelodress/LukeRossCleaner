@@ -12,7 +12,7 @@ IF EXIST afop_plus.exe GOTO cleanupAFOP
 IF EXIST Cyberpunk2077.exe GOTO cleanupCP2077
 IF EXIST DarkSoulsRemastered.exe GOTO cleanupDSR
 IF EXIST DarkSoulsII.exe GOTO cleanupDS2
-IF EXIST eldenring.exe IF EXIST start_protected_game_ori.exe GOTO cleanupEldenRing
+IF EXIST eldenring.exe GOTO cleanupEldenRing
 IF EXIST FarCryNewDawn.exe GOTO cleanupFCND
 IF EXIST FCPrimal.exe GOTO cleanupFCP
 IF EXIST FarCry4.exe GOTO cleanupFC4
@@ -31,6 +31,7 @@ IF EXIST Oregon-Win*-Shipping.exe GOTO cleanupHOL
 IF EXIST HorizonForbiddenWest.exe GOTO cleanupHFW
 IF EXIST HorizonZeroDawn.exe GOTO cleanupHZD
 IF EXIST HogwartsLegacy.exe IF EXIST EOSSDK-Win64-Shipping.dll GOTO cleanupHogwarts
+IF EXIST KingdomCome.exe GOTO cleanupKCD2
 IF EXIST TheGreatCircle.exe GOTO cleanupIJTGC
 IF EXIST mafiadefinitiveedition.exe GOTO cleanupMDE1
 IF EXIST "Mafia II Definitive Edition.exe" GOTO cleanupMDE2
@@ -58,10 +59,13 @@ IF NOT EXIST "%doc%%sub%" IF EXIST "%doc1%%sub%" SET "doc=%doc1%"
 IF NOT EXIST "%doc%%sub%" IF EXIST "%doc2%%sub%" SET "doc=%doc2%"
 SET "dst=%doc%%sub%"
 
-DEL "%dst%graphic settings.cfg" "%dst%persistent_settings.cfg" "%dst%state.cfg"
-REN "%dst%graphic settings_ori.cfg" graphic settings.cfg
-REN "%dst%persistent_settings_ori.cfg" persistent_settings.cfg
-REN "%dst%state_ori.cfg" state.cfg
+IF ExIST "%dst%graphic settings_ori.cfg" (
+    DEL "%dst%graphic settings.cfg" "%dst%persistent_settings.cfg" "%dst%state.cfg"
+    REN "%dst%graphic settings_ori.cfg" graphic settings.cfg
+    REN "%dst%persistent_settings_ori.cfg" persistent_settings.cfg
+    REN "%dst%state_ori.cfg" state.cfg
+) ELSE GOTO no_ori
+
 GOTO end
 
 :cleanupAH
@@ -75,12 +79,16 @@ SET subGDK=\AtomicHeart\Saved\Config\WinGDK\
 SET "dst=%LOCALAPPDATA%%sub%"
 SET "dstGDK=%LOCALAPPDATA%%subGDK%"
 IF EXIST "%dst%" (
-    DEL "%dst%GameUserSettings.ini"
-    REN "%dst%GameUserSettings_ori.ini" GameUserSettings.ini
+    IF ExIST "%dst%GameUserSettings_ori.ini" (
+        DEL "%dst%GameUserSettings.ini"
+        REN "%dst%GameUserSettings_ori.ini" GameUserSettings.ini
+    ) ELSE GOTO no_ori
 )
 IF EXIST "%dstGDK%" (
-    DEL "%dstGDK%GameUserSettings.ini"
-    REN "%dstGDK%GameUserSettings_ori.ini" GameUserSettings.ini
+    IF ExIST "%dst%GraphicsConfig_ori.xml" (
+        DEL "%dstGDK%GameUserSettings.ini"
+        REN "%dstGDK%GameUserSettings_ori.ini" GameUserSettings.ini
+    ) ELSE GOTO no_ori
 )
 GOTO end
 
@@ -92,8 +100,10 @@ DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini"
 echo Restoring graphic settings...
 SET sub=\CD Projekt Red\Cyberpunk 2077\
 SET "dst=%LOCALAPPDATA%%sub%"
-DEL "%dst%UserSettings.json"
-REN "%dst%UserSettings_ori.json" UserSettings.json
+IF EXIST "%dst%UserSettings_ori.json" (
+    DEL "%dst%UserSettings.json"
+    REN "%dst%UserSettings_ori.json" UserSettings.json
+)
 GOTO end
 
 :cleanupDSR
@@ -104,8 +114,10 @@ DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini"
 echo Restoring graphic settings...
 SET sub=\FromSoftware\NBGI\DarkSouls\
 SET "dst=%LOCALAPPDATA%%sub%"
-DEL "%dst%DarkSouls.ini"
-REN "%dst%DarkSouls_ori.ini" DarkSouls.ini
+IF ExIST "%dst%DarkSouls_ori.ini" (
+    DEL "%dst%DarkSouls.ini"
+    REN "%dst%DarkSouls_ori.ini" DarkSouls.ini
+) ELSE GOTO no_ori
 GOTO end
 
 :cleanupDS2
@@ -116,21 +128,26 @@ DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini"
 echo Restoring graphic settings...
 SET sub=\DarkSoulsII\
 SET "dst=%LOCALAPPDATA%%sub%"
-DEL "%dst%GraphicsConfig_SOFS.xml"
-REN "%dst%GraphicsConfig_SOFS_ori.xml" GraphicsConfig_SOFS.xml
+IF ExIST "%dst%GraphicsConfig_SOFS_ori.xml" (
+    DEL "%dst%GraphicsConfig_SOFS.xml"
+    REN "%dst%GraphicsConfig_SOFS_ori.xml" GraphicsConfig_SOFS.xml
+) ELSE GOTO no_ori
 GOTO end
 
 :cleanupEldenRing
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "start_protected_game.exe" "RealVR64.dll"
+DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll"
+IF EXIST start_protected_game_ori.exe DEL start_protected_game.exe
 REN start_protected_game_ori.exe start_protected_game.exe
 
 echo Restoring graphic settings...
 SET sub=\EldenRing\
 SET "dst=%APPDATA%%sub%"
-DEL "%dst%GraphicsConfig.xml"
-REN "%dst%GraphicsConfig_ori.xml" GraphicsConfig.xml
+IF ExIST "%dst%GraphicsConfig_ori.xml" (
+    DEL "%dst%GraphicsConfig.xml"
+    REN "%dst%GraphicsConfig_ori.xml" GraphicsConfig.xml
+) ELSE GOTO no_ori
 GOTO end
 
 :cleanupFCND
@@ -143,8 +160,10 @@ SET "sub=My Games\Far Cry New Dawn\"
 IF NOT EXIST "%doc%%sub%" IF EXIST "%doc1%%sub%" SET "doc=%doc1%"
 IF NOT EXIST "%doc%%sub%" IF EXIST "%doc2%%sub%" SET "doc=%doc2%"
 SET "dst=%doc%%sub%"
-DEL "%dst%\gamerprofile.xml" 
-REN "%dst%\gamerprofile_ori.xml" gamerprofile.xml
+IF ExIST "%dst%\gamerprofile_ori.xml" (
+    DEL "%dst%\gamerprofile.xml" 
+    REN "%dst%\gamerprofile_ori.xml" gamerprofile.xml
+) ELSE GOTO no_ori
 GOTO end
 
 :cleanupFCP
@@ -157,8 +176,10 @@ SET "sub=My Games\Far Cry Primal\"
 IF NOT EXIST "%doc%%sub%" IF EXIST "%doc1%%sub%" SET "doc=%doc1%"
 IF NOT EXIST "%doc%%sub%" IF EXIST "%doc2%%sub%" SET "doc=%doc2%"
 SET "dst=%doc%%sub%"
-DEL "%dst%\gamerprofile.xml" 
-REN "%dst%\gamerprofile_ori.xml" gamerprofile.xml
+IF ExIST "%dst%\gamerprofile_ori.xml" (
+    DEL "%dst%\gamerprofile.xml" 
+    REN "%dst%\gamerprofile_ori.xml" gamerprofile.xml
+) ELSE GOTO no_ori
 GOTO end
 
 :cleanupFC4
@@ -189,8 +210,10 @@ SET "sub=My Games\Far Cry 5\"
 IF NOT EXIST "%doc%%sub%" IF EXIST "%doc1%%sub%" SET "doc=%doc1%"
 IF NOT EXIST "%doc%%sub%" IF EXIST "%doc2%%sub%" SET "doc=%doc2%"
 SET "dst=%doc%%sub%"
-DEL "%dst%\gamerprofile.xml" 
-REN "%dst%\gamerprofile_ori.xml" gamerprofile.xml
+IF ExIST "%dst%\gamerprofile_ori.xml" (
+    DEL "%dst%\gamerprofile.xml" 
+    REN "%dst%\gamerprofile_ori.xml" gamerprofile.xml
+) ELSE GOTO no_ori
 GOTO end
 
 :cleanupFC6
@@ -203,8 +226,10 @@ SET "sub=My Games\Far Cry 6\"
 IF NOT EXIST "%doc%%sub%" IF EXIST "%doc1%%sub%" SET "doc=%doc1%"
 IF NOT EXIST "%doc%%sub%" IF EXIST "%doc2%%sub%" SET "doc=%doc2%"
 SET "dst=%doc%%sub%"
-DEL "%dst%\gamerprofile.xml" 
-REN "%dst%\gamerprofile_ori.xml" gamerprofile.xml
+IF ExIST "%dst%\gamerprofile_ori.xml" (
+    DEL "%dst%\gamerprofile.xml" 
+    REN "%dst%\gamerprofile_ori.xml" gamerprofile.xml
+) ELSE GOTO no_ori
 GOTO end
 
 :cleanupFF7R
@@ -226,8 +251,10 @@ FOR /F "delims=" %%D IN ('DIR /AD /B "%dst%Steam"') DO (
 )
 
 SET "sub2=%dst%Saved\Config\WindowsNoEditor\"
-DEL "%sub2%Engine.ini" 
-REN "%sub2%Engine_ori.ini" Engine.ini
+IF ExIST "%sub2%Engine_ori.ini" (
+    DEL "%sub2%Engine.ini" 
+    REN "%sub2%Engine_ori.ini" Engine.ini
+) ELSE GOTO no_ori
 GOTO end
 
 :cleanupFF7RB
@@ -266,8 +293,10 @@ DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini"
 echo Restoring graphic settings...
 SET sub=\Ghostrunner\Saved\Config\WindowsNoEditor\
 SET "dst=%LOCALAPPDATA%%sub%"
-DEL "%dst%GameUserSettings.ini"
-REN "%dst%GameUserSettings_ori.ini" GameUserSettings.ini
+IF ExIST "%dst%GameUserSettings_ori.ini" (
+    DEL "%dst%GameUserSettings.ini"
+    REN "%dst%GameUserSettings_ori.ini" GameUserSettings.ini  
+) ELSE GOTO no_ori
 GOTO end
 
 :cleanupGWT
@@ -278,8 +307,10 @@ DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini"
 echo Restoring graphic settings...
 SET "sub=\Saved Games\TangoGameworks\Saved\Config\WindowsNoEditor\"
 SET "dst=%USERPROFILE%%sub%"
-DEL "%dst%GameUserSettings.ini"
-REN "%dst%GameUserSettings_ori.ini" GameUserSettings.ini
+IF ExIST "%dst%GameUserSettings_ori.ini" (
+    DEL "%dst%GameUserSettings.ini"
+    REN "%dst%GameUserSettings_ori.ini" GameUserSettings.ini
+) ELSE GOTO no_ori
 GOTO end
 
 :cleanupGWTegs
@@ -290,8 +321,10 @@ DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini"
 echo Restoring graphic settings...
 SET "sub=\Saved Games\TangoGameworks\GhostWire Tokyo (EGS)\Saved\Config\WindowsNoEditor\"
 SET "dst=%USERPROFILE%%sub%"
-DEL "%dst%GameUserSettings.ini"
-REN "%dst%GameUserSettings_ori.ini" GameUserSettings.ini
+IF ExIST "%dst%GameUserSettings_ori.ini" (
+    DEL "%dst%GameUserSettings.ini"
+    REN "%dst%GameUserSettings_ori.ini" GameUserSettings.ini
+) ELSE GOTO no_ori
 GOTO end
 
 :cleanupGTA5
@@ -304,8 +337,10 @@ SET "sub=\Rockstar Games\GTA V\"
 IF NOT EXIST "%doc%%sub%" IF EXIST "%doc1%%sub%" SET "doc=%doc1%"
 IF NOT EXIST "%doc%%sub%" IF EXIST "%doc2%%sub%" SET "doc=%doc2%"
 SET "dst=%doc%%sub%"
-DEL "%dst%settings.xml"
-REN "%dst%settings_ori.xml" settings.xml
+IF ExIST "%dst%settings_ori.xml" (
+    DEL "%dst%settings.xml"
+    REN "%dst%settings_ori.xml" settings.xml
+) ELSE GOTO no_ori
 GOTO end
 
 :cleanupGROUNDED
@@ -319,12 +354,16 @@ SET subGDK=\Maine\Saved\Config\WinGDK\
 SET "dst=%LOCALAPPDATA%%sub%"
 SET "dstGDK=%LOCALAPPDATA%%subGDK%"
 IF EXIST "%dst%" (
-    DEL "%dst%GameUserSettings.ini"
-    REN "%dst%GameUserSettings_ori.ini" GameUserSettings.ini
+    IF ExIST "%dst%GameUserSettings_ori.ini" (
+        DEL "%dst%GameUserSettings.ini"
+        REN "%dst%GameUserSettings_ori.ini" GameUserSettings.ini
+    ) ELSE GOTO no_ori
 )
 IF EXIST "%dstGDK%" (
-    DEL "%dstGDK%GameUserSettings.ini"
-    REN "%dstGDK%GameUserSettings_ori.ini" GameUserSettings.ini
+    IF ExIST "%dstGDK%GameUserSettings_ori.ini" (
+        DEL "%dstGDK%GameUserSettings.ini"
+        REN "%dstGDK%GameUserSettings_ori.ini" GameUserSettings.ini
+    ) ELSE GOTO no_ori
 )
 GOTO end
 
@@ -339,12 +378,16 @@ SET subGDK=\Oregon\Saved\Config\WinGDK\
 SET "dst=%LOCALAPPDATA%%sub%"
 SET "dstGDK=%LOCALAPPDATA%%subGDK%"
 IF EXIST "%dst%" (
-    DEL "%dst%GameUserSettings.ini"
-    REN "%dst%GameUserSettings_ori.ini" GameUserSettings.ini
+    IF ExIST "%dst%GameUserSettings_ori.ini" (
+        DEL "%dst%GameUserSettings.ini"
+        REN "%dst%GameUserSettings_ori.ini" GameUserSettings.ini
+    ) ELSE GOTO no_ori
 )
 IF EXIST "%dstGDK%" (
-    DEL "%dstGDK%GameUserSettings.ini"
-    REN "%dstGDK%GameUserSettings_ori.ini" GameUserSettings.ini
+    IF ExIST "%dstGDK%GameUserSettings_ori.ini" (
+        DEL "%dstGDK%GameUserSettings.ini"
+        REN "%dstGDK%GameUserSettings_ori.ini" GameUserSettings.ini
+    ) ELSE GOTO no_ori
 )
 GOTO end
 
@@ -365,8 +408,10 @@ DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini"
 echo Restoring graphic settings...
 SET sub=\Horizon Zero Dawn\Saved Game\profile\
 SET "dst=%USERPROFILE%\Documents%sub%"
-DEL "%dst%graphicsconfig.ini"
-REN "%dst%graphicsconfig_ori.ini" graphicsconfig.ini
+IF ExIST "%dst%graphicsconfig_ori.ini" (
+    DEL "%dst%graphicsconfig.ini"
+    REN "%dst%graphicsconfig_ori.ini" graphicsconfig.ini
+) ELSE GOTO no_ori
 GOTO end
 
 :cleanupHogwarts
@@ -377,8 +422,27 @@ DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini"
 echo Restoring graphic settings...
 SET sub=\Hogwarts Legacy\Saved\Config\WindowsNoEditor\
 SET "dst=%LOCALAPPDATA%%sub%"
-DEL "%dst%GameUserSettings.ini"
-REN "%dst%GameUserSettings_ori.ini" GameUserSettings.ini
+IF ExIST "%dst%GameUserSettings_ori.ini" (
+    DEL "%dst%GameUserSettings.ini"
+    REN "%dst%GameUserSettings_ori.ini" GameUserSettings.ini
+) ELSE GOTO no_ori
+GOTO end
+
+:cleanupKCD2
+echo Deleting mod files...
+RMDIR /s /q "RealRepo"
+DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log"
+
+echo Restoring graphic settings...
+SET sub=\Saved Games\kingdomcome2\profiles\default\
+SET "dst=%USERPROFILE%%sub%"
+IF ExIST "%dst%attributes_ori.xml" (
+    DEL "%dst%attributes.xml"
+    REN "%dst%attributes_ori.xml" attributes.xml
+    DEL "..\..\user.cfg"
+    REN "..\..\user_ori.cfg" user.cfg
+) ELSE GOTO no_ori
+
 GOTO end
 
 :cleanupIJTGC
@@ -445,8 +509,10 @@ DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini"
 echo Restoring graphic settings...
 SET sub=\Documents\My Games\Outlaws\
 SET "dst=%USERPROFILE%%sub%"
-DEL "%dst%graphic settings.cfg"
-REN "%dst%graphic settings_ori.cfg" "graphic settings.cfg"
+IF ExIST "%dst%graphic settings_ori.cfg" (
+    DEL "%dst%graphic settings.cfg"
+    REN "%dst%graphic settings_ori.cfg" "graphic settings.cfg"
+) ELSE GOTO no_ori
 GOTO end
 
 :cleanupRDR2
@@ -460,8 +526,10 @@ SET "sub=Rockstar Games\Red Dead Redemption 2\Settings\"
 IF NOT EXIST "%doc%%sub%" IF EXIST "%doc1%%sub%" SET "doc=%doc1%"
 IF NOT EXIST "%doc%%sub%" IF EXIST "%doc2%%sub%" SET "doc=%doc2%"
 SET "dst=%doc%%sub%"
-DEL "%dst%system.xml"
-REN "%dst%system_ori.xml" system.xml
+IF ExIST "%dst%system_ori.xml" (
+    DEL "%dst%system.xml"
+    REN "%dst%system_ori.xml" system.xml
+) ELSE GOTO no_ori
 GOTO end
 
 :cleanupSPIDERMAN
@@ -478,8 +546,10 @@ DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini"
 echo Restoring graphic settings...
 SET sub=\Hk_project\Saved\Config\WindowsNoEditor\
 SET "dst=%LOCALAPPDATA%%sub%"
-DEL "%dst%GameUserSettings.ini"
-REN "%dst%GameUserSettings_ori.ini" GameUserSettings.ini
+IF ExIST "%dst%GameUserSettings_ori.ini" (
+    DEL "%dst%GameUserSettings.ini"
+    REN "%dst%GameUserSettings_ori.ini" GameUserSettings.ini
+) ELSE GOTO no_ori
 GOTO end
 
 :cleanupULOTC
@@ -489,8 +559,10 @@ DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini"
 
 echo Restoring graphic settings...
 SET sub=Uncharted4_data\
-DEL "%sub%screeninfo.cfg"
-REN "%sub%screeninfo_ori.cfg" screeninfo.cfg
+IF ExIST "%sub%screeninfo_ori.cfg" (
+    DEL "%sub%screeninfo.cfg"
+    REN "%sub%screeninfo_ori.cfg" screeninfo.cfg
+) ELSE GOTO no_ori
 GOTO end
 
 :cleanupWD1
@@ -502,8 +574,10 @@ echo Restoring graphic settings...
 SET sub=\Documents\My Games\Watch_Dogs\
 SET "dst=%USERPROFILE%%sub%"
 FOR /F "delims=" %%D IN ('DIR /AD /B "%dst%"') DO (
-    DEL "%dst%%%D\GamerProfile.xml"
-    REN "%dst%%%D\GamerProfile_ori.xml" GamerProfile.xml
+    IF ExIST "%dst%%%D\GamerProfile_ori.xml" (
+        DEL "%dst%%%D\GamerProfile.xml"
+        REN "%dst%%%D\GamerProfile_ori.xml" GamerProfile.xml
+    ) ELSE GOTO no_ori
 )
 GOTO end
 
@@ -517,9 +591,14 @@ SET "sub=My Games\Watch_Dogs 2\"
 IF NOT EXIST "%doc%%sub%" IF EXIST "%doc1%%sub%" SET "doc=%doc1%"
 IF NOT EXIST "%doc%%sub%" IF EXIST "%doc2%%sub%" SET "doc=%doc2%"
 SET "dst=%doc%%sub%"
-DEL "%dst%\WD2_GamerProfile.xml"
-REN "%dst%\WD2_GamerProfile_ori.xml" WD2_GamerProfile.xml
+IF ExIST "%dst%\WD2_GamerProfile_ori.xml" (
+    DEL "%dst%\WD2_GamerProfile.xml"
+    REN "%dst%\WD2_GamerProfile_ori.xml" WD2_GamerProfile.xml
+) ELSE GOTO no_ori
 GOTO end
+
+:no_ori
+echo It seems that there are no graphic presets created by the R.E.A.L. mod. Skipping graphic settings restoration...
 
 :abort
 echo Execution aborted. Please report any issues on my GitHub: Yelodress

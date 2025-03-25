@@ -118,7 +118,7 @@
 </details>
 
 ## 🚧 Roadmap:
-- Adding support for KCD2
+- Adding support for KCD2 (see [Issue #7](https://github.com/Yelodress/LukeRossCleaner/issues/7))
 - Skipping graphic presets deletion when the `*_ori` file isn't created
 - ...
 

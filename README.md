@@ -117,11 +117,6 @@
   - Ghostrunner: `\Ghostrunner\Ghostrunner\Binaries\Win64`
 </details>
 
-## 🚧 Roadmap:
-- Adding support for KCD2 (see [Issue #7](https://github.com/Yelodress/LukeRossCleaner/issues/7))
-- Skipping graphic presets deletion when the `*_ori` file isn't created
-- ...
-
 Special thanks to [Loocist23](https://github.com/Loocist23) for his time during our tests !
 
 ### ⚠️ This script supports up to version 17.0.0 of the mod. It's not my priority, so if you need a specific game, let me know by creating an [issue](https://github.com/Yelodress/LukeRossCleaner/issues) and I'll update it as soon as possible :)

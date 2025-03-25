@@ -96,7 +96,7 @@
 <details>
   <summary><h2>🤺Warhorse Studios</h2></summary>
   
-  - Kingdom Come: Deliverance II: `Work in progress...`
+  - Kingdom Come: Deliverance II: `\KingdomComeDeliverance2\Bin\Win64MasterMasterSteamPGO`
 </details>
 
 <details>

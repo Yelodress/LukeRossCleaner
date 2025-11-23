@@ -1,7 +1,7 @@
 # 🧼LukeRossCleaner
 ### A bash tool that is designed to get rid of a super cool mod that you can't \*properly* uninstall :)
 
-## 📋 List of supported games (and path), sorted by studios
+## 📋 List of supported games (and path where to place the script), sorted by studios
 <details>
   <summary><h2>🐈Annapurna Interactive</h2></summary>
   

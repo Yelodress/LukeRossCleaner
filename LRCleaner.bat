@@ -12,6 +12,7 @@ IF EXIST afop_plus.exe GOTO cleanupAFOP
 IF EXIST Cyberpunk2077.exe GOTO cleanupCP2077
 IF EXIST DarkSoulsRemastered.exe GOTO cleanupDSR
 IF EXIST DarkSoulsII.exe GOTO cleanupDS2
+IF EXIST DarkSoulsIII.exe GOTO cleanupDS3
 IF EXIST eldenring.exe GOTO cleanupEldenRing
 IF EXIST FarCryNewDawn.exe GOTO cleanupFCND
 IF EXIST FCPrimal.exe GOTO cleanupFCP
@@ -51,7 +52,7 @@ GOTO abort
 :cleanupAFOP
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll"
+DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll"
 
 echo Restoring graphic settings...
 SET "sub=My Games\AFOP\"
@@ -71,7 +72,7 @@ GOTO end
 :cleanupAH
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log"
+DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log"
 
 echo Restoring graphic settings...
 SET sub=\AtomicHeart\Saved\Config\WindowsNoEditor\
@@ -95,7 +96,7 @@ GOTO end
 :cleanupCP2077
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log"
+DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log"
 
 echo Restoring graphic settings...
 SET sub=\CD Projekt Red\Cyberpunk 2077\
@@ -109,7 +110,7 @@ GOTO end
 :cleanupDSR
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "start_protected_game.exe" "RealVR64.dll"
+DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "start_protected_game.exe" "RealVR64.dll"
 
 echo Restoring graphic settings...
 SET sub=\FromSoftware\NBGI\DarkSouls\
@@ -123,7 +124,7 @@ GOTO end
 :cleanupDS2
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "start_protected_game.exe" "RealVR64.dll" "BackupSaves.bat"
+DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "start_protected_game.exe" "RealVR64.dll" "BackupSaves.bat"
 
 echo Restoring graphic settings...
 SET sub=\DarkSoulsII\
@@ -134,12 +135,24 @@ IF ExIST "%dst%GraphicsConfig_SOFS_ori.xml" (
 ) ELSE GOTO no_ori
 GOTO end
 
+:cleanupDS3
+echo Deleting mod files...
+RMDIR /s /q "RealRepo"
+DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "start_protected_game.exe" "RealVR64.dll" "BackupSaves.bat"
+
+echo Restoring graphic settings...
+SET sub=\DarkSoulsIII\
+SET "dst=%APPDATA%%sub%"
+IF ExIST "%dst%GraphicsConfig_ori.xml" (
+    DEL "%dst%GraphicsConfig.xml"
+    REN "%dst%GraphicsConfig_ori.xml" GraphicsConfig.xml
+) ELSE GOTO no_ori
+GOTO end
+
 :cleanupEldenRing
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll"
-IF EXIST start_protected_game_ori.exe DEL start_protected_game.exe
-REN start_protected_game_ori.exe start_protected_game.exe
+DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll"
 
 echo Restoring graphic settings...
 SET sub=\EldenRing\
@@ -153,7 +166,7 @@ GOTO end
 :cleanupFCND
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll"
+DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll"
 
 echo Restoring graphic settings...
 SET "sub=My Games\Far Cry New Dawn\"
@@ -169,7 +182,7 @@ GOTO end
 :cleanupFCP
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll"
+DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll"
 
 echo Restoring graphic settings...
 SET "sub=My Games\Far Cry Primal\"
@@ -185,7 +198,7 @@ GOTO end
 :cleanupFC4
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll"
+DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll"
 
 echo Restoring graphic settings...
 SET "sub=My Games\Far Cry 4\"
@@ -203,7 +216,7 @@ GOTO end
 :cleanupFC5
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll"
+DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll"
 
 echo Restoring graphic settings...
 SET "sub=My Games\Far Cry 5\"
@@ -219,7 +232,7 @@ GOTO end
 :cleanupFC6
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll"
+DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll"
 
 echo Restoring graphic settings...
 SET "sub=My Games\Far Cry 6\"
@@ -235,7 +248,7 @@ GOTO end
 :cleanupFF7R
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll"
+DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll"
 
 echo Restoring graphic settings...
 SET "sub=My Games\FINAL FANTASY VII REMAKE\"
@@ -260,7 +273,7 @@ GOTO end
 :cleanupFF7RB
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll"
+DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll"
 
 echo Restoring graphic settings...
 SET "sub=My Games\FINAL FANTASY VII REBIRTH\"
@@ -279,7 +292,7 @@ GOTO end
 :cleanupGOT
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log"
+DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log"
 
 echo Restoring the graphics settings will delete the game graphics registry key. You will need to set your preferences again at the next launch.
 REG delete "HKCU\Software\Sucker Punch Productions\Ghost of Tsushima DIRECTOR'S CUT\Graphics"
@@ -288,7 +301,7 @@ GOTO end
 :cleanupGR
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log"
+DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log"
 
 echo Restoring graphic settings...
 SET sub=\Ghostrunner\Saved\Config\WindowsNoEditor\
@@ -302,7 +315,7 @@ GOTO end
 :cleanupGWT
 echo Deleting mod files...
 RMDIR /s /q "RealRepo" "reshade-shaders"
-DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "ReShadePreset.ini"
+DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "ReShadePreset.ini"
 
 echo Restoring graphic settings...
 SET "sub=\Saved Games\TangoGameworks\Saved\Config\WindowsNoEditor\"
@@ -316,7 +329,7 @@ GOTO end
 :cleanupGWTegs
 echo Deleting mod files...
 RMDIR /s /q "RealRepo" "reshade-shaders"
-DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "ReShadePreset.ini"
+DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "ReShadePreset.ini"
 
 echo Restoring graphic settings...
 SET "sub=\Saved Games\TangoGameworks\GhostWire Tokyo (EGS)\Saved\Config\WindowsNoEditor\"
@@ -346,7 +359,7 @@ GOTO end
 :cleanupGROUNDED
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log"
+DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log"
 
 echo Restoring graphic settings...
 SET sub=\Maine\Saved\Config\WindowsNoEditor\
@@ -370,7 +383,7 @@ GOTO end
 :cleanupHOL
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log"
+DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log"
 
 echo Restoring graphic settings...
 SET sub=\Oregon\Saved\Config\WindowsNoEditor\
@@ -394,7 +407,7 @@ GOTO end
 :cleanupHFW
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll"
+DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll"
 
 echo Restoring the graphics settings will delete the game graphics registry key. You will need to set your preferences again at the next launch.
 REG delete "HKCU\Software\Guerrilla Games\Horizon Forbidden West Complete Edition\Graphics"
@@ -403,7 +416,7 @@ GOTO end
 :cleanupHZD
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log"
+DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log"
 
 echo Restoring graphic settings...
 SET sub=\Horizon Zero Dawn\Saved Game\profile\
@@ -417,7 +430,7 @@ GOTO end
 :cleanupHogwarts
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log"
+DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log"
 
 echo Restoring graphic settings...
 SET sub=\Hogwarts Legacy\Saved\Config\WindowsNoEditor\
@@ -431,7 +444,7 @@ GOTO end
 :cleanupKCD2
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log"
+DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log"
 
 echo Restoring graphic settings...
 SET sub=\Saved Games\kingdomcome2\profiles\default\
@@ -448,7 +461,7 @@ GOTO end
 :cleanupIJTGC
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.json" "RealVR64.dll"
+DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.json" "RealVR64.dll"
 
 echo Restoring graphic settings...
 powershell -Command "& { $path = 'HKLM:\SOFTWARE\Khronos\Vulkan\ImplicitLayers'; $regName = (Get-ItemProperty -Path $path | Get-Member -MemberType NoteProperty | Where-Object { $_.Name -like '*RealVR64.json' }).Name; if ($regName) { Start-Process cmd -ArgumentList ('/c REG DELETE \"HKLM\SOFTWARE\Khronos\Vulkan\ImplicitLayers\" /V \"' + $regName + '\" /F') -Verb RunAs } }"
@@ -504,7 +517,7 @@ GOTO end
 :cleanupStarWarsOutlaws
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll" 
+DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll" 
 
 echo Restoring graphic settings...
 SET sub=\Documents\My Games\Outlaws\
@@ -535,13 +548,13 @@ GOTO end
 :cleanupSPIDERMAN
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll"
+DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll"
 GOTO end
 
 :cleanupSTRAY
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "start_protected_game.exe" "RealVR64.dll"
+DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "start_protected_game.exe" "RealVR64.dll"
 
 echo Restoring graphic settings...
 SET sub=\Hk_project\Saved\Config\WindowsNoEditor\
@@ -555,7 +568,7 @@ GOTO end
 :cleanupULOTC
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "start_protected_game.exe" "RealVR64.dll"
+DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "start_protected_game.exe" "RealVR64.dll"
 
 echo Restoring graphic settings...
 SET sub=Uncharted4_data\
@@ -568,7 +581,7 @@ GOTO end
 :cleanupWD1
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log"
+DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log"
 
 echo Restoring graphic settings...
 SET sub=\Documents\My Games\Watch_Dogs\
@@ -584,7 +597,7 @@ GOTO end
 :cleanupWD2
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL "cudart64_110.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log"
+DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log"
 
 echo Restoring graphic settings...
 SET "sub=My Games\Watch_Dogs 2\"
@@ -605,7 +618,7 @@ echo Execution aborted. Please report any issues on my GitHub: Yelodress
 pause
 
 :end
-echo All done ! Please report any issues on my GitHub: Yelodress
+echo All done, time to re-enjoy your game !
 echo This script will remove itself after pressing any key
 pause
 DEL "LRCleaner.bat"

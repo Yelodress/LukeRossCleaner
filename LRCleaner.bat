@@ -43,6 +43,8 @@ IF EXIST RDR2.exe GOTO cleanupRDR2
 IF EXIST Spider-Man.exe GOTO cleanupSPIDERMAN
 IF EXIST MilesMorales.exe GOTO cleanupSPIDERMAN
 IF EXIST Stray-Win64-Shipping.exe GOTO cleanupSTRAY
+IF EXIST tlou-i.exe GOTO cleanupTLOU1
+IF EXIST tlou-ii.exe GOTO cleanupTLOU2
 IF EXIST u4.exe IF EXIST tll.exe GOTO cleanupULOTC
 IF EXIST watch_dogs.exe GOTO cleanupWD1
 IF EXIST WatchDogs2.exe GOTO cleanupWD2
@@ -563,6 +565,33 @@ IF ExIST "%dst%GameUserSettings_ori.ini" (
     DEL "%dst%GameUserSettings.ini"
     REN "%dst%GameUserSettings_ori.ini" GameUserSettings.ini
 ) ELSE GOTO no_ori
+GOTO end
+
+:cleanupTLOU1
+echo Deleting mod files...
+RMDIR /s /q "RealRepo"
+DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "start_protected_game.exe" "RealVR64.dll"
+
+echo Restoring graphic settings...
+SET sub=\Saved Games\The Last of Us Part I\users\
+SET "dst=%USERPROFILE%%sub%"
+FOR /F "delims=" %%D IN ('DIR /AD /B "%dst%"') DO (
+    IF ExIST "%dst%%%D\screeninfo_ori.cfg" (
+        DEL "%dst%%%D\screeninfo.cfg"
+        REN "%dst%%%D\screeninfo_ori.cfg" screeninfo.cfg
+    ) ELSE GOTO no_ori
+)
+GOTO end
+
+:cleanupTLOU2
+echo Deleting mod files...
+RMDIR /s /q "RealRepo"
+DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "start_protected_game.exe" "RealVR64.dll"
+
+echo Restoring the graphics settings will delete the game graphics registry key. You will need to set your preferences again at the next launch.
+REG delete "HKCU\Software\Naughty Dog\The Last of Us Part II\Graphics"
+REG delete "HKCU\Software\Naughty Dog\The Last of Us Part II\UI"
+
 GOTO end
 
 :cleanupULOTC

@@ -51,6 +51,13 @@
 </details>
 
 <details>
+  <summary><h2>🐕Naughty Dog</h2></summary>
+  
+  - The Last of Us Part 1: `\The Last of Us Part I`
+  - The Last of Us Part 2: `\The Last of Us Part II`
+</details>
+
+<details>
   <summary><h2>🎮PlayStation Studios</h2></summary>
 
   - Ghost of Tsushima: `\Ghost of Tsushima DIRECTOR'S CUT`
@@ -132,6 +139,4 @@ Special thanks to [Loocist23](https://github.com/Loocist23) for his time during 
   - Horizon Zero Dawn Remastered
   - Spider Man 2
   - Watch Dogs Legion
-  - The Last of us 1
-  - The Last of us 2
 </details>

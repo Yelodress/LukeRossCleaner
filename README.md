@@ -119,4 +119,19 @@
 
 Special thanks to [Loocist23](https://github.com/Loocist23) for his time during our tests !
 
-### ⚠️ This script supports up to version 18.0.0 of the mod. It's not my priority, so if you need a specific game, let me know by creating an [issue](https://github.com/Yelodress/LukeRossCleaner/issues) and I'll update it as soon as possible :)
+### ⚠️ This script supports up to version 18.0.0 of the mod. I'm working on a v26.3.0 support. It's not my priority, so if you need a specific game, let me know by creating an [issue](https://github.com/Yelodress/LukeRossCleaner/issues) and I'll update it as soon as possible :)
+
+<details>
+  <summary><h2>TODO</h2></summary>
+  
+  - DOOM Ethernal
+  - DOOM The Dark Ages
+  - Dark Souls 3
+  - Days Gone
+  - Death Stranding
+  - Horizon Zero Dawn Remastered
+  - Spider Man 2
+  - Watch Dogs Legion
+  - The Last of us 1
+  - The Last of us 2
+</details>

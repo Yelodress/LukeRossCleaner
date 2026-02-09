@@ -13,6 +13,7 @@ IF EXIST Cyberpunk2077.exe GOTO cleanupCP2077
 IF EXIST DarkSoulsRemastered.exe GOTO cleanupDSR
 IF EXIST DarkSoulsII.exe GOTO cleanupDS2
 IF EXIST DarkSoulsIII.exe GOTO cleanupDS3
+IF EXIST DOOMEternalx64vk.exe GOTO cleanupDOOME
 IF EXIST eldenring.exe GOTO cleanupEldenRing
 IF EXIST FarCryNewDawn.exe GOTO cleanupFCND
 IF EXIST FCPrimal.exe GOTO cleanupFCP
@@ -140,7 +141,7 @@ GOTO end
 :cleanupDS3
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "start_protected_game.exe" "RealVR64.dll" "BackupSaves.bat"
+DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll" "BackupSaves.bat"
 
 echo Restoring graphic settings...
 SET sub=\DarkSoulsIII\
@@ -149,6 +150,15 @@ IF ExIST "%dst%GraphicsConfig_ori.xml" (
     DEL "%dst%GraphicsConfig.xml"
     REN "%dst%GraphicsConfig_ori.xml" GraphicsConfig.xml
 ) ELSE GOTO no_ori
+GOTO end
+
+:cleanupDOOME
+echo Deleting mod files...
+RMDIR /s /q "doomSandBox\RealRepo" "RealRepo"
+DEL doomSandBox\cudart64_*.dll "doomSandBox\openvr_api.dll" "doomSandBox\RealVR.ini" cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll" "BackupSaves.bat"
+
+echo Restoring graphic settings...
+powershell -Command "& { $path = 'HKLM:\SOFTWARE\Khronos\Vulkan\ImplicitLayers'; $regName = (Get-ItemProperty -Path $path | Get-Member -MemberType NoteProperty | Where-Object { $_.Name -like '*RealVR64.json' }).Name; if ($regName) { Start-Process cmd -ArgumentList ('/c REG DELETE \"HKLM\SOFTWARE\Khronos\Vulkan\ImplicitLayers\" /V \"' + $regName + '\" /F') -Verb RunAs } }"
 GOTO end
 
 :cleanupEldenRing

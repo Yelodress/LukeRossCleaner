@@ -26,6 +26,7 @@
   
   - Dark Souls: Remastered: `\DARK SOULS REMASTERED`
   - Dark Souls II: Scholar of the First Sin: `\Dark Souls II\Game`
+  - Dark Souls III: `\Dark Souls III\Game`
   - Elden Ring: `\ELDEN RING`
 </details>
 
@@ -126,7 +127,6 @@ Special thanks to [Loocist23](https://github.com/Loocist23) for his time during 
   
   - DOOM Ethernal
   - DOOM The Dark Ages
-  - Dark Souls 3
   - Days Gone
   - Death Stranding
   - Horizon Zero Dawn Remastered

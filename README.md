@@ -38,6 +38,12 @@
 </details>
 
 <details>
+  <summary><h2>👾id Software</h2></summary>
+  
+  - DOOM Ethernal `\DOOMEternal`
+</details>
+
+<details>
   <summary><h2>🕸️Insomniac Games</h2></summary>
   
   - Marvel's Spider-Man Remastered: `\Spider-man Remastered`
@@ -132,7 +138,6 @@ Special thanks to [Loocist23](https://github.com/Loocist23) for his time during 
 <details>
   <summary><h2>TODO</h2></summary>
   
-  - DOOM Ethernal
   - DOOM The Dark Ages
   - Days Gone
   - Death Stranding

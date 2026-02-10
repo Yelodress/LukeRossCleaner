@@ -16,6 +16,12 @@
 </details>
 
 <details>
+  <summary><h2>🔻Blend Studio</h2></summary>
+    
+  - Days Gone: `\Days Gone\BendGame\Binaries\Win64` 
+</details>
+
+<details>
   <summary><h2>🐦CD Projekt</h2></summary>
   
   - Cyberpunk 2077: `\Cyberpunk 2077\Cyberpunk 2077\bin\x64`
@@ -35,25 +41,27 @@
   
   - Horizon Forbidden West: `\Horizon Forbidden West`
   - Horizon Zero Dawn: `\Horizon Zero Dawn`
+  - Horizon Zero Dawn Remastered: `\Horizon Zero Dawn Remastered`
 </details>
 
 <details>
   <summary><h2>👾id Software</h2></summary>
   
-  - Death Stranding `\DeathStranding`
-</details>
+  - DOOM Ethernal `\DOOMEternal`
+  - DOOM The Dark Ages `\DOOMTheDarkAges`
+ </details>
 
 <details>
   <summary><h2>🕸️Insomniac Games</h2></summary>
   
   - Marvel's Spider-Man Remastered: `\Spider-man Remastered`
   - Marvel's Spider-Man: Miles Morales: `\Marvel’s Spider-Man - Miles Morales`
+  - Marvel's Spider-Man 2: `\Marvel's Spider-Man 2`
 </details>
 
   <summary><h2>🧳Kojima Productions</h2></summary>
   
-  - Marvel's Spider-Man Remastered: `\Spider-man Remastered`
-  - Marvel's Spider-Man: Miles Morales: `\Marvel’s Spider-Man - Miles Morales`
+   - Death Stranding `\DeathStranding`
 </details>
 
 <details>
@@ -140,13 +148,4 @@
 
 Special thanks to [Loocist23](https://github.com/Loocist23) for his time during our tests !
 
-### ⚠️ This script supports up to version 18.0.0 of the mod. I'm working on a v26.3.0 support. It's not my priority, so if you need a specific game, let me know by creating an [issue](https://github.com/Yelodress/LukeRossCleaner/issues) and I'll update it as soon as possible :)
-
-<details>
-  <summary><h2>TODO</h2></summary>
-  
-  - DOOM The Dark Ages
-  - Days Gone
-  - Horizon Zero Dawn Remastered
-  - Spider Man 2
-</details>
+### ⚠️ This script supports up to version v26.3.0 of the mod. It's not my priority, so if you need a specific game, let me know by creating an [issue](https://github.com/Yelodress/LukeRossCleaner/issues) and I'll update it as soon as possible :)

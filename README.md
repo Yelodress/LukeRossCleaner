@@ -104,6 +104,7 @@
   - FarCry 6: `\Far Cry 6`
   - Watch Dogs: `\Watch_Dogs\bin`
   - Watch Dogs 2: `\Watch_Dogs 2\bin`
+  - Watch Dogs Legion: `\Watch Dogs Legion\bin`
   - Star Wars Outlaws: `\Star Wars Outlaws`
 </details>
 
@@ -143,5 +144,4 @@ Special thanks to [Loocist23](https://github.com/Loocist23) for his time during 
   - Death Stranding
   - Horizon Zero Dawn Remastered
   - Spider Man 2
-  - Watch Dogs Legion
 </details>

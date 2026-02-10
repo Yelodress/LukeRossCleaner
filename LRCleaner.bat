@@ -13,6 +13,8 @@ IF EXIST Cyberpunk2077.exe GOTO cleanupCP2077
 IF EXIST DarkSoulsRemastered.exe GOTO cleanupDSR
 IF EXIST DarkSoulsII.exe GOTO cleanupDS2
 IF EXIST DarkSoulsIII.exe GOTO cleanupDS3
+IF EXIST DeathStranding.exe GOTO cleanupDSDC
+IF EXIST ds.exe GOTO cleanupDSDC
 IF EXIST DOOMEternalx64vk.exe GOTO cleanupDOOME
 IF EXIST eldenring.exe GOTO cleanupEldenRing
 IF EXIST FarCryNewDawn.exe GOTO cleanupFCND
@@ -150,6 +152,18 @@ SET "dst=%APPDATA%%sub%"
 IF ExIST "%dst%GraphicsConfig_ori.xml" (
     DEL "%dst%GraphicsConfig.xml"
     REN "%dst%GraphicsConfig_ori.xml" GraphicsConfig.xml
+) ELSE GOTO no_ori
+GOTO end
+
+:cleanupDSDC
+echo Deleting mod files...
+RMDIR /s /q "RealRepo"
+DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll" "BackupSaves.bat"
+
+echo Restoring graphic settings...
+IF ExIST "settings_ori.cfg" (
+    DEL "settings.cfg
+    REN "settings_ori.cfg" settings.cfg
 ) ELSE GOTO no_ori
 GOTO end
 

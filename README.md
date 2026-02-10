@@ -57,8 +57,9 @@
   - Marvel's Spider-Man Remastered: `\Spider-man Remastered`
   - Marvel's Spider-Man: Miles Morales: `\Marvel’s Spider-Man - Miles Morales`
   - Marvel's Spider-Man 2: `\Marvel's Spider-Man 2`
-</details>
+    </details>
 
+<details>
   <summary><h2>🧳Kojima Productions</h2></summary>
   
    - Death Stranding `\DeathStranding`

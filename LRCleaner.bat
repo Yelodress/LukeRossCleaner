@@ -49,6 +49,7 @@ IF EXIST tlou-ii.exe GOTO cleanupTLOU2
 IF EXIST u4.exe IF EXIST tll.exe GOTO cleanupULOTC
 IF EXIST watch_dogs.exe GOTO cleanupWD1
 IF EXIST WatchDogs2.exe GOTO cleanupWD2
+IF EXIST WatchDogsLegion.exe GOTO cleanupWDL
 ECHO This game is not supported for now.
 GOTO abort
 
@@ -647,6 +648,26 @@ IF ExIST "%dst%\WD2_GamerProfile_ori.xml" (
     DEL "%dst%\WD2_GamerProfile.xml"
     REN "%dst%\WD2_GamerProfile_ori.xml" WD2_GamerProfile.xml
 ) ELSE GOTO no_ori
+GOTO end
+
+:cleanupWDL
+echo Deleting mod files...
+RMDIR /s /q "RealRepo"
+DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log"
+
+echo Restoring graphic settings...
+SET "sub=My Games\Watch Dogs Legion\"
+IF NOT EXIST "%doc%%sub%" IF EXIST "%doc1%%sub%" SET "doc=%doc1%"
+IF NOT EXIST "%doc%%sub%" IF EXIST "%doc2%%sub%" SET "doc=%doc2%"
+SET "dst=%doc%%sub%"
+
+FOR /F "delims=" %%D IN ('DIR /AD /B "%dst%"') DO (
+    IF EXIST "%dst%%%D\WD3_GamerProfile_ori.xml" (
+        DEL "%dst%%%D\WD3_GamerProfile.xml"
+        REN "%dst%%%D\WD3_GamerProfile_ori.xml" "WD3_GamerProfile.xml"
+    ) ELSE GOTO no_ori
+)
+
 GOTO end
 
 :no_ori

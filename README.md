@@ -40,11 +40,17 @@
 <details>
   <summary><h2>👾id Software</h2></summary>
   
-  - DOOM Ethernal `\DOOMEternal`
+  - Death Stranding `\DeathStranding`
 </details>
 
 <details>
   <summary><h2>🕸️Insomniac Games</h2></summary>
+  
+  - Marvel's Spider-Man Remastered: `\Spider-man Remastered`
+  - Marvel's Spider-Man: Miles Morales: `\Marvel’s Spider-Man - Miles Morales`
+</details>
+
+  <summary><h2>🧳Kojima Productions</h2></summary>
   
   - Marvel's Spider-Man Remastered: `\Spider-man Remastered`
   - Marvel's Spider-Man: Miles Morales: `\Marvel’s Spider-Man - Miles Morales`
@@ -141,7 +147,6 @@ Special thanks to [Loocist23](https://github.com/Loocist23) for his time during 
   
   - DOOM The Dark Ages
   - Days Gone
-  - Death Stranding
   - Horizon Zero Dawn Remastered
   - Spider Man 2
 </details>

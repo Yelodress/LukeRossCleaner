@@ -13,9 +13,11 @@ IF EXIST Cyberpunk2077.exe GOTO cleanupCP2077
 IF EXIST DarkSoulsRemastered.exe GOTO cleanupDSR
 IF EXIST DarkSoulsII.exe GOTO cleanupDS2
 IF EXIST DarkSoulsIII.exe GOTO cleanupDS3
+IF EXIST DaysGone.exe GOTO cleanupDG
 IF EXIST DeathStranding.exe GOTO cleanupDSDC
 IF EXIST ds.exe GOTO cleanupDSDC
 IF EXIST DOOMEternalx64vk.exe GOTO cleanupDOOME
+IF EXIST DOOMTheDarkAges.exe GOTO cleanupDOOMTDA
 IF EXIST eldenring.exe GOTO cleanupEldenRing
 IF EXIST FarCryNewDawn.exe GOTO cleanupFCND
 IF EXIST FCPrimal.exe GOTO cleanupFCP
@@ -34,6 +36,7 @@ IF EXIST Maine-Win*-Shipping.exe GOTO cleanupGROUNDED
 IF EXIST Oregon-Win*-Shipping.exe GOTO cleanupHOL
 IF EXIST HorizonForbiddenWest.exe GOTO cleanupHFW
 IF EXIST HorizonZeroDawn.exe GOTO cleanupHZD
+IF EXIST HorizonZeroDawnRemastered.exe GOTO cleanupHZDR
 IF EXIST HogwartsLegacy.exe IF EXIST EOSSDK-Win64-Shipping.dll GOTO cleanupHogwarts
 IF EXIST KingdomCome.exe GOTO cleanupKCD2
 IF EXIST TheGreatCircle.exe GOTO cleanupIJTGC
@@ -44,7 +47,8 @@ IF EXIST Outlaws.exe GOTO cleanupStarWarsOutlaws
 IF EXIST Outlaws_Plus.exe GOTO cleanupStarWarsOutlaws
 IF EXIST RDR2.exe GOTO cleanupRDR2
 IF EXIST Spider-Man.exe GOTO cleanupSPIDERMAN
-IF EXIST MilesMorales.exe GOTO cleanupSPIDERMAN
+IF EXIST MilesMorales.exe GOTO cleanupSPIDERMANMM
+IF EXIST Spider-Man2.exe GOTO cleanupSPIDERMAN2
 IF EXIST Stray-Win64-Shipping.exe GOTO cleanupSTRAY
 IF EXIST tlou-i.exe GOTO cleanupTLOU1
 IF EXIST tlou-ii.exe GOTO cleanupTLOU2
@@ -155,6 +159,20 @@ IF ExIST "%dst%GraphicsConfig_ori.xml" (
 ) ELSE GOTO no_ori
 GOTO end
 
+:cleanupDG
+echo Deleting mod files...
+RMDIR /s /q "RealRepo"
+DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll" "BackupSaves.bat"
+
+echo Restoring graphic settings...
+SET sub=\BendGame\Saved\Config\WindowsNoEditor\
+SET "dst=%LOCALAPPDATA%%sub%"
+IF ExIST "%dst%GameUserSettings_ori.ini" (
+    DEL "%dst%GameUserSettings.ini"
+    REN "%dst%GameUserSettings_ori.ini" GameUserSettings.ini  
+) ELSE GOTO no_ori
+GOTO end
+
 :cleanupDSDC
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
@@ -171,6 +189,15 @@ GOTO end
 echo Deleting mod files...
 RMDIR /s /q "doomSandBox\RealRepo" "RealRepo"
 DEL doomSandBox\cudart64_*.dll "doomSandBox\openvr_api.dll" "doomSandBox\RealVR.ini" cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll" "BackupSaves.bat"
+
+echo Restoring graphic settings...
+powershell -Command "& { $path = 'HKLM:\SOFTWARE\Khronos\Vulkan\ImplicitLayers'; $regName = (Get-ItemProperty -Path $path | Get-Member -MemberType NoteProperty | Where-Object { $_.Name -like '*RealVR64.json' }).Name; if ($regName) { Start-Process cmd -ArgumentList ('/c REG DELETE \"HKLM\SOFTWARE\Khronos\Vulkan\ImplicitLayers\" /V \"' + $regName + '\" /F') -Verb RunAs } }"
+GOTO end
+
+:cleanupDOOMTDA
+echo Deleting mod files...
+RMDIR /s /q "doomSandBox\RealRepo" "RealRepo"
+DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll" "BackupSaves.bat"
 
 echo Restoring graphic settings...
 powershell -Command "& { $path = 'HKLM:\SOFTWARE\Khronos\Vulkan\ImplicitLayers'; $regName = (Get-ItemProperty -Path $path | Get-Member -MemberType NoteProperty | Where-Object { $_.Name -like '*RealVR64.json' }).Name; if ($regName) { Start-Process cmd -ArgumentList ('/c REG DELETE \"HKLM\SOFTWARE\Khronos\Vulkan\ImplicitLayers\" /V \"' + $regName + '\" /F') -Verb RunAs } }"
@@ -454,6 +481,15 @@ IF ExIST "%dst%graphicsconfig_ori.ini" (
 ) ELSE GOTO no_ori
 GOTO end
 
+:cleanupHZDR
+echo Deleting mod files...
+RMDIR /s /q "RealRepo"
+DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll"
+
+echo Restoring the graphics settings will delete the game graphics registry key. You will need to set your preferences again at the next launch.
+REG delete "HKCU\Software\Guerrilla Games\Horizon Zero Dawn Remastered\Graphics"
+GOTO end
+
 :cleanupHogwarts
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
@@ -576,6 +612,27 @@ GOTO end
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
 DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll"
+
+echo Restoring the graphics settings will delete the game graphics registry key. You will need to set your preferences again at the next launch.
+REG delete "HKCU\Software\Insomniac Games\Marvel's Spider-Man Remastered\Graphics"
+GOTO end
+
+:cleanupSPIDERMANMM
+echo Deleting mod files...
+RMDIR /s /q "RealRepo"
+DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll"
+
+echo Restoring the graphics settings will delete the game graphics registry key. You will need to set your preferences again at the next launch.
+REG delete "HKCU\Software\Insomniac Games\Marvel's Spider-Man Miles Morales\Graphics"
+GOTO end
+
+:cleanupSPIDERMAN2
+echo Deleting mod files...
+RMDIR /s /q "RealRepo"
+DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll"
+
+echo Restoring the graphics settings will delete the game graphics registry key. You will need to set your preferences again at the next launch.
+REG delete "HKCU\Software\Insomniac Games\Marvel's Spider-Man 2\Graphics"
 GOTO end
 
 :cleanupSTRAY

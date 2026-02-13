@@ -47,8 +47,8 @@
 <details>
   <summary><h2>👾id Software</h2></summary>
   
-  - DOOM Ethernal `\DOOMEternal`
-  - DOOM The Dark Ages `\DOOMTheDarkAges`
+  - DOOM Ethernal: `\DOOMEternal`
+  - DOOM The Dark Ages: `\DOOMTheDarkAges`
  </details>
 
 <details>
@@ -62,7 +62,13 @@
 <details>
   <summary><h2>🧳Kojima Productions</h2></summary>
   
-   - Death Stranding `\DeathStranding`
+   - Death Stranding: `\DeathStranding`
+</details>
+
+<details>
+  <summary><h2>💀Larian Studios</h2></summary>
+  
+   - Baldur's Gate 3: `\Baldur's Gate 3\bin `
 </details>
 
 <details>
@@ -149,4 +155,4 @@
 
 Special thanks to [Loocist23](https://github.com/Loocist23) for his time during our tests !
 
-### ⚠️ This script supports up to version v26.3.0 of the mod. It's not my priority, so if you need a specific game, let me know by creating an [issue](https://github.com/Yelodress/LukeRossCleaner/issues) and I'll update it as soon as possible :)
+### ⚠️ This script supports up to version v27.0.0 of the mod. It's not my priority, so if you need a specific game, let me know by creating an [issue](https://github.com/Yelodress/LukeRossCleaner/issues) and I'll update it as soon as possible :)

@@ -9,6 +9,7 @@ IF "%doc%"=="\" SET "doc=%doc1%"
 IF EXIST AtomicHeart-Win*-Shipping.exe GOTO cleanupAH
 IF EXIST afop.exe GOTO cleanupAFOP
 IF EXIST afop_plus.exe GOTO cleanupAFOP
+IF EXIST bg3_dx11.exe GOTO cleanupBG3
 IF EXIST Cyberpunk2077.exe GOTO cleanupCP2077
 IF EXIST DarkSoulsRemastered.exe GOTO cleanupDSR
 IF EXIST DarkSoulsII.exe GOTO cleanupDS2
@@ -76,7 +77,6 @@ IF ExIST "%dst%graphic settings_ori.cfg" (
     REN "%dst%persistent_settings_ori.cfg" persistent_settings.cfg
     REN "%dst%state_ori.cfg" state.cfg
 ) ELSE GOTO no_ori
-
 GOTO end
 
 :cleanupAH
@@ -101,6 +101,20 @@ IF EXIST "%dstGDK%" (
         REN "%dstGDK%GameUserSettings_ori.ini" GameUserSettings.ini
     ) ELSE GOTO no_ori
 )
+GOTO end
+
+:cleanupBG3
+echo Deleting mod files...
+RMDIR /s /q "RealRepo"
+DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log"
+
+echo Restoring graphic settings...
+SET sub=\Larian Studios\Baldur's Gate 3\
+SET "dst=%LOCALAPPDATA%%sub%"
+IF EXIST "%dst%graphicSettings_ori.lsx" (
+    DEL "%dst%graphicSettings.lsx"
+    REN "%dst%graphicSettings_ori.lsx" graphicSettings.lsx
+) ELSE GOTO no_ori
 GOTO end
 
 :cleanupCP2077

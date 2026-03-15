@@ -194,7 +194,7 @@ DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "Re
 
 echo Restoring graphic settings...
 IF ExIST "settings_ori.cfg" (
-    DEL "settings.cfg
+    DEL "settings.cfg"
     REN "settings_ori.cfg" settings.cfg
 ) ELSE GOTO no_ori
 GOTO end

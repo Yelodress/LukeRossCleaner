@@ -157,4 +157,4 @@ Special thanks to [Loocist23](https://github.com/Loocist23) for his time during 
 
 ⚠️ This script supports up to version `v2603.10.1 + early access Day's Gone & Baldur's Gate 3` (formerly `v27.0.0`) of the mod. It's not my priority, so if you need a specific game, let me know by creating an [issue](https://github.com/Yelodress/LukeRossCleaner/issues) and I'll update it as soon as possible :)
 
-> Please not that i'm not affiliated in any way with LukeRoss and his work. For any question or reclamation, feel free to reach me at `yelodress[at]pm.me`.
+> Please note that I have no affiliation with LukeRoss or his work. If you have any questions or concerns, please feel free to contact me at the following address: `yelodress[at]pm.me`.

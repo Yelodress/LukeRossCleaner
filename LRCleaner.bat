@@ -6,17 +6,22 @@ SET "doc2=%USERPROFILE%\Documents\"
 IF "%doc1%"=="\" SET "doc1=%doc2%"
 IF "%doc%"=="\" SET "doc=%doc1%"
 
+IF EXIST 007FirstLight.exe GOTO cleanup007
 IF EXIST AtomicHeart-Win*-Shipping.exe GOTO cleanupAH
 IF EXIST afop.exe GOTO cleanupAFOP
 IF EXIST afop_plus.exe GOTO cleanupAFOP
 IF EXIST bg3_dx11.exe GOTO cleanupBG3
+IF EXIST CrimsonDesert.exe GOTO cleanupCD
 IF EXIST Cyberpunk2077.exe GOTO cleanupCP2077
 IF EXIST DarkSoulsRemastered.exe GOTO cleanupDSR
 IF EXIST DarkSoulsII.exe GOTO cleanupDS2
 IF EXIST DarkSoulsIII.exe GOTO cleanupDS3
 IF EXIST DaysGone.exe GOTO cleanupDG
+IF EXIST "Dead Space.exe" GOTO cleanupDS2023
 IF EXIST DeathStranding.exe GOTO cleanupDSDC
 IF EXIST ds.exe GOTO cleanupDSDC
+IF EXIST DS2.exe GOTO cleanupDS2OTB
+IF EXIST DOOMx64vk.exe GOTO cleanupDOOM2016
 IF EXIST DOOMEternalx64vk.exe GOTO cleanupDOOME
 IF EXIST DOOMTheDarkAges.exe GOTO cleanupDOOMTDA
 IF EXIST eldenring.exe GOTO cleanupEldenRing
@@ -33,6 +38,7 @@ IF EXIST GWT.exe IF EXIST OpenImageDenoise.dll GOTO cleanupGWT
 IF EXIST GWT.exe IF EXIST XCurl.dll GOTO cleanupGWT
 IF EXIST GWT.exe IF EXIST .egstore GOTO cleanupGWTegs
 IF EXIST GTA5.exe GOTO cleanupGTA5
+IF EXIST GTA5_Enhanced.exe GOTO cleanupGTA5E
 IF EXIST Maine-Win*-Shipping.exe GOTO cleanupGROUNDED
 IF EXIST Oregon-Win*-Shipping.exe GOTO cleanupHOL
 IF EXIST HorizonForbiddenWest.exe GOTO cleanupHFW
@@ -59,6 +65,26 @@ IF EXIST WatchDogs2.exe GOTO cleanupWD2
 IF EXIST WatchDogsLegion.exe GOTO cleanupWDL
 ECHO This game is not supported for now.
 GOTO abort
+
+:cleanup007
+echo Deleting mod files...
+RMDIR /s /q "RealRepo"
+DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll"
+
+:askReg_007
+SET "ans=Y"
+SET /P "ans=Restoring the graphics settings affected by the mod will reset them to their default values. Proceed anyway ? (Y/n) "
+IF /I "%ans%"=="Y" GOTO doReg_007
+IF /I "%ans%"=="YES" GOTO doReg_007
+IF /I "%ans%"=="N" GOTO end
+IF /I "%ans%"=="NO" GOTO end
+ECHO Invalid answer, type Y or N.
+GOTO askReg_007
+
+:doReg_007
+FOR %%V IN (DLSSQuality:0 Fullscreen:1 HDR:1 MotionBlur:1 VRSProfile:1 VSync:1) DO FOR /F "tokens=1,2 delims=:" %%A IN ("%%V") DO REG ADD "HKCU\Software\IO Interactive\007 First Light" /v %%A /t REG_DWORD /d %%B /f >NUL
+ECHO Graphics settings restored.
+GOTO end
 
 :cleanupAFOP
 echo Deleting mod files...
@@ -114,6 +140,20 @@ SET "dst=%LOCALAPPDATA%%sub%"
 IF EXIST "%dst%graphicSettings_ori.lsx" (
     DEL "%dst%graphicSettings.lsx"
     REN "%dst%graphicSettings_ori.lsx" graphicSettings.lsx
+) ELSE GOTO no_ori
+GOTO end
+
+:cleanupCD
+echo Deleting mod files...
+RMDIR /s /q "RealRepo"
+DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log"
+
+echo Restoring graphic settings...
+SET sub=\Pearl Abyss\CD\save\
+SET "dst=%LOCALAPPDATA%%sub%"
+IF EXIST "%dst%user_engine_option_save_ori.xml" (
+    DEL "%dst%user_engine_option_save.xml"
+    REN "%dst%user_engine_option_save_ori.xml" user_engine_option_save.xml
 ) ELSE GOTO no_ori
 GOTO end
 
@@ -187,6 +227,28 @@ IF ExIST "%dst%GameUserSettings_ori.ini" (
 ) ELSE GOTO no_ori
 GOTO end
 
+:cleanupDS2023
+echo Deleting mod files...
+RMDIR /s /q "RealRepo"
+DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll" "BackupSaves.bat"
+
+echo Restoring graphic settings...
+SET sub=Dead Space (2023)\settings\
+IF NOT EXIST "%doc%%sub%" IF EXIST "%doc1%%sub%" SET "doc=%doc1%"
+IF NOT EXIST "%doc%%sub%" IF EXIST "%doc2%%sub%" SET "doc=%doc2%"
+SET "dst=%doc%%sub%"
+SET "restored="
+IF EXIST "%dst%ProfileOptions_profile_ori" (
+    MOVE /Y "%dst%ProfileOptions_profile_ori" "%dst%ProfileOptions_profile" >NUL
+    SET restored=yes
+)
+IF EXIST "%dst%steam\ProfileOptions_profile_ori" (
+    MOVE /Y "%dst%steam\ProfileOptions_profile_ori" "%dst%steam\ProfileOptions_profile" >NUL
+    SET restored=yes
+)
+IF NOT DEFINED restored GOTO no_ori
+GOTO end
+
 :cleanupDSDC
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
@@ -197,6 +259,36 @@ IF ExIST "settings_ori.cfg" (
     DEL "settings.cfg"
     REN "settings_ori.cfg" settings.cfg
 ) ELSE GOTO no_ori
+GOTO end
+
+:cleanupDS2OTB
+echo Deleting mod files...
+RMDIR /s /q "RealRepo"
+DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll" "BackupSaves.bat"
+
+echo Restoring graphic settings...
+:askReg_DS2OTB
+SET "ans=Y"
+SET /P "ans=Restoring the graphics settings to their default values ? (Y/n) "
+IF /I "%ans%"=="Y" GOTO doReg_DS2OTB
+IF /I "%ans%"=="YES" GOTO doReg_DS2OTB
+IF /I "%ans%"=="N" GOTO end
+IF /I "%ans%"=="NO" GOTO end
+ECHO Invalid answer, type Y or N.
+GOTO askReg_DS2OTB
+
+:doReg_DS2OTB
+REG DELETE "HKCU\Software\KOJIMA PRODUCTIONS\DEATH STRANDING 2 - ON THE BEACH\Graphics" /f >NUL 2>&1
+ECHO Graphics settings restored.
+GOTO end
+
+:cleanupDOOM2016
+echo Deleting mod files...
+RMDIR /s /q "RealRepo"
+DEL cudart64_*.dll "RealVR.ini" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR64.log" "RealVR64.dll" "BackupSaves.bat"
+
+echo Restoring graphic settings...
+powershell -NoProfile -Command "$p = 'HKLM:\SOFTWARE\Khronos\Vulkan\ImplicitLayers'; $d = Join-Path $env:ProgramData 'RealVR'; if (((Get-Item $p -ErrorAction SilentlyContinue).Property -like '*RealVR64.json') -or (Test-Path $d)) { Start-Process powershell -Verb RunAs -Wait -ArgumentList ('-NoProfile -Command Remove-ItemProperty -Path ' + $p + ' -Name *RealVR64.json -ErrorAction SilentlyContinue; Remove-Item -Recurse -Force ' + $d) }"
 GOTO end
 
 :cleanupDOOME
@@ -415,6 +507,22 @@ DEL "RealVR.ini" "d3d11.dll" "ScriptHookV.dll" "RealConfig.bat" "commandline.txt
 
 echo Restoring graphic settings...
 SET "sub=\Rockstar Games\GTA V\"
+IF NOT EXIST "%doc%%sub%" IF EXIST "%doc1%%sub%" SET "doc=%doc1%"
+IF NOT EXIST "%doc%%sub%" IF EXIST "%doc2%%sub%" SET "doc=%doc2%"
+SET "dst=%doc%%sub%"
+IF ExIST "%dst%settings_ori.xml" (
+    DEL "%dst%settings.xml"
+    REN "%dst%settings_ori.xml" settings.xml
+) ELSE GOTO no_ori
+GOTO end
+
+:cleanupGTA5E
+echo Deleting mod files...
+RMDIR /s /q "RealRepo"
+DEL cudart64_*.dll "RealVR.ini" "d3d11.dll" "ScriptHookV.dll" "RealConfig.bat" "commandline.txt" "openvr_api.dll" "nvapi64.dll" "d3dx.ini" "dinput8.dll" "ScriptHookV.log" "asiloader.log" "args.txt" "NativeTrainer.asi"
+
+echo Restoring graphic settings...
+SET "sub=\Rockstar Games\GTAV Enhanced\"
 IF NOT EXIST "%doc%%sub%" IF EXIST "%doc1%%sub%" SET "doc=%doc1%"
 IF NOT EXIST "%doc%%sub%" IF EXIST "%doc2%%sub%" SET "doc=%doc2%"
 SET "dst=%doc%%sub%"

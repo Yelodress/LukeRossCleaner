@@ -36,7 +36,6 @@ IF EXIST GhostOfTsushima.exe GOTO cleanupGOT
 IF EXIST Ghostrunner-Win64-Shipping.exe GOTO cleanupGR
 IF EXIST GWT.exe IF EXIST OpenImageDenoise.dll GOTO cleanupGWT
 IF EXIST GWT.exe IF EXIST XCurl.dll GOTO cleanupGWT
-IF EXIST GWT.exe IF EXIST .egstore GOTO cleanupGWTegs
 IF EXIST GTA5.exe GOTO cleanupGTA5
 IF EXIST GTA5_Enhanced.exe GOTO cleanupGTA5E
 IF EXIST Maine-Win*-Shipping.exe GOTO cleanupGROUNDED
@@ -44,7 +43,7 @@ IF EXIST Oregon-Win*-Shipping.exe GOTO cleanupHOL
 IF EXIST HorizonForbiddenWest.exe GOTO cleanupHFW
 IF EXIST HorizonZeroDawn.exe GOTO cleanupHZD
 IF EXIST HorizonZeroDawnRemastered.exe GOTO cleanupHZDR
-IF EXIST HogwartsLegacy.exe IF EXIST EOSSDK-Win64-Shipping.dll GOTO cleanupHogwarts
+IF EXIST HogwartsLegacy.exe IF EXIST amd_fidelityfx_dx12.dll GOTO cleanupHogwarts
 IF EXIST KingdomCome.exe GOTO cleanupKCD2
 IF EXIST TheGreatCircle.exe GOTO cleanupIJTGC
 IF EXIST mafiadefinitiveedition.exe GOTO cleanupMDE1
@@ -69,7 +68,7 @@ GOTO abort
 :cleanup007
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll"
+DEL "cudart64_12.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR*.ini" "RealVR64.log" "RealVR64.dll"
 
 :askReg_007
 SET "ans=Y"
@@ -89,7 +88,7 @@ GOTO end
 :cleanupAFOP
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll"
+DEL "cudart64_12.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR*.ini" "RealVR64.log" "RealVR64.dll"
 
 echo Restoring graphic settings...
 SET "sub=My Games\AFOP\"
@@ -97,140 +96,128 @@ IF NOT EXIST "%doc%%sub%" IF EXIST "%doc1%%sub%" SET "doc=%doc1%"
 IF NOT EXIST "%doc%%sub%" IF EXIST "%doc2%%sub%" SET "doc=%doc2%"
 SET "dst=%doc%%sub%"
 
-IF ExIST "%dst%graphic settings_ori.cfg" (
-    DEL "%dst%graphic settings.cfg" "%dst%persistent_settings.cfg" "%dst%state.cfg"
-    REN "%dst%graphic settings_ori.cfg" graphic settings.cfg
-    REN "%dst%persistent_settings_ori.cfg" persistent_settings.cfg
-    REN "%dst%state_ori.cfg" state.cfg
+IF EXIST "%dst%graphic settings_ori.cfg" (
+    MOVE /Y "%dst%graphic settings_ori.cfg" "%dst%graphic settings.cfg" >NUL
+    IF EXIST "%dst%persistent_settings_ori.cfg" MOVE /Y "%dst%persistent_settings_ori.cfg" "%dst%persistent_settings.cfg" >NUL
+    IF EXIST "%dst%state_ori.cfg" MOVE /Y "%dst%state_ori.cfg" "%dst%state.cfg" >NUL
 ) ELSE GOTO no_ori
 GOTO end
 
 :cleanupAH
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log"
+DEL "cudart64_12.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR*.ini" "RealVR64.log"
 
 echo Restoring graphic settings...
-SET sub=\AtomicHeart\Saved\Config\WindowsNoEditor\
-SET subGDK=\AtomicHeart\Saved\Config\WinGDK\
-SET "dst=%LOCALAPPDATA%%sub%"
-SET "dstGDK=%LOCALAPPDATA%%subGDK%"
-IF EXIST "%dst%" (
-    IF ExIST "%dst%GameUserSettings_ori.ini" (
-        DEL "%dst%GameUserSettings.ini"
-        REN "%dst%GameUserSettings_ori.ini" GameUserSettings.ini
-    ) ELSE GOTO no_ori
+SET "dst=%LOCALAPPDATA%\AtomicHeart\Saved\Config\WindowsNoEditor\"
+SET "dstGDK=%LOCALAPPDATA%\AtomicHeart\Saved\Config\WinGDK\"
+SET "restored="
+IF EXIST "%dst%GameUserSettings_ori.ini" (
+    MOVE /Y "%dst%GameUserSettings_ori.ini" "%dst%GameUserSettings.ini" >NUL
+    SET "restored=yes"
 )
-IF EXIST "%dstGDK%" (
-    IF ExIST "%dst%GraphicsConfig_ori.xml" (
-        DEL "%dstGDK%GameUserSettings.ini"
-        REN "%dstGDK%GameUserSettings_ori.ini" GameUserSettings.ini
-    ) ELSE GOTO no_ori
+IF EXIST "%dstGDK%GameUserSettings_ori.ini" (
+    MOVE /Y "%dstGDK%GameUserSettings_ori.ini" "%dstGDK%GameUserSettings.ini" >NUL
+    SET "restored=yes"
 )
+IF NOT DEFINED restored GOTO no_ori
 GOTO end
 
 :cleanupBG3
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log"
+DEL "cudart64_12.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR*.ini" "RealVR64.log"
 
 echo Restoring graphic settings...
 SET sub=\Larian Studios\Baldur's Gate 3\
 SET "dst=%LOCALAPPDATA%%sub%"
 IF EXIST "%dst%graphicSettings_ori.lsx" (
-    DEL "%dst%graphicSettings.lsx"
-    REN "%dst%graphicSettings_ori.lsx" graphicSettings.lsx
+    MOVE /Y "%dst%graphicSettings_ori.lsx" "%dst%graphicSettings.lsx" >NUL
 ) ELSE GOTO no_ori
 GOTO end
 
 :cleanupCD
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log"
+DEL "cudart64_12.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR*.ini" "RealVR64.log"
 
 echo Restoring graphic settings...
 SET sub=\Pearl Abyss\CD\save\
 SET "dst=%LOCALAPPDATA%%sub%"
 IF EXIST "%dst%user_engine_option_save_ori.xml" (
-    DEL "%dst%user_engine_option_save.xml"
-    REN "%dst%user_engine_option_save_ori.xml" user_engine_option_save.xml
+    MOVE /Y "%dst%user_engine_option_save_ori.xml" "%dst%user_engine_option_save.xml" >NUL
 ) ELSE GOTO no_ori
 GOTO end
 
 :cleanupCP2077
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log"
+DEL "cudart64_12.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR*.ini" "RealVR64.log"
 
 echo Restoring graphic settings...
 SET sub=\CD Projekt Red\Cyberpunk 2077\
 SET "dst=%LOCALAPPDATA%%sub%"
 IF EXIST "%dst%UserSettings_ori.json" (
-    DEL "%dst%UserSettings.json"
-    REN "%dst%UserSettings_ori.json" UserSettings.json
-)
+    MOVE /Y "%dst%UserSettings_ori.json" "%dst%UserSettings.json" >NUL
+) ELSE GOTO no_ori
 GOTO end
 
 :cleanupDSR
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "start_protected_game.exe" "RealVR64.dll"
+DEL "cudart64_12.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR*.ini" "RealVR64.log" "RealVR64.dll"
 
 echo Restoring graphic settings...
 SET sub=\FromSoftware\NBGI\DarkSouls\
 SET "dst=%LOCALAPPDATA%%sub%"
 IF ExIST "%dst%DarkSouls_ori.ini" (
-    DEL "%dst%DarkSouls.ini"
-    REN "%dst%DarkSouls_ori.ini" DarkSouls.ini
+    MOVE /Y "%dst%DarkSouls_ori.ini" "%dst%DarkSouls.ini" >NUL
 ) ELSE GOTO no_ori
 GOTO end
 
 :cleanupDS2
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "start_protected_game.exe" "RealVR64.dll" "BackupSaves.bat"
+DEL "cudart64_12.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR*.ini" "RealVR64.log" "RealVR64.dll" "BackupSaves.bat"
 
 echo Restoring graphic settings...
 SET sub=\DarkSoulsII\
-SET "dst=%LOCALAPPDATA%%sub%"
+SET "dst=%APPDATA%%sub%"
 IF ExIST "%dst%GraphicsConfig_SOFS_ori.xml" (
-    DEL "%dst%GraphicsConfig_SOFS.xml"
-    REN "%dst%GraphicsConfig_SOFS_ori.xml" GraphicsConfig_SOFS.xml
+    MOVE /Y "%dst%GraphicsConfig_SOFS_ori.xml" "%dst%GraphicsConfig_SOFS.xml" >NUL
 ) ELSE GOTO no_ori
 GOTO end
 
 :cleanupDS3
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll" "BackupSaves.bat"
+DEL "cudart64_12.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR*.ini" "RealVR64.log" "RealVR64.dll" "BackupSaves.bat"
 
 echo Restoring graphic settings...
 SET sub=\DarkSoulsIII\
 SET "dst=%APPDATA%%sub%"
 IF ExIST "%dst%GraphicsConfig_ori.xml" (
-    DEL "%dst%GraphicsConfig.xml"
-    REN "%dst%GraphicsConfig_ori.xml" GraphicsConfig.xml
+    MOVE /Y "%dst%GraphicsConfig_ori.xml" "%dst%GraphicsConfig.xml" >NUL
 ) ELSE GOTO no_ori
 GOTO end
 
 :cleanupDG
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll" "BackupSaves.bat"
+DEL "cudart64_12.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR*.ini" "RealVR64.log" "RealVR64.dll" "BackupSaves.bat"
 
 echo Restoring graphic settings...
 SET sub=\BendGame\Saved\Config\WindowsNoEditor\
 SET "dst=%LOCALAPPDATA%%sub%"
 IF ExIST "%dst%GameUserSettings_ori.ini" (
-    DEL "%dst%GameUserSettings.ini"
-    REN "%dst%GameUserSettings_ori.ini" GameUserSettings.ini  
+    MOVE /Y "%dst%GameUserSettings_ori.ini" "%dst%GameUserSettings.ini" >NUL 
 ) ELSE GOTO no_ori
 GOTO end
 
 :cleanupDS2023
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll" "BackupSaves.bat"
+DEL "cudart64_12.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR*.ini" "RealVR64.log" "RealVR64.dll" "BackupSaves.bat"
 
 echo Restoring graphic settings...
 SET sub=Dead Space (2023)\settings\
@@ -252,19 +239,18 @@ GOTO end
 :cleanupDSDC
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll" "BackupSaves.bat"
+DEL "cudart64_12.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR*.ini" "RealVR64.log" "RealVR64.dll" "BackupSaves.bat"
 
 echo Restoring graphic settings...
 IF ExIST "settings_ori.cfg" (
-    DEL "settings.cfg"
-    REN "settings_ori.cfg" settings.cfg
+    MOVE /Y "settings_ori.cfg" "settings.cfg" >NUL
 ) ELSE GOTO no_ori
 GOTO end
 
 :cleanupDS2OTB
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll" "BackupSaves.bat"
+DEL "cudart64_12.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR*.ini" "RealVR64.log" "RealVR64.dll" "BackupSaves.bat"
 
 echo Restoring graphic settings...
 :askReg_DS2OTB
@@ -285,48 +271,45 @@ GOTO end
 :cleanupDOOM2016
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL cudart64_*.dll "RealVR.ini" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR64.log" "RealVR64.dll" "BackupSaves.bat"
+DEL "cudart64_12.dll" "RealVR*.ini" "openvr_api.dll" "RealConfig.bat" "RealVR64.log" "RealVR64.dll" "BackupSaves.bat"
 
-echo Restoring graphic settings...
-powershell -NoProfile -Command "$p = 'HKLM:\SOFTWARE\Khronos\Vulkan\ImplicitLayers'; $d = Join-Path $env:ProgramData 'RealVR'; if (((Get-Item $p -ErrorAction SilentlyContinue).Property -like '*RealVR64.json') -or (Test-Path $d)) { Start-Process powershell -Verb RunAs -Wait -ArgumentList ('-NoProfile -Command Remove-ItemProperty -Path ' + $p + ' -Name *RealVR64.json -ErrorAction SilentlyContinue; Remove-Item -Recurse -Force ' + $d) }"
+CALL :vulkanclean
 GOTO end
 
 :cleanupDOOME
 echo Deleting mod files...
 RMDIR /s /q "doomSandBox\RealRepo" "RealRepo"
-DEL doomSandBox\cudart64_*.dll "doomSandBox\openvr_api.dll" "doomSandBox\RealVR.ini" cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll" "BackupSaves.bat"
+DEL "doomSandBox\cudart64_12.dll" "doomSandBox\openvr_api.dll" "doomSandBox\RealVR*.ini" "cudart64_12.dll" "openvr_api.dll" "RealConfig.bat" "RealVR*.ini" "RealVR64.log" "RealVR64.dll" "BackupSaves.bat"
 
-echo Restoring graphic settings...
-powershell -Command "& { $path = 'HKLM:\SOFTWARE\Khronos\Vulkan\ImplicitLayers'; $regName = (Get-ItemProperty -Path $path | Get-Member -MemberType NoteProperty | Where-Object { $_.Name -like '*RealVR64.json' }).Name; if ($regName) { Start-Process cmd -ArgumentList ('/c REG DELETE \"HKLM\SOFTWARE\Khronos\Vulkan\ImplicitLayers\" /V \"' + $regName + '\" /F') -Verb RunAs } }"
+CALL :vulkanclean
 GOTO end
 
 :cleanupDOOMTDA
 echo Deleting mod files...
 RMDIR /s /q "doomSandBox\RealRepo" "RealRepo"
-DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll" "BackupSaves.bat"
+DEL "cudart64_12.dll" "openvr_api.dll" "RealConfig.bat" "RealVR*.ini" "RealVR64.log" "RealVR64.dll" "BackupSaves.bat"
 
-echo Restoring graphic settings...
-powershell -Command "& { $path = 'HKLM:\SOFTWARE\Khronos\Vulkan\ImplicitLayers'; $regName = (Get-ItemProperty -Path $path | Get-Member -MemberType NoteProperty | Where-Object { $_.Name -like '*RealVR64.json' }).Name; if ($regName) { Start-Process cmd -ArgumentList ('/c REG DELETE \"HKLM\SOFTWARE\Khronos\Vulkan\ImplicitLayers\" /V \"' + $regName + '\" /F') -Verb RunAs } }"
+CALL :vulkanclean
 GOTO end
 
 :cleanupEldenRing
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll"
+DEL "cudart64_12.dll" "openvr_api.dll" "RealConfig.bat" "RealVR*.ini" "RealVR64.log" "RealVR64.dll"
+IF EXIST start_protected_game_ori.exe MOVE /Y start_protected_game_ori.exe start_protected_game.exe >NUL
 
 echo Restoring graphic settings...
 SET sub=\EldenRing\
 SET "dst=%APPDATA%%sub%"
 IF ExIST "%dst%GraphicsConfig_ori.xml" (
-    DEL "%dst%GraphicsConfig.xml"
-    REN "%dst%GraphicsConfig_ori.xml" GraphicsConfig.xml
+    MOVE /Y "%dst%GraphicsConfig_ori.xml" "%dst%GraphicsConfig.xml" >NUL
 ) ELSE GOTO no_ori
 GOTO end
 
 :cleanupFCND
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll"
+DEL "cudart64_12.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR*.ini" "RealVR64.log" "RealVR64.dll"
 
 echo Restoring graphic settings...
 SET "sub=My Games\Far Cry New Dawn\"
@@ -334,15 +317,14 @@ IF NOT EXIST "%doc%%sub%" IF EXIST "%doc1%%sub%" SET "doc=%doc1%"
 IF NOT EXIST "%doc%%sub%" IF EXIST "%doc2%%sub%" SET "doc=%doc2%"
 SET "dst=%doc%%sub%"
 IF ExIST "%dst%\gamerprofile_ori.xml" (
-    DEL "%dst%\gamerprofile.xml" 
-    REN "%dst%\gamerprofile_ori.xml" gamerprofile.xml
+    MOVE /Y "%dst%gamerprofile_ori.xml" "%dst%gamerprofile.xml" >NUL
 ) ELSE GOTO no_ori
 GOTO end
 
 :cleanupFCP
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll"
+DEL "cudart64_12.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR*.ini" "RealVR64.log" "RealVR64.dll"
 
 echo Restoring graphic settings...
 SET "sub=My Games\Far Cry Primal\"
@@ -350,33 +332,35 @@ IF NOT EXIST "%doc%%sub%" IF EXIST "%doc1%%sub%" SET "doc=%doc1%"
 IF NOT EXIST "%doc%%sub%" IF EXIST "%doc2%%sub%" SET "doc=%doc2%"
 SET "dst=%doc%%sub%"
 IF ExIST "%dst%\gamerprofile_ori.xml" (
-    DEL "%dst%\gamerprofile.xml" 
-    REN "%dst%\gamerprofile_ori.xml" gamerprofile.xml
+    MOVE /Y "%dst%gamerprofile_ori.xml" "%dst%gamerprofile.xml" >NUL
 ) ELSE GOTO no_ori
 GOTO end
 
 :cleanupFC4
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll"
+DEL "cudart64_12.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR*.ini" "RealVR64.log" "RealVR64.dll"
 
 echo Restoring graphic settings...
 SET "sub=My Games\Far Cry 4\"
 IF NOT EXIST "%doc%%sub%" IF EXIST "%doc1%%sub%" SET "doc=%doc1%"
 IF NOT EXIST "%doc%%sub%" IF EXIST "%doc2%%sub%" SET "doc=%doc2%"
 SET "dst=%doc%%sub%"
-FOR /F "delims=" %%D IN ('DIR /AD /B "%dst%"') DO (
+SET "restored="
+IF NOT EXIST "%dst%" GOTO no_ori
+FOR /F "delims=" %%D IN ('DIR /AD /B "%dst%" 2^>nul') DO (
     IF EXIST "%dst%%%D\GamerProfile_ori.xml" (
-        DEL "%dst%%%D\GamerProfile.xml" 
-        REN "%dst%%%D\GamerProfile_ori.xml" GamerProfile.xml
+        MOVE /Y "%dst%%%D\GamerProfile_ori.xml" "%dst%%%D\GamerProfile.xml" >NUL
+        SET "restored=yes"
     )
 )
+IF NOT DEFINED restored GOTO no_ori
 GOTO end
 
 :cleanupFC5
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll"
+DEL "cudart64_12.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR*.ini" "RealVR64.log" "RealVR64.dll"
 
 echo Restoring graphic settings...
 SET "sub=My Games\Far Cry 5\"
@@ -384,15 +368,14 @@ IF NOT EXIST "%doc%%sub%" IF EXIST "%doc1%%sub%" SET "doc=%doc1%"
 IF NOT EXIST "%doc%%sub%" IF EXIST "%doc2%%sub%" SET "doc=%doc2%"
 SET "dst=%doc%%sub%"
 IF ExIST "%dst%\gamerprofile_ori.xml" (
-    DEL "%dst%\gamerprofile.xml" 
-    REN "%dst%\gamerprofile_ori.xml" gamerprofile.xml
+    MOVE /Y "%dst%gamerprofile_ori.xml" "%dst%gamerprofile.xml" >NUL
 ) ELSE GOTO no_ori
 GOTO end
 
 :cleanupFC6
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll"
+DEL "cudart64_12.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR*.ini" "RealVR64.log" "RealVR64.dll"
 
 echo Restoring graphic settings...
 SET "sub=My Games\Far Cry 6\"
@@ -400,59 +383,86 @@ IF NOT EXIST "%doc%%sub%" IF EXIST "%doc1%%sub%" SET "doc=%doc1%"
 IF NOT EXIST "%doc%%sub%" IF EXIST "%doc2%%sub%" SET "doc=%doc2%"
 SET "dst=%doc%%sub%"
 IF ExIST "%dst%\gamerprofile_ori.xml" (
-    DEL "%dst%\gamerprofile.xml" 
-    REN "%dst%\gamerprofile_ori.xml" gamerprofile.xml
+    MOVE /Y "%dst%gamerprofile_ori.xml" "%dst%gamerprofile.xml" >NUL
 ) ELSE GOTO no_ori
 GOTO end
 
 :cleanupFF7R
-echo Deleting mod files...
-RMDIR /s /q "RealRepo"
-DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll"
-
-echo Restoring graphic settings...
 SET "sub=My Games\FINAL FANTASY VII REMAKE\"
 IF NOT EXIST "%doc%%sub%" IF EXIST "%doc1%%sub%" SET "doc=%doc1%"
 IF NOT EXIST "%doc%%sub%" IF EXIST "%doc2%%sub%" SET "doc=%doc2%"
 SET "dst=%doc%%sub%"
+SET "wne=%dst%Saved\Config\WindowsNoEditor\"
+SET "ref=RealRepo\FF7R\Settings\Engine.ini"
+SET "reset="
 
-FOR /F "delims=" %%D IN ('DIR /AD /B "%dst%EOS"') DO (
-    DEL "%dst%EOS\%%D\ff7remakedevice.sav"
-)
-FOR /F "delims=" %%D IN ('DIR /AD /B "%dst%Steam"') DO (
-    DEL "%dst%Steam\%%D\ff7remakedevice.sav"
+echo Restoring graphic settings...
+IF EXIST "%wne%Engine_ori.ini" (
+    MOVE /Y "%wne%Engine_ori.ini" "%wne%Engine.ini" >NUL
+) ELSE IF EXIST "%wne%Engine.ini" (
+    IF EXIST "%ref%" (
+        FC /B "%wne%Engine.ini" "%ref%" >NUL 2>&1
+        IF ERRORLEVEL 1 (
+            echo WARNING: Engine.ini was modified after the install, left in place:
+            echo          "%wne%Engine.ini"
+        ) ELSE DEL /F /Q "%wne%Engine.ini"
+    ) ELSE (
+        echo WARNING: Unable to tell if this Engine.ini comes from the mod, left in place:
+        echo          "%wne%Engine.ini"
+    )
 )
 
-SET "sub2=%dst%Saved\Config\WindowsNoEditor\"
-IF ExIST "%sub2%Engine_ori.ini" (
-    DEL "%sub2%Engine.ini" 
-    REN "%sub2%Engine_ori.ini" Engine.ini
-) ELSE GOTO no_ori
+FOR %%P IN (EOS Steam) DO IF EXIST "%dst%%%P\" (
+    FOR /F "delims=" %%D IN ('DIR /AD /B "%dst%%%P" 2^>nul') DO (
+        IF EXIST "%dst%%%P\%%D\ff7remakedevice_ori.sav" (
+            MOVE /Y "%dst%%%P\%%D\ff7remakedevice_ori.sav" "%dst%%%P\%%D\ff7remakedevice.sav" >NUL
+        ) ELSE IF EXIST "%dst%%%P\%%D\ff7remakedevice.sav" (
+            DEL /F /Q "%dst%%%P\%%D\ff7remakedevice.sav"
+            SET "reset=yes"
+        )
+    )
+)
+IF DEFINED reset (
+    echo NOTE: Your FF7R display settings were not backed up at install time. They have been reset to default values, set them again in game.
+)
+
+echo Deleting mod files...
+RMDIR /s /q "RealRepo" 2>nul
+DEL "cudart64_12.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR*.ini" "RealVR64.log" "RealVR64.dll" 2>nul
+
 GOTO end
 
 :cleanupFF7RB
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll"
+DEL "cudart64_12.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR*.ini" "RealVR64.log" "RealVR64.dll"
 
 echo Restoring graphic settings...
 SET "sub=My Games\FINAL FANTASY VII REBIRTH\"
 IF NOT EXIST "%doc%%sub%" IF EXIST "%doc1%%sub%" SET "doc=%doc1%"
 IF NOT EXIST "%doc%%sub%" IF EXIST "%doc2%%sub%" SET "doc=%doc2%"
 SET "dst=%doc%%sub%"
-
-FOR /F "delims=" %%D IN ('DIR /AD /B "%dst%EOS"') DO (
-    DEL "%dst%EOS\%%D\ff7rebirthdevice.sav"
+SET "reset="
+FOR %%P IN (EOS Steam) DO IF EXIST "%dst%%%P\" (
+    FOR /F "delims=" %%D IN ('DIR /AD /B "%dst%%%P" 2^>nul') DO (
+        IF EXIST "%dst%%%P\%%D\ff7rebirthdevice_ori.sav" (
+            MOVE /Y "%dst%%%P\%%D\ff7rebirthdevice_ori.sav" "%dst%%%P\%%D\ff7rebirthdevice.sav" >NUL
+        ) ELSE IF EXIST "%dst%%%P\%%D\ff7rebirthdevice.sav" (
+            DEL /F /Q "%dst%%%P\%%D\ff7rebirthdevice.sav"
+            SET "reset=yes"
+        )
+    )
 )
-FOR /F "delims=" %%D IN ('DIR /AD /B "%dst%Steam"') DO (
-    DEL "%dst%Steam\%%D\ff7rebirthdevice.sav"
+IF DEFINED reset (
+    echo NOTE: Your FF7 Rebirth display settings were not backed up at install time. They have been reset to default values, set them again in game.
 )
 GOTO end
+
 
 :cleanupGOT
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log"
+DEL "cudart64_12.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR*.ini" "RealVR64.log"
 
 echo Restoring the graphics settings will delete the game graphics registry key. You will need to set your preferences again at the next launch.
 REG delete "HKCU\Software\Sucker Punch Productions\Ghost of Tsushima DIRECTOR'S CUT\Graphics"
@@ -461,49 +471,43 @@ GOTO end
 :cleanupGR
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log"
+DEL "cudart64_12.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR*.ini" "RealVR64.log"
 
 echo Restoring graphic settings...
 SET sub=\Ghostrunner\Saved\Config\WindowsNoEditor\
 SET "dst=%LOCALAPPDATA%%sub%"
 IF ExIST "%dst%GameUserSettings_ori.ini" (
-    DEL "%dst%GameUserSettings.ini"
-    REN "%dst%GameUserSettings_ori.ini" GameUserSettings.ini  
+    MOVE /Y "%dst%GameUserSettings_ori.ini" "%dst%GameUserSettings.ini" >NUL
+  
 ) ELSE GOTO no_ori
 GOTO end
 
 :cleanupGWT
 echo Deleting mod files...
-RMDIR /s /q "RealRepo" "reshade-shaders"
-DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "ReShadePreset.ini"
+RMDIR /s /q "RealRepo"
+DEL "cudart64_12.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR*.ini" "RealVR64.log" "ReShadePreset.ini" 2>nul
+DEL "ReShadePreset.ini" "reshade-shaders\Shaders\CAS.fx" "reshade-shaders\Shaders\ReShade.fxh" "reshade-shaders\Textures\dummy" 2>nul
+RMDIR "reshade-shaders\Shaders" "reshade-shaders\Textures" 2>nul
+RMDIR "reshade-shaders" 2>nul
 
 echo Restoring graphic settings...
-SET "sub=\Saved Games\TangoGameworks\Saved\Config\WindowsNoEditor\"
-SET "dst=%USERPROFILE%%sub%"
-IF ExIST "%dst%GameUserSettings_ori.ini" (
-    DEL "%dst%GameUserSettings.ini"
-    REN "%dst%GameUserSettings_ori.ini" GameUserSettings.ini
-) ELSE GOTO no_ori
-GOTO end
-
-:cleanupGWTegs
-echo Deleting mod files...
-RMDIR /s /q "RealRepo" "reshade-shaders"
-DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "ReShadePreset.ini"
-
-echo Restoring graphic settings...
-SET "sub=\Saved Games\TangoGameworks\GhostWire Tokyo (EGS)\Saved\Config\WindowsNoEditor\"
-SET "dst=%USERPROFILE%%sub%"
-IF ExIST "%dst%GameUserSettings_ori.ini" (
-    DEL "%dst%GameUserSettings.ini"
-    REN "%dst%GameUserSettings_ori.ini" GameUserSettings.ini
-) ELSE GOTO no_ori
+SET "dst=%USERPROFILE%\Saved Games\TangoGameworks\"
+SET "wne=\Saved\Config\WindowsNoEditor\"
+SET "restored="
+IF NOT EXIST "%dst%" GOTO no_ori
+FOR /F "delims=" %%D IN ('DIR /AD /B "%dst%" 2^>nul') DO (
+    IF EXIST "%dst%%%D%wne%GameUserSettings_ori.ini" (
+        MOVE /Y "%dst%%%D%wne%GameUserSettings_ori.ini" "%dst%%%D%wne%GameUserSettings.ini" >NUL
+        SET "restored=yes"
+    )
+)
+IF NOT DEFINED restored GOTO no_ori
 GOTO end
 
 :cleanupGTA5
 echo Deleting mod files...
 RMDIR /s /q "asi" "Settings" "ShaderFixes"
-DEL "RealVR.ini" "d3d11.dll" "ScriptHookV.dll" "RealConfig.bat" "commandline.txt" "openvr_api.dll" "nvapi64.dll" "d3dx.ini" "dinput8.dll" "ScriptHookV.log" "asiloader.log" "args.txt" "NativeTrainer.asi"
+DEL "RealVR*.ini" "d3d11.dll" "ScriptHookV.dll" "RealConfig.bat" "commandline.txt" "openvr_api.dll" "nvapi64.dll" "d3dx.ini" "dinput8.dll" "ScriptHookV.log" "asiloader.log" "args.txt" "NativeTrainer.asi"
 
 echo Restoring graphic settings...
 SET "sub=\Rockstar Games\GTA V\"
@@ -511,15 +515,14 @@ IF NOT EXIST "%doc%%sub%" IF EXIST "%doc1%%sub%" SET "doc=%doc1%"
 IF NOT EXIST "%doc%%sub%" IF EXIST "%doc2%%sub%" SET "doc=%doc2%"
 SET "dst=%doc%%sub%"
 IF ExIST "%dst%settings_ori.xml" (
-    DEL "%dst%settings.xml"
-    REN "%dst%settings_ori.xml" settings.xml
+    MOVE /Y "%dst%settings_ori.xml" "%dst%settings.xml" >NUL
 ) ELSE GOTO no_ori
 GOTO end
 
 :cleanupGTA5E
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL cudart64_*.dll "RealVR.ini" "d3d11.dll" "ScriptHookV.dll" "RealConfig.bat" "commandline.txt" "openvr_api.dll" "nvapi64.dll" "d3dx.ini" "dinput8.dll" "ScriptHookV.log" "asiloader.log" "args.txt" "NativeTrainer.asi"
+DEL "cudart64_12.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR*.ini" "RealVR64.log"
 
 echo Restoring graphic settings...
 SET "sub=\Rockstar Games\GTAV Enhanced\"
@@ -527,63 +530,55 @@ IF NOT EXIST "%doc%%sub%" IF EXIST "%doc1%%sub%" SET "doc=%doc1%"
 IF NOT EXIST "%doc%%sub%" IF EXIST "%doc2%%sub%" SET "doc=%doc2%"
 SET "dst=%doc%%sub%"
 IF ExIST "%dst%settings_ori.xml" (
-    DEL "%dst%settings.xml"
-    REN "%dst%settings_ori.xml" settings.xml
+    MOVE /Y "%dst%settings_ori.xml" "%dst%settings.xml" >NUL
 ) ELSE GOTO no_ori
 GOTO end
 
 :cleanupGROUNDED
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log"
+DEL "cudart64_12.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR*.ini" "RealVR64.log"
 
 echo Restoring graphic settings...
-SET sub=\Maine\Saved\Config\WindowsNoEditor\
-SET subGDK=\Maine\Saved\Config\WinGDK\
-SET "dst=%LOCALAPPDATA%%sub%"
-SET "dstGDK=%LOCALAPPDATA%%subGDK%"
-IF EXIST "%dst%" (
-    IF ExIST "%dst%GameUserSettings_ori.ini" (
-        DEL "%dst%GameUserSettings.ini"
-        REN "%dst%GameUserSettings_ori.ini" GameUserSettings.ini
-    ) ELSE GOTO no_ori
+SET "dst=%LOCALAPPDATA%\Maine\Saved\Config\WindowsNoEditor\"
+SET "dstGDK=%LOCALAPPDATA%\Maine\Saved\Config\WinGDK\"
+SET "restored="
+IF EXIST "%dst%GameUserSettings_ori.ini" (
+    MOVE /Y "%dst%GameUserSettings_ori.ini" "%dst%GameUserSettings.ini" >NUL
+    SET "restored=yes"
 )
-IF EXIST "%dstGDK%" (
-    IF ExIST "%dstGDK%GameUserSettings_ori.ini" (
-        DEL "%dstGDK%GameUserSettings.ini"
-        REN "%dstGDK%GameUserSettings_ori.ini" GameUserSettings.ini
-    ) ELSE GOTO no_ori
+IF EXIST "%dstGDK%GameUserSettings_ori.ini" (
+    MOVE /Y "%dstGDK%GameUserSettings_ori.ini" "%dstGDK%GameUserSettings.ini" >NUL
+    SET "restored=yes"
 )
+IF NOT DEFINED restored GOTO no_ori
 GOTO end
 
 :cleanupHOL
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log"
+DEL "cudart64_12.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR*.ini" "RealVR64.log"
+IF NOT EXIST "..\..\..\Engine\Binaries\ThirdParty\OpenXR\win64\openxr_loader.dll" echo NOTE: Verify the integrity of the game files in Steam or the Xbox app to restore the OpenXR loader deleted by the installer.
 
 echo Restoring graphic settings...
-SET sub=\Oregon\Saved\Config\WindowsNoEditor\
-SET subGDK=\Oregon\Saved\Config\WinGDK\
-SET "dst=%LOCALAPPDATA%%sub%"
-SET "dstGDK=%LOCALAPPDATA%%subGDK%"
-IF EXIST "%dst%" (
-    IF ExIST "%dst%GameUserSettings_ori.ini" (
-        DEL "%dst%GameUserSettings.ini"
-        REN "%dst%GameUserSettings_ori.ini" GameUserSettings.ini
-    ) ELSE GOTO no_ori
+SET "dst=%LOCALAPPDATA%\Oregon\Saved\Config\WindowsNoEditor\"
+SET "dstGDK=%LOCALAPPDATA%\Oregon\Saved\Config\WinGDK\"
+SET "restored="
+IF EXIST "%dst%GameUserSettings_ori.ini" (
+    MOVE /Y "%dst%GameUserSettings_ori.ini" "%dst%GameUserSettings.ini" >NUL
+    SET "restored=yes"
 )
-IF EXIST "%dstGDK%" (
-    IF ExIST "%dstGDK%GameUserSettings_ori.ini" (
-        DEL "%dstGDK%GameUserSettings.ini"
-        REN "%dstGDK%GameUserSettings_ori.ini" GameUserSettings.ini
-    ) ELSE GOTO no_ori
+IF EXIST "%dstGDK%GameUserSettings_ori.ini" (
+    MOVE /Y "%dstGDK%GameUserSettings_ori.ini" "%dstGDK%GameUserSettings.ini" >NUL
+    SET "restored=yes"
 )
+IF NOT DEFINED restored GOTO no_ori
 GOTO end
 
 :cleanupHFW
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll"
+DEL "cudart64_12.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR*.ini" "RealVR64.log" "RealVR64.dll"
 
 echo Restoring the graphics settings will delete the game graphics registry key. You will need to set your preferences again at the next launch.
 REG delete "HKCU\Software\Guerrilla Games\Horizon Forbidden West Complete Edition\Graphics"
@@ -592,21 +587,22 @@ GOTO end
 :cleanupHZD
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log"
+DEL "cudart64_12.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR*.ini" "RealVR64.log"
 
 echo Restoring graphic settings...
-SET sub=\Horizon Zero Dawn\Saved Game\profile\
-SET "dst=%USERPROFILE%\Documents%sub%"
-IF ExIST "%dst%graphicsconfig_ori.ini" (
-    DEL "%dst%graphicsconfig.ini"
-    REN "%dst%graphicsconfig_ori.ini" graphicsconfig.ini
+SET "sub=Horizon Zero Dawn\Saved Game\profile\"
+IF NOT EXIST "%doc%%sub%" IF EXIST "%doc1%%sub%" SET "doc=%doc1%"
+IF NOT EXIST "%doc%%sub%" IF EXIST "%doc2%%sub%" SET "doc=%doc2%"
+SET "dst=%doc%%sub%"
+IF EXIST "%dst%graphicsconfig_ori.ini" (
+    MOVE /Y "%dst%graphicsconfig_ori.ini" "%dst%graphicsconfig.ini" >NUL
 ) ELSE GOTO no_ori
 GOTO end
 
 :cleanupHZDR
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll"
+DEL "cudart64_12.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR*.ini" "RealVR64.log" "RealVR64.dll"
 
 echo Restoring the graphics settings will delete the game graphics registry key. You will need to set your preferences again at the next launch.
 REG delete "HKCU\Software\Guerrilla Games\Horizon Zero Dawn Remastered\Graphics"
@@ -615,47 +611,44 @@ GOTO end
 :cleanupHogwarts
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log"
+DEL "cudart64_12.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR*.ini" "RealVR64.log"
 
 echo Restoring graphic settings...
 SET sub=\Hogwarts Legacy\Saved\Config\WindowsNoEditor\
 SET "dst=%LOCALAPPDATA%%sub%"
 IF ExIST "%dst%GameUserSettings_ori.ini" (
-    DEL "%dst%GameUserSettings.ini"
-    REN "%dst%GameUserSettings_ori.ini" GameUserSettings.ini
+    MOVE /Y "%dst%GameUserSettings_ori.ini" "%dst%GameUserSettings.ini" >NUL
 ) ELSE GOTO no_ori
 GOTO end
 
 :cleanupKCD2
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log"
+DEL "cudart64_12.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR*.ini" "RealVR64.log"
 
 echo Restoring graphic settings...
-SET sub=\Saved Games\kingdomcome2\profiles\default\
-SET "dst=%USERPROFILE%%sub%"
-IF ExIST "%dst%attributes_ori.xml" (
-    DEL "%dst%attributes.xml"
-    REN "%dst%attributes_ori.xml" attributes.xml
-    DEL "..\..\user.cfg"
-    REN "..\..\user_ori.cfg" user.cfg
-) ELSE GOTO no_ori
+IF EXIST "..\..\user_ori.cfg" (
+    MOVE /Y "..\..\user_ori.cfg" "..\..\user.cfg" >NUL
+) ELSE DEL "..\..\user.cfg" 2>nul
 
+SET "dst=%USERPROFILE%\Saved Games\kingdomcome2\profiles\default\"
+IF EXIST "%dst%attributes_ori.xml" (
+    MOVE /Y "%dst%attributes_ori.xml" "%dst%attributes.xml" >NUL
+) ELSE GOTO no_ori
 GOTO end
 
 :cleanupIJTGC
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.json" "RealVR64.dll"
+DEL "cudart64_12.dll" "openvr_api.dll" "RealConfig.bat" "RealVR*.ini" "RealVR64.json" "RealVR64.dll" "RealVR64.log"
 
-echo Restoring graphic settings...
-powershell -Command "& { $path = 'HKLM:\SOFTWARE\Khronos\Vulkan\ImplicitLayers'; $regName = (Get-ItemProperty -Path $path | Get-Member -MemberType NoteProperty | Where-Object { $_.Name -like '*RealVR64.json' }).Name; if ($regName) { Start-Process cmd -ArgumentList ('/c REG DELETE \"HKLM\SOFTWARE\Khronos\Vulkan\ImplicitLayers\" /V \"' + $regName + '\" /F') -Verb RunAs } }"
+CALL :vulkanclean
 GOTO end
 
 :cleanupMDE1
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll"
+DEL "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR*.ini" "RealVR64.log" "RealVR64.dll"
 
 echo Restoring graphic settings...
 SET "sub=My Games\Mafia Definitive Edition\"
@@ -672,7 +665,7 @@ GOTO end
 :cleanupMDE2
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll"
+DEL "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR*.ini" "RealVR64.log" "RealVR64.dll"
 
 echo Restoring graphic settings...
 SET "sub=My Games\Mafia II Definitive Edition\"
@@ -687,7 +680,7 @@ GOTO end
 :cleanupMDE3
 echo Deleting mod files...
 RMDIR /s /q "RealRepo" "reshade-shaders"
-DEL "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll" "ReShadePreset.ini"
+DEL "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR*.ini" "RealVR64.log" "RealVR64.dll" "ReShadePreset.ini"
 
 echo Restoring graphic settings...
 SET "sub=\2K Games\Mafia III\"
@@ -702,38 +695,44 @@ GOTO end
 :cleanupStarWarsOutlaws
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll" 
+DEL "cudart64_12.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR*.ini" "RealVR64.log" "RealVR64.dll" 
 
 echo Restoring graphic settings...
-SET sub=\Documents\My Games\Outlaws\
-SET "dst=%USERPROFILE%%sub%"
-IF ExIST "%dst%graphic settings_ori.cfg" (
-    DEL "%dst%graphic settings.cfg"
-    REN "%dst%graphic settings_ori.cfg" "graphic settings.cfg"
+SET "sub=My Games\Outlaws\"
+IF NOT EXIST "%doc%%sub%" IF EXIST "%doc1%%sub%" SET "doc=%doc1%"
+IF NOT EXIST "%doc%%sub%" IF EXIST "%doc2%%sub%" SET "doc=%doc2%"
+SET "dst=%doc%%sub%"
+IF EXIST "%dst%graphic settings_ori.cfg" (
+    MOVE /Y "%dst%graphic settings_ori.cfg" "%dst%graphic settings.cfg" >NUL
+    IF EXIST "%dst%state_ori.cfg" MOVE /Y "%dst%state_ori.cfg" "%dst%state.cfg" >NUL
 ) ELSE GOTO no_ori
 GOTO end
 
 :cleanupRDR2
 echo Deleting mod files...
 RMDIR /s /q "RealRepo" "Settings"
-DEL "RealVR_RDR2.asi" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "ScriptHookRDR2.dll" "RealVR64.dll" "dinput8.dll" "commandline.txt" "RealVR64.json"
+DEL "RealVR_RDR2.asi" "openvr_api.dll" "RealConfig.bat" "RealVR*.ini" "ScriptHookRDR2.dll" "RealVR64.dll" "dinput8.dll" "commandline.txt" "RealVR64.json" "RealVR64.log"
+
+echo Removing Vulkan layer...
+SET "layer=%~dp0RealVR64.json"
+REG DELETE "HKCU\SOFTWARE\Khronos\Vulkan\ImplicitLayers" /v "%layer%" /f >NUL 2>&1
+REG QUERY "HKLM\SOFTWARE\Khronos\Vulkan\ImplicitLayers" /v "%layer%" >NUL 2>&1
+IF NOT ERRORLEVEL 1 powershell -NoProfile -Command "Start-Process powershell -Verb RunAs -Wait -ArgumentList '-NoProfile -Command Remove-ItemProperty -Path HKLM:\SOFTWARE\Khronos\Vulkan\ImplicitLayers -Name ''%layer%'''"
 
 echo Restoring graphic settings...
-powershell -Command "& { $path = 'HKLM:\SOFTWARE\Khronos\Vulkan\ImplicitLayers'; $regName = (Get-ItemProperty -Path $path | Get-Member -MemberType NoteProperty | Where-Object { $_.Name -like '*RealVR64.json' }).Name; if ($regName) { Start-Process cmd -ArgumentList ('/c REG DELETE \"HKLM\SOFTWARE\Khronos\Vulkan\ImplicitLayers\" /V \"' + $regName + '\" /F') -Verb RunAs } }"
 SET "sub=Rockstar Games\Red Dead Redemption 2\Settings\"
 IF NOT EXIST "%doc%%sub%" IF EXIST "%doc1%%sub%" SET "doc=%doc1%"
 IF NOT EXIST "%doc%%sub%" IF EXIST "%doc2%%sub%" SET "doc=%doc2%"
 SET "dst=%doc%%sub%"
-IF ExIST "%dst%system_ori.xml" (
-    DEL "%dst%system.xml"
-    REN "%dst%system_ori.xml" system.xml
+IF EXIST "%dst%system_ori.xml" (
+    MOVE /Y "%dst%system_ori.xml" "%dst%system.xml" >NUL
 ) ELSE GOTO no_ori
 GOTO end
 
 :cleanupSPIDERMAN
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll"
+DEL "cudart64_12.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR*.ini" "RealVR64.log" "RealVR64.dll"
 
 echo Restoring the graphics settings will delete the game graphics registry key. You will need to set your preferences again at the next launch.
 REG delete "HKCU\Software\Insomniac Games\Marvel's Spider-Man Remastered\Graphics"
@@ -742,7 +741,7 @@ GOTO end
 :cleanupSPIDERMANMM
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll"
+DEL "cudart64_12.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR*.ini" "RealVR64.log" "RealVR64.dll"
 
 echo Restoring the graphics settings will delete the game graphics registry key. You will need to set your preferences again at the next launch.
 REG delete "HKCU\Software\Insomniac Games\Marvel's Spider-Man Miles Morales\Graphics"
@@ -751,7 +750,7 @@ GOTO end
 :cleanupSPIDERMAN2
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "RealVR64.dll"
+DEL "cudart64_12.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR*.ini" "RealVR64.log" "RealVR64.dll"
 
 echo Restoring the graphics settings will delete the game graphics registry key. You will need to set your preferences again at the next launch.
 REG delete "HKCU\Software\Insomniac Games\Marvel's Spider-Man 2\Graphics"
@@ -760,77 +759,82 @@ GOTO end
 :cleanupSTRAY
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "start_protected_game.exe" "RealVR64.dll"
+DEL "cudart64_12.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR*.ini" "RealVR64.log" "RealVR64.dll"
 
 echo Restoring graphic settings...
 SET sub=\Hk_project\Saved\Config\WindowsNoEditor\
 SET "dst=%LOCALAPPDATA%%sub%"
 IF ExIST "%dst%GameUserSettings_ori.ini" (
-    DEL "%dst%GameUserSettings.ini"
-    REN "%dst%GameUserSettings_ori.ini" GameUserSettings.ini
+    MOVE /Y "%dst%GameUserSettings_ori.ini" "%dst%GameUserSettings.ini" >NUL
 ) ELSE GOTO no_ori
 GOTO end
 
 :cleanupTLOU1
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "start_protected_game.exe" "RealVR64.dll"
+DEL "cudart64_12.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR*.ini" "RealVR64.log" "RealVR64.dll"
 
 echo Restoring graphic settings...
-SET sub=\Saved Games\The Last of Us Part I\users\
-SET "dst=%USERPROFILE%%sub%"
-FOR /F "delims=" %%D IN ('DIR /AD /B "%dst%"') DO (
-    IF ExIST "%dst%%%D\screeninfo_ori.cfg" (
-        DEL "%dst%%%D\screeninfo.cfg"
-        REN "%dst%%%D\screeninfo_ori.cfg" screeninfo.cfg
-    ) ELSE GOTO no_ori
+SET "dst=%USERPROFILE%\Saved Games\The Last of Us Part I\users\"
+SET "restored="
+IF NOT EXIST "%dst%" GOTO no_ori
+FOR /F "delims=" %%D IN ('DIR /AD /B "%dst%" 2^>nul') DO (
+    IF EXIST "%dst%%%D\screeninfo_ori.cfg" (
+        MOVE /Y "%dst%%%D\screeninfo_ori.cfg" "%dst%%%D\screeninfo.cfg" >NUL
+        SET "restored=yes"
+    )
 )
+IF NOT DEFINED restored GOTO no_ori
 GOTO end
 
 :cleanupTLOU2
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "start_protected_game.exe" "RealVR64.dll"
+DEL "cudart64_12.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR*.ini" "RealVR64.log" "RealVR64.dll"
 
 echo Restoring the graphics settings will delete the game graphics registry key. You will need to set your preferences again at the next launch.
-REG delete "HKCU\Software\Naughty Dog\The Last of Us Part II\Graphics"
-REG delete "HKCU\Software\Naughty Dog\The Last of Us Part II\UI"
+REG DELETE "HKCU\Software\Naughty Dog\The Last of Us Part II\Graphics" /f
+REG DELETE "HKCU\Software\Naughty Dog\The Last of Us Part II\UI" /v HudScaling /f
 
 GOTO end
 
 :cleanupULOTC
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log" "start_protected_game.exe" "RealVR64.dll"
+DEL "cudart64_12.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR*.ini" "RealVR64.log" "RealVR64.dll"
 
 echo Restoring graphic settings...
-SET sub=Uncharted4_data\
-IF ExIST "%sub%screeninfo_ori.cfg" (
-    DEL "%sub%screeninfo.cfg"
-    REN "%sub%screeninfo_ori.cfg" screeninfo.cfg
+SET "dst=Uncharted4_data\"
+IF EXIST "%dst%screeninfo_ori.cfg" (
+    MOVE /Y "%dst%screeninfo_ori.cfg" "%dst%screeninfo.cfg" >NUL
 ) ELSE GOTO no_ori
 GOTO end
 
 :cleanupWD1
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log"
+DEL "cudart64_12.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR*.ini" "RealVR64.log"
 
 echo Restoring graphic settings...
-SET sub=\Documents\My Games\Watch_Dogs\
-SET "dst=%USERPROFILE%%sub%"
-FOR /F "delims=" %%D IN ('DIR /AD /B "%dst%"') DO (
-    IF ExIST "%dst%%%D\GamerProfile_ori.xml" (
-        DEL "%dst%%%D\GamerProfile.xml"
-        REN "%dst%%%D\GamerProfile_ori.xml" GamerProfile.xml
-    ) ELSE GOTO no_ori
+SET "sub=My Games\Watch_Dogs\"
+IF NOT EXIST "%doc%%sub%" IF EXIST "%doc1%%sub%" SET "doc=%doc1%"
+IF NOT EXIST "%doc%%sub%" IF EXIST "%doc2%%sub%" SET "doc=%doc2%"
+SET "dst=%doc%%sub%"
+SET "restored="
+IF NOT EXIST "%dst%" GOTO no_ori
+FOR /F "delims=" %%D IN ('DIR /AD /B "%dst%" 2^>nul') DO (
+    IF EXIST "%dst%%%D\GamerProfile_ori.xml" (
+        MOVE /Y "%dst%%%D\GamerProfile_ori.xml" "%dst%%%D\GamerProfile.xml" >NUL
+        SET "restored=yes"
+    )
 )
+IF NOT DEFINED restored GOTO no_ori
 GOTO end
 
 :cleanupWD2
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log"
+DEL "cudart64_12.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR*.ini" "RealVR64.log"
 
 echo Restoring graphic settings...
 SET "sub=My Games\Watch_Dogs 2\"
@@ -838,40 +842,54 @@ IF NOT EXIST "%doc%%sub%" IF EXIST "%doc1%%sub%" SET "doc=%doc1%"
 IF NOT EXIST "%doc%%sub%" IF EXIST "%doc2%%sub%" SET "doc=%doc2%"
 SET "dst=%doc%%sub%"
 IF ExIST "%dst%\WD2_GamerProfile_ori.xml" (
-    DEL "%dst%\WD2_GamerProfile.xml"
-    REN "%dst%\WD2_GamerProfile_ori.xml" WD2_GamerProfile.xml
+    MOVE /Y "%dst%WD2_GamerProfile_ori.xml" "%dst%WD2_GamerProfile.xml" >NUL
 ) ELSE GOTO no_ori
 GOTO end
 
 :cleanupWDL
 echo Deleting mod files...
 RMDIR /s /q "RealRepo"
-DEL cudart64_*.dll "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR.ini" "RealVR64.log"
+DEL "cudart64_12.dll" "dxgi.dll" "openvr_api.dll" "RealConfig.bat" "RealVR*.ini" "RealVR64.log"
 
 echo Restoring graphic settings...
 SET "sub=My Games\Watch Dogs Legion\"
 IF NOT EXIST "%doc%%sub%" IF EXIST "%doc1%%sub%" SET "doc=%doc1%"
 IF NOT EXIST "%doc%%sub%" IF EXIST "%doc2%%sub%" SET "doc=%doc2%"
 SET "dst=%doc%%sub%"
-
-FOR /F "delims=" %%D IN ('DIR /AD /B "%dst%"') DO (
+SET "restored="
+IF NOT EXIST "%dst%" GOTO no_ori
+FOR /F "delims=" %%D IN ('DIR /AD /B "%dst%" 2^>nul') DO (
     IF EXIST "%dst%%%D\WD3_GamerProfile_ori.xml" (
-        DEL "%dst%%%D\WD3_GamerProfile.xml"
-        REN "%dst%%%D\WD3_GamerProfile_ori.xml" "WD3_GamerProfile.xml"
-    ) ELSE GOTO no_ori
+        MOVE /Y "%dst%%%D\WD3_GamerProfile_ori.xml" "%dst%%%D\WD3_GamerProfile.xml" >NUL
+        SET "restored=yes"
+    )
 )
-
+IF NOT DEFINED restored GOTO no_ori
 GOTO end
 
 :no_ori
 echo It seems that there are no graphic presets created by the R.E.A.L. mod. Skipping graphic settings restoration...
+GOTO end
+
+:vulkanclean
+echo Removing Vulkan layer...
+echo NOTE: This Vulkan layer is shared by DOOM, DOOM Eternal, DOOM: The Dark Ages and Indiana Jones. Removing it disables R.E.A.L. VR for all of these games.
+CHOICE /C YN /M "Remove it now"
+IF %ERRORLEVEL% NEQ 1 (
+    echo Vulkan layer left in place.
+    EXIT /B 0
+)
+powershell -NoProfile -NonInteractive -Command "Remove-ItemProperty -Path 'HKCU:\SOFTWARE\Khronos\Vulkan\ImplicitLayers' -Name '*RealVR64.json' -ErrorAction SilentlyContinue; $p='HKLM:\SOFTWARE\Khronos\Vulkan\ImplicitLayers'; $d=Join-Path $env:ProgramData 'RealVR'; if (((Get-Item $p -ErrorAction SilentlyContinue).Property -like '*RealVR64.json') -or (Test-Path $d)) { try { Start-Process powershell -Verb RunAs -Wait -ErrorAction Stop -ArgumentList ('-NoProfile -Command Remove-ItemProperty -Path ' + $p + ' -Name *RealVR64.json -ErrorAction SilentlyContinue; Remove-Item -Recurse -Force ' + $d) } catch { Write-Host 'WARNING: Administrator rights were refused, the Vulkan layer is still installed.' } }"
+EXIT /B 0
 
 :abort
 echo Execution aborted. Please report any issues on my GitHub: Yelodress
 pause
+EXIT /B 1
 
 :end
 echo All done, time to re-enjoy your game !
 echo This script will remove itself after pressing any key
 pause
+
 DEL "LRCleaner.bat"

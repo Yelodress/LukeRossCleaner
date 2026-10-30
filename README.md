@@ -28,6 +28,12 @@
 </details>
 
 <details>
+  <summary><h2>🤑EA</h2></summary>
+  
+  - Dead Space (2023): `\Dead Space (2023)`
+</details>
+
+<details>
   <summary><h2>⚔Fromsoftware</h2></summary>
   
   - Dark Souls: Remastered: `\DARK SOULS REMASTERED`
@@ -46,7 +52,8 @@
 
 <details>
   <summary><h2>👾id Software</h2></summary>
-  
+
+  - DOOM (2016): `\DOOM (2016)`
   - DOOM Ethernal: `\DOOMEternal`
   - DOOM The Dark Ages: `\DOOMTheDarkAges`
  </details>
@@ -60,9 +67,16 @@
     </details>
 
 <details>
+  <summary><h2>🧑‍💼IO Interactive</h2></summary>
+  
+  - 007 First Light: `\007 First Light`
+</details>
+
+<details>
   <summary><h2>🧳Kojima Productions</h2></summary>
   
    - Death Stranding: `\DeathStranding`
+   - Death Stranding 2: `\DEATH STRANDING 2 - ON THE BEACH`
 </details>
 
 <details>
@@ -85,6 +99,12 @@
 </details>
 
 <details>
+  <summary><h2>🪄Pearl Abyss</h2></summary>
+
+  - Crimson Desert: `\Crimson Desert\bin64`
+</details>
+
+<details>
   <summary><h2>🎮PlayStation Studios</h2></summary>
 
   - Ghost of Tsushima: `\Ghost of Tsushima DIRECTOR'S CUT`
@@ -94,7 +114,7 @@
 <details>
   <summary><h2>®️Rockstar Games</h2></summary>
 
-  - Grand Theft Auto V: `\GTAV` or `\Grand Theft Auto V`
+  - Grand Theft Auto V: `\GTAV` or `\Grand Theft Auto V` or `\GTAVEnhanced`
   - Mafia: Definitive Edition: `\Mafia Definitive Edition`
   - Mafia II: Definitive Edition: `\Mafia II - Definitive Edition\pc`
   - Mafia III: Definitive Edition: `\Mafia 3 - Definitive Edition`
@@ -155,6 +175,6 @@
 
 Special thanks to [Loocist23](https://github.com/Loocist23) for his time during our tests !
 
-⚠️ This script supports up to version `v2603.10.1 + early access Day's Gone & Baldur's Gate 3` (formerly `v27.0.0`) of the mod. It's not my priority, so if you need a specific game, let me know by creating an [issue](https://github.com/Yelodress/LukeRossCleaner/issues) and I'll update it as soon as possible :)
+⚠️ This script supports up to version `v2610.15.2` of the mod. It's not my priority, so if you need a specific game, let me know by creating an [issue](https://github.com/Yelodress/LukeRossCleaner/issues) and I'll update it as soon as possible :)
 
 > Please note that I have no affiliation with LukeRoss or his work. If you have any questions or concerns, please feel free to contact me at the following address: `yelodress[at]pm.me`.
